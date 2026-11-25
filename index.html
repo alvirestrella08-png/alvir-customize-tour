@@ -42,7 +42,7 @@
     @media print {
       header, footer, .no-print { display: none !important; }
       body { background: #ffffff !important; color: #000000 !important; }
-      .print-only-banner { display: block !important; }
+      section { box-shadow: none !important; border-color: #cbd5e1 !important; }
     }
   </style>
 </head>
@@ -59,7 +59,7 @@
           <span class="block text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-tight">
             Alvir Customize Tour
           </span>
-          <span class="block text-[11px] text-slate-500">Tailor-Made Local &amp; International Getaways</span>
+          <span class="block text-[11px] text-slate-500">Tailor-Made Local &amp; International Travel</span>
         </div>
       </a>
 
@@ -68,6 +68,7 @@
         <a href="#destinations" onclick="setMainMode('INTERNATIONAL')" class="hover:text-brand-600 transition-colors">International</a>
         <a href="#packages" class="hover:text-brand-600 transition-colors">Available Packages</a>
         <a href="#the-owner" class="hover:text-brand-600 transition-colors">Meet the Owner</a>
+        <a href="#quote-section" class="hover:text-brand-600 transition-colors">Send Quote to Alvir</a>
       </nav>
 
       <!-- Currency Converter / Switcher at Top -->
@@ -120,7 +121,7 @@
         </h1>
 
         <p class="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed">
-          Pumili mula sa aming ready-made packages o mag-customize ng sarili mong itinerary—akma sa oras, budget, at energy ng grupo mo.
+          Choose from curated local and international packages or customize your own itinerary paced to your schedule, budget, and daily energy.
         </p>
 
         <div class="pt-1 flex flex-wrap items-center gap-3">
@@ -139,10 +140,10 @@
             Explore International
           </a>
           <a
-            href="#packages"
+            href="#quote-section"
             class="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-brand-300 font-bold text-xs sm:text-sm transition-all"
           >
-            Available Packages
+            Send Quote to Alvir
           </a>
         </div>
       </div>
@@ -151,8 +152,8 @@
       <div class="lg:col-span-5">
         <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-3xl p-5 sm:p-6 space-y-3.5">
           <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
-            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-300">Quick Currency Estimator</span>
-            <span id="rateNoteLabel" class="text-[11px] text-slate-300">Base: PHP (₱)</span>
+            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-300">Currency Converter</span>
+            <span id="rateNoteLabel" class="text-[11px] text-slate-300">Display: PHP (₱)</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -186,11 +187,11 @@
           </div>
 
           <div class="bg-slate-950/60 border border-white/10 rounded-2xl p-3.5 flex items-baseline justify-between">
-            <span class="text-xs text-slate-300">Estimated Conversion:</span>
+            <span class="text-xs text-slate-300">Estimated Value:</span>
             <span id="quickConvertedOutput" class="text-xl font-extrabold text-brand-300">$86.21</span>
           </div>
           <p class="text-[10px] text-slate-400">
-            Reference estimate only; final rates depend on live FX &amp; supplier terms.
+            Reference estimate only; final rates are confirmed upon quote review.
           </p>
         </div>
       </div>
@@ -205,7 +206,7 @@
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <span class="text-xs font-extrabold uppercase tracking-wider text-brand-700">Browse By Tab</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Where Do You Want To Go?</h2>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Destinations</h2>
         </div>
 
         <!-- Level 1 Tabs: LOCAL vs INTERNATIONAL -->
@@ -213,21 +214,21 @@
           <button
             id="mainTabLocal"
             onclick="setMainMode('LOCAL')"
-            class="px-5 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-600 text-white shadow-2xs"
+            class="px-5 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-600 text-white shadow-2xs cursor-pointer"
           >
             Local
           </button>
           <button
             id="mainTabIntl"
             onclick="setMainMode('INTERNATIONAL')"
-            class="px-5 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white"
+            class="px-5 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer"
           >
             International
           </button>
         </div>
       </div>
 
-      <!-- Level 2 Sub-Tabs Bar (Per Local Tab / International Tab) -->
+      <!-- Level 2 Sub-Tabs Bar -->
       <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-2xs">
         <div id="subTabsContainer" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
           <!-- Rendered by JS -->
@@ -246,13 +247,13 @@
         <div>
           <span class="text-xs font-extrabold uppercase tracking-wider text-sky-700">Curated Deals</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Available Packages</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">Ready-made packages o pwede mong i-customize ayon sa trip pace mo.</p>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Ready-made starting options or tailor-made itineraries built around your group.</p>
         </div>
 
         <div class="flex flex-wrap gap-2">
-          <button onclick="filterPackages('ALL')" id="pkgFilterAll" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white">All</button>
-          <button onclick="filterPackages('LOCAL')" id="pkgFilterLocal" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">Local</button>
-          <button onclick="filterPackages('INTERNATIONAL')" id="pkgFilterIntl" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">International</button>
+          <button onclick="filterPackages('ALL')" id="pkgFilterAll" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white cursor-pointer">All</button>
+          <button onclick="filterPackages('LOCAL')" id="pkgFilterLocal" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer">Local</button>
+          <button onclick="filterPackages('INTERNATIONAL')" id="pkgFilterIntl" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer">International</button>
         </div>
       </div>
 
@@ -261,7 +262,7 @@
       </div>
     </section>
 
-    <!-- SECTION 3: MEET THE OWNER, ALVIR + WHY ME + MESSENGER QR + PRINT NOTE -->
+    <!-- SECTION 3: MEET THE OWNER, ALVIR -->
     <section id="the-owner" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <!-- Left: Owner Freedive Photo -->
@@ -277,45 +278,45 @@
                 Meet the Owner, Alvir
               </span>
               <div class="text-base font-extrabold">Alvir</div>
-              <div class="text-[11px] text-slate-300">Travel • Explore • Freedive • New Friends</div>
+              <div class="text-[11px] text-slate-300">Freediver • Traveler • Explorer</div>
             </div>
           </div>
         </div>
 
-        <!-- Right: Story, Why Me, Messenger 15-Min Call + QR, Print Note -->
+        <!-- Right: Story, Why Me, Messenger 15-Min Call + QR -->
         <div class="lg:col-span-7 space-y-4">
           <div>
             <span class="text-xs font-extrabold uppercase tracking-wider text-brand-700">Meet the Owner, Alvir</span>
             <h2 class="text-2xl font-extrabold text-slate-900 mt-1">
-              Why Clients Keep Coming Back
+              Smart Itineraries Designed Around Your Time &amp; Energy
             </h2>
           </div>
 
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Mahilig mag-travel, mag-explore, mag-freedive, at makipagkilala sa bagong kaibigan—whether solo, kasama ang friends, pamilya, o guests. Karamihan ng clients ay nagiging repeat bookings dahil sa detalyadong payo mula pag-book ng flights hanggang sa smart itinerary na akma talaga sa oras at energy ng bawat grupo.
+            Passionate about traveling, exploring, freediving, and meeting new friends—whether solo travelers, barkada, families, or guests. Many clients return for repeat trips because of practical flight guidance and smart itineraries tailored to each group's schedule and energy levels.
           </p>
 
           <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
             <li class="flex items-start gap-2.5">
               <span class="text-brand-600 font-extrabold">✓</span>
-              <span><strong>Smart Itinerary &amp; Daily Energy Guide:</strong> Transparent feedback at malinaw na gabay sa pagod o energy consumption araw-araw para sakto sa pace ng grupo.</span>
+              <span><strong>Transparent Daily Energy &amp; Pace Guide:</strong> Clear feedback and daily fatigue/energy guidance so your trip feels enjoyable, not rushed.</span>
             </li>
             <li class="flex items-start gap-2.5">
               <span class="text-brand-600 font-extrabold">✓</span>
-              <span><strong>First-Hand Experience by Alvir:</strong> Lahat ng tours at ruta ay napuntahan at na-explore na mismo ni Alvir.</span>
+              <span><strong>First-Hand Experience:</strong> Routes and destinations personally explored and experienced by Alvir.</span>
             </li>
             <li class="flex items-start gap-2.5">
               <span class="text-brand-600 font-extrabold">✓</span>
-              <span><strong>Ultra-Budget to Luxury Options:</strong> May choices mula ultra-budget, budget, mid-range, hanggang luxury accommodations.</span>
+              <span><strong>Ultra-Budget to Luxury Options:</strong> Flexible choices spanning ultra-budget, budget, mid-range, and luxury stays.</span>
             </li>
           </ul>
 
           <!-- 15-Minute Messenger Call + QR Card -->
           <div class="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 border border-slate-200 rounded-2xl p-4">
             <div class="space-y-2">
-              <div class="text-xs font-extrabold text-slate-900">Book a 15-Minute Call on Messenger</div>
+              <div class="text-xs font-extrabold text-slate-900">15-Minute Trip Call on Messenger</div>
               <p class="text-[11px] text-slate-600 leading-relaxed">
-                Pag-usapan natin ang flight timing, energy pace, budget, at customization mo bago ka mag-book.
+                Discuss flight timing, pace, budget, and custom preferences directly with Alvir.
               </p>
               <a
                 href="https://m.me/alvirski"
@@ -339,20 +340,113 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Print Itinerary Reminder -->
-          <div class="mt-4 pt-3 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <p class="text-xs text-slate-600 leading-relaxed">
-              After printing this page, send this to Alvir and <strong>galingan mo tumawad</strong> 😄✨
-            </p>
-            <button
-              type="button"
-              onclick="window.print()"
-              class="no-print px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold shrink-0 transition-colors cursor-pointer"
-            >
-              Print Itinerary
-            </button>
-          </div>
+    <!-- SECTION 4: SEND QUOTE TO ALVIR (NO SUBMIT BUTTON — PRINT & SCREENSHOT FOR REVIEW) -->
+    <section id="quote-section" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xs space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-brand-700">Quote Preparation</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-0.5">SEND QUOTE TO ALVIR</h2>
+        </div>
+        <div class="text-xs text-slate-600 font-semibold">
+          Alvir • <span class="font-bold text-slate-900">09163345946</span> • <span class="font-bold text-slate-900">alvirestrella08@gmail.com</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="quoteRecipient" class="block text-xs font-extrabold text-slate-800 mb-1.5">Recipient</label>
+          <input
+            type="text"
+            id="quoteRecipient"
+            value="Alvir — 09163345946 | alvirestrella08@gmail.com"
+            readonly
+            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs sm:text-sm font-semibold text-slate-700"
+          />
+        </div>
+
+        <div>
+          <label for="travelDatesInput" class="block text-xs font-extrabold text-slate-800 mb-1.5">Travel Dates *</label>
+          <input
+            type="text"
+            id="travelDatesInput"
+            oninput="updateQuotePreview()"
+            placeholder="e.g., Dec 10–13, 2026"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+          />
+        </div>
+      </div>
+
+      <div class="bg-brand-50/70 border border-brand-200 rounded-2xl p-4 space-y-2">
+        <label for="priceMatchInput" class="block text-xs sm:text-sm font-extrabold text-slate-900">
+          Found a lower quote from another travel agency? We offer a price match guarantee on comparable inclusions.
+        </label>
+        <textarea
+          id="priceMatchInput"
+          rows="2"
+          oninput="updateQuotePreview()"
+          placeholder='Enter "None" or share the quote details and inclusions so Alvir can review for a price match...'
+          class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-brand-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+        ></textarea>
+      </div>
+
+      <div>
+        <label for="otherNotesInput" class="block text-xs sm:text-sm font-extrabold text-slate-800 mb-1.5">
+          Other Requests / Notes
+        </label>
+        <textarea
+          id="otherNotesInput"
+          rows="3"
+          oninput="updateQuotePreview()"
+          placeholder='Dietary restrictions, flight details, hotel tier (ultra-budget to luxury), group pace, or "None"...'
+          class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+        ></textarea>
+      </div>
+
+      <!-- Live Quote Sheet Preview for Screenshot / Print -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2 text-xs">
+        <div class="font-extrabold uppercase tracking-wider text-slate-500 text-[10px]">Quote Summary for Review</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-800">
+          <div><span class="font-bold">To:</span> Alvir (09163345946 / alvirestrella08@gmail.com)</div>
+          <div><span class="font-bold">Travel Dates:</span> <span id="previewDates">Not specified</span></div>
+          <div><span class="font-bold">Display Currency:</span> <span id="previewCurrency">PHP (₱)</span></div>
+          <div><span class="font-bold">Price Match:</span> <span id="previewPriceMatch">None</span></div>
+        </div>
+        <div class="text-slate-800 pt-1">
+          <span class="font-bold">Notes / Requests:</span> <span id="previewNotes">None</span>
+        </div>
+      </div>
+
+      <!-- Print / Screenshot Actions & Reminder (No Submit Button) -->
+      <div class="pt-3 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <p class="text-xs text-slate-700 leading-relaxed">
+            After printing this page, send this to Alvir and <strong>galingan mo tumawad</strong> 😄✨
+          </p>
+          <p class="text-[11px] text-slate-500">
+            Print or take a screenshot of this quote sheet and send it to Alvir via Messenger (@alvirski), SMS/call (09163345946), or email (alvirestrella08@gmail.com) for review.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5 shrink-0 no-print">
+          <button
+            type="button"
+            onclick="copyQuoteSummary()"
+            id="copyQuoteBtn"
+            class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 text-xs font-extrabold transition-colors cursor-pointer"
+          >
+            Copy Quote Summary
+          </button>
+          <button
+            type="button"
+            onclick="window.print()"
+            class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold transition-colors cursor-pointer"
+          >
+            Print Quote
+          </button>
         </div>
       </div>
     </section>
@@ -363,12 +457,10 @@
   <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 px-4 sm:px-6 text-xs">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
-        <span class="font-extrabold text-white">Alvir Customize Tour</span> • Customized Local &amp; International Travel
+        <span class="font-extrabold text-white">Alvir Customize Tour</span> • Alvir • 09163345946 • alvirestrella08@gmail.com
       </div>
       <div class="flex flex-wrap items-center gap-4">
         <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Messenger (@alvirski)</a>
-        <span>•</span>
-        <a href="mailto:alvirestrella08@gmail.com" class="hover:text-white transition-colors">alvirestrella08@gmail.com</a>
         <span>•</span>
         <a href="calculator.html" class="text-brand-400 font-bold hover:underline">Calculator</a>
       </div>
@@ -376,9 +468,6 @@
   </footer>
 
   <script>
-    // =========================================================================
-    // 1. CURRENCY RATES (PHP BASE REFERENCE — EDITABLE)
-    // =========================================================================
     const CURRENCY_CONFIG = {
       PHP: { symbol: '₱', rateFromPhp: 1, decimals: 0, label: 'PHP (₱)' },
       USD: { symbol: '$', rateFromPhp: 1 / 58, decimals: 2, label: 'USD ($)' },
@@ -414,6 +503,7 @@
       document.getElementById('rateNoteLabel').textContent = `Display: ${CURRENCY_CONFIG[activeCurrency].label}`;
       updateQuickConverter();
       renderPackages();
+      updateQuotePreview();
     }
 
     function syncCurrencyFromQuick(code) {
@@ -432,9 +522,6 @@
       document.getElementById('quickConvertedOutput').textContent = `${cfg.symbol}${formatted}`;
     }
 
-    // =========================================================================
-    // 2. TABBED DESTINATIONS (PER TAB IN LOCAL & INTERNATIONAL)
-    // =========================================================================
     const DESTINATION_TABS = {
       LOCAL: [
         {
@@ -493,7 +580,7 @@
               badge: 'Custom Quote',
               image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
               highlights: ['Island Hopping with Lunch', 'Paraw Sailing & Water Activities', 'Caticlan / Kalibo Transfers'],
-              link: 'calculator.html?section=LOCAL&dest=CORON'
+              link: '#quote-section'
             }
           ]
         },
@@ -507,7 +594,7 @@
               badge: 'Custom Quote',
               image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80',
               highlights: ['Countryside & Loboc River Cruise', 'Balicasag & Virgin Island', 'Private Car/Van & Transfers'],
-              link: 'calculator.html?section=LOCAL&dest=CORON'
+              link: '#quote-section'
             }
           ]
         },
@@ -521,7 +608,7 @@
               badge: 'Custom Quote',
               image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80',
               highlights: ['South Cebu Adventure', 'Cebu City & Highland Stops', 'Customizable Group Pace'],
-              link: 'calculator.html?section=LOCAL&dest=CORON'
+              link: '#quote-section'
             }
           ]
         },
@@ -535,7 +622,7 @@
               badge: 'Custom Quote',
               image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
               highlights: ['Tri-Island Hopping', 'Maasin River & Coconut View', 'Sugba Lagoon / Magpupungko'],
-              link: 'calculator.html?section=LOCAL&dest=CORON'
+              link: '#quote-section'
             }
           ]
         },
@@ -549,12 +636,11 @@
               badge: 'Custom Quote',
               image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
               highlights: ['Baguio & Sagada / Banaue', 'Vigan & Ilocos Norte Coast', 'Van Charter & Custom Pace'],
-              link: 'calculator.html?section=LOCAL&dest=CORON'
+              link: '#quote-section'
             }
           ]
         }
       ],
-
       INTERNATIONAL: [
         {
           tabId: 'VIETNAM',
@@ -653,9 +739,6 @@
       ]
     };
 
-    // =========================================================================
-    // 3. AVAILABLE PACKAGES
-    // =========================================================================
     const PACKAGES = [
       {
         type: 'LOCAL',
@@ -857,10 +940,50 @@
       }).join('');
     }
 
+    function getQuoteSummaryText() {
+      const dates = document.getElementById('travelDatesInput').value.trim() || 'Not specified';
+      const priceMatch = document.getElementById('priceMatchInput').value.trim() || 'None';
+      const notes = document.getElementById('otherNotesInput').value.trim() || 'None';
+      const currLabel = CURRENCY_CONFIG[activeCurrency].label;
+
+      return [
+        'SEND QUOTE TO ALVIR',
+        'Recipient: Alvir | 09163345946 | alvirestrella08@gmail.com',
+        `Travel Dates: ${dates}`,
+        `Currency: ${currLabel}`,
+        `Price Match: ${priceMatch}`,
+        `Other Requests / Notes: ${notes}`
+      ].join('\n');
+    }
+
+    function updateQuotePreview() {
+      document.getElementById('previewDates').textContent =
+        document.getElementById('travelDatesInput').value.trim() || 'Not specified';
+      document.getElementById('previewCurrency').textContent =
+        CURRENCY_CONFIG[activeCurrency].label;
+      document.getElementById('previewPriceMatch').textContent =
+        document.getElementById('priceMatchInput').value.trim() || 'None';
+      document.getElementById('previewNotes').textContent =
+        document.getElementById('otherNotesInput').value.trim() || 'None';
+    }
+
+    function copyQuoteSummary() {
+      const text = getQuoteSummaryText();
+      const btn = document.getElementById('copyQuoteBtn');
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = orig; }, 1800);
+      }).catch(() => {
+        alert(text);
+      });
+    }
+
     // Init
     setMainMode('LOCAL');
     renderPackages();
     updateQuickConverter();
+    updateQuotePreview();
   </script>
 </body>
 </html>
