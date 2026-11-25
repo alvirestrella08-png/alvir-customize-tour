@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alvir Customize Tour — Interactive Tour Calculator</title>
+  <title>Alvir Customize Tour — Customized Local &amp; International Travel</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,9 +12,7 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
             brand: {
               50: '#f0fdfa',
@@ -36,1841 +34,833 @@
       font-family: 'Inter', sans-serif;
       background-color: #f8fafc;
       color: #0f172a;
-      -webkit-tap-highlight-color: transparent;
+      scroll-behavior: smooth;
     }
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    @media print {
+      header, footer, .no-print { display: none !important; }
+      body { background: #ffffff !important; color: #000000 !important; }
+      .print-only-banner { display: block !important; }
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 pb-28 lg:pb-10">
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
 
-  <!-- Top Brand & Navigation Header -->
-  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+  <!-- Top Navigation Header + Currency Switcher -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-2xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-600 to-sky-700 flex items-center justify-center text-white font-extrabold text-base shadow-sm">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-600 to-sky-700 flex items-center justify-center text-white font-extrabold text-base shadow-xs">
           AC
         </div>
         <div>
-          <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-tight">
+          <span class="block text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-tight">
             Alvir Customize Tour
-          </h1>
-          <p class="text-xs text-slate-500">À La Carte Tours, Transfers, Rentals & Accommodations • Regular Guest Rates</p>
+          </span>
+          <span class="block text-[11px] text-slate-500">Tailor-Made Local &amp; International Getaways</span>
         </div>
-      </div>
+      </a>
 
-      <!-- Top-Level Mode Switch: Local vs International -->
-      <div class="flex items-center gap-2 bg-slate-100 p-1 rounded-2xl border border-slate-200">
-        <button
-          id="topTabLocal"
-          onclick="setTopSection('LOCAL')"
-          class="px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all bg-brand-600 text-white shadow-xs"
-        >
-          Local
-        </button>
-        <button
-          id="topTabIntl"
-          onclick="setTopSection('INTERNATIONAL')"
-          class="px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white"
-        >
-          International
-        </button>
-      </div>
-    </div>
+      <nav class="hidden lg:flex items-center gap-6 text-xs font-bold text-slate-700">
+        <a href="#destinations" onclick="setMainMode('LOCAL')" class="hover:text-brand-600 transition-colors">Local Tours</a>
+        <a href="#destinations" onclick="setMainMode('INTERNATIONAL')" class="hover:text-brand-600 transition-colors">International</a>
+        <a href="#packages" class="hover:text-brand-600 transition-colors">Available Packages</a>
+        <a href="#the-owner" class="hover:text-brand-600 transition-colors">Meet the Owner</a>
+      </nav>
 
-    <!-- Sub-Menu Bar (Changes dynamically between Local -> Palawan sub-menus and International sub-menus) -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2 border-t border-slate-100 bg-slate-50/70">
-      <div id="subMenuBar" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-        <!-- Rendered by JS -->
+      <!-- Currency Converter / Switcher at Top -->
+      <div class="flex items-center gap-2">
+        <label for="currencySelect" class="sr-only">Currency</label>
+        <select
+          id="currencySelect"
+          onchange="setCurrency(this.value)"
+          class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200/70 border border-slate-200 text-xs font-extrabold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"
+        >
+          <option value="PHP">₱ PHP</option>
+          <option value="USD">$ USD</option>
+          <option value="HKD">HK$ HKD</option>
+          <option value="VND">₫ VND</option>
+          <option value="THB">฿ THB</option>
+          <option value="IDR">Rp IDR</option>
+        </select>
+
+        <a
+          href="calculator.html"
+          class="px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-extrabold shadow-2xs transition-all"
+        >
+          Calculator
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Area -->
-  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 pt-5 flex-1">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-slate-900 text-white">
+    <div class="absolute inset-0 opacity-30">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg"
+        alt="Palawan Lagoon"
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-slate-900/65"></div>
 
-    <!-- INTERNATIONAL COMING SOON VIEW -->
-    <section id="internationalView" class="hidden max-w-2xl mx-auto my-8">
-      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 text-center space-y-4">
-        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200">
-          International Destinations
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-7 space-y-5">
+        <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/30 text-brand-200 text-xs font-bold">
+          <span>Lowest Rate Price Match</span>
+          <span>•</span>
+          <span>Smart &amp; Energy-Fit Itineraries</span>
         </div>
-        <h2 id="intlSelectedTitle" class="text-2xl font-extrabold text-slate-900">Vietnam — Da Nang</h2>
-        <p class="text-sm sm:text-base font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-2xl px-4 py-3">
-          Coming soon — please message Alvir directly for a personalized quote
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+          Build Your Dream Trip, <span class="text-brand-400">Your Way.</span>
+        </h1>
+
+        <p class="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed">
+          Pumili mula sa aming ready-made packages o mag-customize ng sarili mong itinerary—akma sa oras, budget, at energy ng grupo mo.
         </p>
-        <p class="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
-          We are preparing customized international itineraries for Vietnam (Da Nang, Hanoi-Sapa), Thailand, Bali Indonesia, Hong Kong Only, Hong Kong-Macau, Macau Only, and Taiwan.
-        </p>
-        <div class="pt-2 flex flex-wrap items-center justify-center gap-2.5">
-          <button
-            onclick="setTopSection('LOCAL')"
-            class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white transition-colors"
+
+        <div class="pt-1 flex flex-wrap items-center gap-3">
+          <a
+            href="#destinations"
+            onclick="setMainMode('LOCAL')"
+            class="px-5 py-3 rounded-2xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg transition-all"
           >
-            Explore Local (Palawan)
+            Explore Local →
+          </a>
+          <a
+            href="#destinations"
+            onclick="setMainMode('INTERNATIONAL')"
+            class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold text-xs sm:text-sm backdrop-blur transition-all"
+          >
+            Explore International
+          </a>
+          <a
+            href="#packages"
+            class="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-brand-300 font-bold text-xs sm:text-sm transition-all"
+          >
+            Available Packages
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Currency Converter Widget -->
+      <div class="lg:col-span-5">
+        <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-3xl p-5 sm:p-6 space-y-3.5">
+          <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-300">Quick Currency Estimator</span>
+            <span id="rateNoteLabel" class="text-[11px] text-slate-300">Base: PHP (₱)</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label for="convertAmountInput" class="block text-[11px] font-semibold text-slate-300 mb-1">Amount in PHP (₱)</label>
+              <input
+                type="number"
+                id="convertAmountInput"
+                min="0"
+                step="100"
+                value="5000"
+                oninput="updateQuickConverter()"
+                class="w-full px-3 py-2 rounded-xl bg-slate-950/70 border border-white/20 text-white text-sm font-extrabold focus:outline-none focus:ring-2 focus:ring-brand-400"
+              />
+            </div>
+            <div>
+              <label for="quickTargetCurrency" class="block text-[11px] font-semibold text-slate-300 mb-1">Convert To</label>
+              <select
+                id="quickTargetCurrency"
+                onchange="syncCurrencyFromQuick(this.value)"
+                class="w-full px-3 py-2 rounded-xl bg-slate-950/70 border border-white/20 text-white text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-400"
+              >
+                <option value="USD">USD ($)</option>
+                <option value="HKD">HKD (HK$)</option>
+                <option value="VND">VND (₫)</option>
+                <option value="THB">THB (฿)</option>
+                <option value="IDR">IDR (Rp)</option>
+                <option value="PHP">PHP (₱)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bg-slate-950/60 border border-white/10 rounded-2xl p-3.5 flex items-baseline justify-between">
+            <span class="text-xs text-slate-300">Estimated Conversion:</span>
+            <span id="quickConvertedOutput" class="text-xl font-extrabold text-brand-300">$86.21</span>
+          </div>
+          <p class="text-[10px] text-slate-400">
+            Reference estimate only; final rates depend on live FX &amp; supplier terms.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-12 space-y-16 flex-1">
+
+    <!-- SECTION 1: TABBED LOCAL & INTERNATIONAL DESTINATIONS -->
+    <section id="destinations" class="space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-brand-700">Browse By Tab</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Where Do You Want To Go?</h2>
+        </div>
+
+        <!-- Level 1 Tabs: LOCAL vs INTERNATIONAL -->
+        <div class="inline-flex bg-slate-200/80 p-1.5 rounded-2xl border border-slate-200 self-start">
+          <button
+            id="mainTabLocal"
+            onclick="setMainMode('LOCAL')"
+            class="px-5 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-600 text-white shadow-2xs"
+          >
+            Local
           </button>
           <button
-            onclick="scrollToInquiryForm()"
-            class="px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white transition-colors"
+            id="mainTabIntl"
+            onclick="setMainMode('INTERNATIONAL')"
+            class="px-5 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white"
           >
-            Send Inquiry to Alvir
+            International
           </button>
+        </div>
+      </div>
+
+      <!-- Level 2 Sub-Tabs Bar (Per Local Tab / International Tab) -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-2xs">
+        <div id="subTabsContainer" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Tab Content Cards Grid -->
+      <div id="destinationCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- SECTION 2: AVAILABLE PACKAGES -->
+    <section id="packages" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-sky-700">Curated Deals</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Available Packages</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Ready-made packages o pwede mong i-customize ayon sa trip pace mo.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterPackages('ALL')" id="pkgFilterAll" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white">All</button>
+          <button onclick="filterPackages('LOCAL')" id="pkgFilterLocal" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">Local</button>
+          <button onclick="filterPackages('INTERNATIONAL')" id="pkgFilterIntl" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">International</button>
+        </div>
+      </div>
+
+      <div id="packagesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- SECTION 3: MEET THE OWNER, ALVIR + WHY ME + MESSENGER QR + PRINT NOTE -->
+    <section id="the-owner" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Left: Owner Freedive Photo -->
+        <div class="lg:col-span-5">
+          <div class="relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-200 aspect-[3/4] max-h-[440px] w-full mx-auto">
+            <img
+              src="dp.jpg"
+              alt="Meet the owner, Alvir freediving underwater"
+              class="w-full h-full object-cover object-center"
+            />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent p-4 text-white">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-brand-500/25 border border-brand-300/40 text-brand-200 mb-1">
+                Meet the Owner, Alvir
+              </span>
+              <div class="text-base font-extrabold">Alvir</div>
+              <div class="text-[11px] text-slate-300">Travel • Explore • Freedive • New Friends</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Story, Why Me, Messenger 15-Min Call + QR, Print Note -->
+        <div class="lg:col-span-7 space-y-4">
+          <div>
+            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-700">Meet the Owner, Alvir</span>
+            <h2 class="text-2xl font-extrabold text-slate-900 mt-1">
+              Why Clients Keep Coming Back
+            </h2>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Mahilig mag-travel, mag-explore, mag-freedive, at makipagkilala sa bagong kaibigan—whether solo, kasama ang friends, pamilya, o guests. Karamihan ng clients ay nagiging repeat bookings dahil sa detalyadong payo mula pag-book ng flights hanggang sa smart itinerary na akma talaga sa oras at energy ng bawat grupo.
+          </p>
+
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-600 font-extrabold">✓</span>
+              <span><strong>Smart Itinerary &amp; Daily Energy Guide:</strong> Transparent feedback at malinaw na gabay sa pagod o energy consumption araw-araw para sakto sa pace ng grupo.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-600 font-extrabold">✓</span>
+              <span><strong>First-Hand Experience by Alvir:</strong> Lahat ng tours at ruta ay napuntahan at na-explore na mismo ni Alvir.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-600 font-extrabold">✓</span>
+              <span><strong>Ultra-Budget to Luxury Options:</strong> May choices mula ultra-budget, budget, mid-range, hanggang luxury accommodations.</span>
+            </li>
+          </ul>
+
+          <!-- 15-Minute Messenger Call + QR Card -->
+          <div class="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 border border-slate-200 rounded-2xl p-4">
+            <div class="space-y-2">
+              <div class="text-xs font-extrabold text-slate-900">Book a 15-Minute Call on Messenger</div>
+              <p class="text-[11px] text-slate-600 leading-relaxed">
+                Pag-usapan natin ang flight timing, energy pace, budget, at customization mo bago ka mag-book.
+              </p>
+              <a
+                href="https://m.me/alvirski"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-extrabold shadow-2xs transition-colors"
+              >
+                Book a 15-Minute Call on Messenger
+              </a>
+            </div>
+
+            <div class="flex sm:flex-col items-center gap-2.5 shrink-0 bg-white p-2.5 rounded-xl border border-slate-200">
+              <img
+                src="Screenshot 2026-11-25 134206.png"
+                alt="Alvir Messenger QR Code (@alvirski)"
+                class="w-24 h-24 object-cover object-top rounded-lg"
+              />
+              <div class="text-center">
+                <div class="text-[10px] font-extrabold text-slate-800">@alvirski</div>
+                <div class="text-[9px] text-slate-500">Scan on Messenger</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Print Itinerary Reminder -->
+          <div class="mt-4 pt-3 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <p class="text-xs text-slate-600 leading-relaxed">
+              After printing this page, send this to Alvir and <strong>galingan mo tumawad</strong> 😄✨
+            </p>
+            <button
+              type="button"
+              onclick="window.print()"
+              class="no-print px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold shrink-0 transition-colors cursor-pointer"
+            >
+              Print Itinerary
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- LOCAL (PALAWAN) CALCULATOR VIEW -->
-    <div id="localCalculatorView" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-
-      <!-- Left Column: Catalog & Filters (7 cols) -->
-      <section class="lg:col-span-7 space-y-4">
-        <!-- Destination Header + Search & Category Filter -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-700">Local • Palawan</span>
-              <h2 id="activePalawanHeading" class="text-lg font-extrabold text-slate-900">Coron</h2>
-            </div>
-            <span class="text-xs font-medium text-slate-500">À la carte / tingi-tingi items only</span>
-          </div>
-
-          <div class="flex flex-col sm:flex-row gap-2">
-            <div class="relative flex-1">
-              <input
-                type="text"
-                id="searchInput"
-                oninput="handleSearch(this.value)"
-                placeholder="Search tour, transfer, room, or rental..."
-                class="w-full pl-8 pr-3 py-2 text-xs bg-slate-100 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white"
-              />
-              <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
-            </div>
-            <select
-              id="categoryFilter"
-              onchange="handleCategoryChange(this.value)"
-              class="px-3 py-2 text-xs font-semibold bg-white border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
-            >
-              <option value="ALL">All Categories</option>
-              <option value="JOINER">Joiner Tours</option>
-              <option value="PRIVATE">Private Tours</option>
-              <option value="TRANSFER">Transfers & Van Rentals</option>
-              <option value="ACCOMMODATION">Accommodations</option>
-              <option value="RENTAL">Gear & Kayak Rentals</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Catalog Items List -->
-        <div id="catalogList" class="space-y-5">
-          <!-- Rendered by JS -->
-        </div>
-      </section>
-
-      <!-- Right Column: Live Calculator & Guest Inquiry Form (5 cols) -->
-      <aside id="inquirySidebar" class="lg:col-span-5 lg:sticky lg:top-28 space-y-4">
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          <!-- Card Header -->
-          <div class="bg-slate-900 px-4 py-3.5 text-white flex items-center justify-between">
-            <div>
-              <h2 class="text-sm font-bold tracking-wide">Customize Your Quote</h2>
-              <p class="text-[11px] text-slate-300">Regular guest rates • Instant estimate & email inquiry</p>
-            </div>
-            <button
-              onclick="resetCalculator()"
-              class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-white/10 hover:bg-white/20 text-white transition-colors"
-            >
-              Reset
-            </button>
-          </div>
-
-          <div class="p-4 space-y-4">
-            <!-- Pax Selector (0-2 Free, 3-5 50%, 6+ Adult) -->
-            <div class="bg-slate-50 rounded-xl p-3 border border-slate-200/80 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">Guests (Child Policy Applied)</span>
-                <span id="paxSummaryLabel" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-brand-100 text-brand-800">
-                  2 Guests (2.0 Paying)
-                </span>
-              </div>
-              <div class="grid grid-cols-3 gap-2">
-                <div class="bg-white p-2 rounded-xl border border-slate-200 text-center">
-                  <div class="text-[11px] font-bold text-slate-800">Adults (6+)</div>
-                  <div class="text-[10px] text-slate-500 mb-1">Full Rate</div>
-                  <div class="flex items-center justify-center gap-1.5">
-                    <button onclick="changePax('adults', -1)" class="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-xs">−</button>
-                    <span id="adultsCount" class="text-sm font-extrabold w-4 text-center">2</span>
-                    <button onclick="changePax('adults', 1)" class="w-6 h-6 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs">+</button>
-                  </div>
-                </div>
-                <div class="bg-white p-2 rounded-xl border border-slate-200 text-center">
-                  <div class="text-[11px] font-bold text-slate-800">Kids (3–5)</div>
-                  <div class="text-[10px] text-amber-600 font-semibold mb-1">50% Rate</div>
-                  <div class="flex items-center justify-center gap-1.5">
-                    <button onclick="changePax('kids', -1)" class="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-xs">−</button>
-                    <span id="kidsCount" class="text-sm font-extrabold w-4 text-center">0</span>
-                    <button onclick="changePax('kids', 1)" class="w-6 h-6 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs">+</button>
-                  </div>
-                </div>
-                <div class="bg-white p-2 rounded-xl border border-slate-200 text-center">
-                  <div class="text-[11px] font-bold text-slate-800">0–2 Yrs</div>
-                  <div class="text-[10px] text-emerald-600 font-semibold mb-1">FREE</div>
-                  <div class="flex items-center justify-center gap-1.5">
-                    <button onclick="changePax('infants', -1)" class="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-xs">−</button>
-                    <span id="infantsCount" class="text-sm font-extrabold w-4 text-center">0</span>
-                    <button onclick="changePax('infants', 1)" class="w-6 h-6 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs">+</button>
-                  </div>
-                </div>
-              </div>
-              <p class="text-[10px] text-slate-500">Valid ID/birth certificate required for 0–5 yrs old.</p>
-            </div>
-
-            <!-- Selected Items List -->
-            <div>
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Selected Items (<span id="selectedCount">0</span>)</span>
-                <span class="text-[11px] text-slate-400">Regular rates</span>
-              </div>
-              <div id="selectedItemsList" class="space-y-2 max-h-60 overflow-y-auto pr-1">
-                <!-- Rendered by JS -->
-              </div>
-            </div>
-
-            <!-- Optional Environmental / Lagoon Fees -->
-            <div class="bg-sky-50/70 rounded-xl p-3 border border-sky-200/80 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-sky-900">Environmental & Lagoon Fees</span>
-                <span class="text-[10px] text-sky-700 font-medium">Optional / per paying pax</span>
-              </div>
-              <div id="feesList" class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                <!-- Rendered by JS -->
-              </div>
-            </div>
-
-            <!-- Guest Discount Input Only -->
-            <div class="bg-amber-50/60 rounded-xl p-3 border border-amber-200/80 space-y-1.5">
-              <div class="flex items-center justify-between">
-                <label for="discountInput" class="text-xs font-bold text-amber-950">Guest Discount (₱)</label>
-                <span class="text-[10px] text-amber-800 font-medium">Applied to Guest Total</span>
-              </div>
-              <input
-                type="number"
-                id="discountInput"
-                min="0"
-                step="50"
-                value="0"
-                oninput="updateDiscount(this.value)"
-                placeholder="0"
-                class="w-full px-3 py-1.5 text-xs font-bold bg-white border border-amber-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500"
-              />
-            </div>
-
-            <!-- Guest Total Box -->
-            <div class="bg-slate-900 text-white rounded-2xl p-4 flex items-baseline justify-between">
-              <div>
-                <div class="text-[11px] font-semibold uppercase tracking-wider text-brand-300">Estimated Guest Total</div>
-                <div id="perPaxEstimate" class="text-xs text-slate-400">₱0 / paying pax</div>
-              </div>
-              <div id="guestTotalAmount" class="text-2xl sm:text-3xl font-extrabold text-white">₱0</div>
-            </div>
-
-            <!-- Required Guest Inquiry & Price Match Form -->
-            <form id="inquiryForm" onsubmit="handleInquirySubmit(event)" class="pt-2 border-t border-slate-200 space-y-3">
-              <div class="flex items-center justify-between">
-                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-800">Send Inquiry to Alvir</h3>
-                <span class="text-[10px] font-bold text-rose-600">* Important / Required</span>
-              </div>
-
-              <div>
-                <label for="guestName" class="block text-xs font-bold text-slate-700 mb-1">
-                  Full Name <span class="text-rose-600">* (Important)</span>
-                </label>
-                <input
-                  type="text"
-                  id="guestName"
-                  required
-                  placeholder="Enter your full name"
-                  class="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500"
-                />
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                <div>
-                  <label for="guestContact" class="block text-xs font-bold text-slate-700 mb-1">
-                    Contact Number / Email <span class="text-rose-600">* (Important)</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="guestContact"
-                    required
-                    placeholder="09XX XXX XXXX or email"
-                    class="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500"
-                  />
-                </div>
-                <div>
-                  <label for="travelDates" class="block text-xs font-bold text-slate-700 mb-1">
-                    Travel Dates <span class="text-rose-600">* (Important)</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="travelDates"
-                    required
-                    placeholder="e.g., Dec 10–13, 2026"
-                    class="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500"
-                  />
-                </div>
-              </div>
-
-              <!-- Mandatory Price-Match Question -->
-              <div class="bg-brand-50/80 border border-brand-200 rounded-xl p-3 space-y-2">
-                <label for="priceMatchAnswer" class="block text-xs font-bold text-slate-900 leading-snug">
-                  May nakita ka bang package sa ibang travel agency? We price match to guarantee we offer the lowest rate. <span class="text-rose-600">* (Important)</span>
-                </label>
-                <textarea
-                  id="priceMatchAnswer"
-                  rows="2"
-                  required
-                  placeholder="Sagot: Wala pa po / Meron po (ilagay ang quote o inclusions para ma-price match natin)..."
-                  class="w-full px-3 py-2 text-xs bg-white border border-brand-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500"
-                ></textarea>
-              </div>
-
-              <!-- Other Requests -->
-              <div>
-                <label for="otherRequests" class="block text-xs font-bold text-slate-700 mb-1">
-                  Other Requests / Notes <span class="text-rose-600">* (Important)</span>
-                </label>
-                <textarea
-                  id="otherRequests"
-                  rows="2"
-                  required
-                  placeholder="Dietary restrictions, flight details, hotel preference, or 'None / Wala na po'..."
-                  class="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500"
-                ></textarea>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                <button
-                  type="submit"
-                  class="w-full py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs shadow-sm transition-all"
-                >
-                  Submit Inquiry via Email
-                </button>
-                <button
-                  type="button"
-                  onclick="copyGuestSummary()"
-                  class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold text-xs transition-all"
-                >
-                  Copy Guest Summary
-                </button>
-              </div>
-              <p class="text-[10px] text-slate-500 text-center">
-                Sends directly to <strong>alvirestrella08@gmail.com</strong> for quote processing.
-              </p>
-            </form>
-          </div>
-        </div>
-      </aside>
-    </div>
   </main>
 
-  <!-- Mobile Sticky Summary Bar -->
-  <div id="mobileStickyBar" class="fixed bottom-0 inset-x-0 z-30 lg:hidden bg-slate-900 text-white border-t border-slate-800 px-4 py-3 shadow-2xl flex items-center justify-between gap-3">
-    <div onclick="scrollToInquiryForm()" class="cursor-pointer">
-      <div class="text-[10px] uppercase tracking-wider text-brand-300 font-semibold">
-        Guest Estimate (<span id="mobileItemCount">0</span> items)
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 px-4 sm:px-6 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <span class="font-extrabold text-white">Alvir Customize Tour</span> • Customized Local &amp; International Travel
       </div>
-      <div id="mobileGuestTotal" class="text-lg font-extrabold leading-tight">₱0</div>
-    </div>
-    <button
-      onclick="scrollToInquiryForm()"
-      class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 text-xs font-extrabold shadow"
-    >
-      Review &amp; Send
-    </button>
-  </div>
-
-  <!-- Client-Safe Inquiry Confirmation Modal (No Tubo / Base Cost Shown On-Screen) -->
-  <div id="resultsModal" class="fixed inset-0 z-50 hidden bg-slate-950/65 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl border border-slate-200 flex flex-col max-h-[90vh]">
-      <div class="px-5 py-4 bg-slate-900 text-white flex items-center justify-between">
-        <div>
-          <h3 class="text-sm sm:text-base font-extrabold">Inquiry Submitted</h3>
-          <p id="emailDeliveryStatus" class="text-xs text-brand-300">Sent to alvirestrella08@gmail.com</p>
-        </div>
-        <button onclick="closeResultsModal()" class="text-slate-300 hover:text-white text-xl font-bold px-2">✕</button>
-      </div>
-
-      <div class="p-5 overflow-y-auto space-y-4 text-xs">
-        <!-- Guest Details Recap -->
-        <div id="modalGuestMeta" class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-1 text-slate-700">
-          <!-- Populated dynamically -->
-        </div>
-
-        <!-- Guest Quote Summary Only -->
-        <div class="bg-brand-50/70 border-2 border-brand-300 rounded-2xl p-4 space-y-2.5">
-          <div class="flex items-center justify-between border-b border-brand-200 pb-2">
-            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-900">Guest Quote &amp; Regular Rates</span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-200 text-brand-900">Guest Copy</span>
-          </div>
-          <div id="modalGuestBreakdown" class="space-y-1.5 text-slate-800"></div>
-          <div class="pt-2 border-t border-brand-200 flex items-baseline justify-between">
-            <span class="font-bold text-slate-900">Estimated Guest Total:</span>
-            <span id="modalGuestTotalVal" class="text-lg font-extrabold text-brand-800">₱0</span>
-          </div>
-        </div>
-
-        <!-- Guest-Safe Quote Text -->
-        <div>
-          <div class="text-[11px] font-bold text-slate-600 mb-1">Guest Summary Copy:</div>
-          <pre id="fullEmailPayload" class="whitespace-pre-wrap font-sans text-[11px] bg-slate-900 text-slate-100 p-3.5 rounded-2xl max-h-48 overflow-y-auto leading-relaxed"></pre>
-        </div>
-      </div>
-
-      <div class="px-5 py-3.5 bg-slate-100 border-t border-slate-200 flex flex-wrap items-center justify-end gap-2">
-        <button
-          onclick="copyEmailPayload()"
-          class="px-4 py-2 rounded-xl text-xs font-bold bg-white hover:bg-slate-50 text-slate-800 border border-slate-300"
-        >
-          Copy Guest Summary
-        </button>
-        <a
-          id="mailtoFallbackLink"
-          href="#"
-          class="px-4 py-2 rounded-xl text-xs font-bold bg-sky-600 hover:bg-sky-700 text-white"
-        >
-          Open Email App
-        </a>
-        <button
-          onclick="closeResultsModal()"
-          class="px-4 py-2 rounded-xl text-xs font-extrabold bg-slate-900 hover:bg-slate-800 text-white"
-        >
-          Done
-        </button>
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Messenger (@alvirski)</a>
+        <span>•</span>
+        <a href="mailto:alvirestrella08@gmail.com" class="hover:text-white transition-colors">alvirestrella08@gmail.com</a>
+        <span>•</span>
+        <a href="calculator.html" class="text-brand-400 font-bold hover:underline">Calculator</a>
       </div>
     </div>
-  </div>
-
-  <!-- Toast Alert -->
-  <div
-    id="toastBanner"
-    class="fixed top-20 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-lg border border-slate-700 text-xs font-semibold"
-  >
-    <span id="toastText">Updated</span>
-  </div>
+  </footer>
 
   <script>
     // =========================================================================
-    // 1. NAVIGATION DATA (LOCAL -> PALAWAN SUB-MENUS & INTERNATIONAL SUB-MENUS)
+    // 1. CURRENCY RATES (PHP BASE REFERENCE — EDITABLE)
     // =========================================================================
-    const PALAWAN_SUBMENUS = [
-      { id: 'CORON', label: 'Coron' },
-      { id: 'EL_NIDO', label: 'El Nido' },
-      { id: 'PUERTO', label: 'Puerto Princesa' },
-      { id: 'PORT_BARTON', label: 'Port Barton' },
-      { id: 'BALABAC', label: 'Balabac' }
-    ];
+    const CURRENCY_CONFIG = {
+      PHP: { symbol: '₱', rateFromPhp: 1, decimals: 0, label: 'PHP (₱)' },
+      USD: { symbol: '$', rateFromPhp: 1 / 58, decimals: 2, label: 'USD ($)' },
+      HKD: { symbol: 'HK$', rateFromPhp: 1 / 7.45, decimals: 2, label: 'HKD (HK$)' },
+      VND: { symbol: '₫', rateFromPhp: 435, decimals: 0, label: 'VND (₫)' },
+      THB: { symbol: '฿', rateFromPhp: 1 / 1.65, decimals: 0, label: 'THB (฿)' },
+      IDR: { symbol: 'Rp', rateFromPhp: 275, decimals: 0, label: 'IDR (Rp)' }
+    };
 
-    const INTERNATIONAL_SUBMENUS = [
-      { id: 'VIETNAM_DANANG', label: 'Vietnam — Da Nang' },
-      { id: 'VIETNAM_HANOI_SAPA', label: 'Vietnam — Hanoi-Sapa' },
-      { id: 'THAILAND', label: 'Thailand' },
-      { id: 'BALI', label: 'Bali Indonesia' },
-      { id: 'HK_ONLY', label: 'Hong Kong Only' },
-      { id: 'HK_MACAU', label: 'Hong Kong-Macau' },
-      { id: 'MACAU_ONLY', label: 'Macau Only' },
-      { id: 'TAIWAN', label: 'Taiwan' }
-    ];
+    let activeCurrency = 'PHP';
 
-    // =========================================================================
-    // 2. À LA CARTE / TINGI-TINGI RATE SHEET DATA (2026 REGULAR & BASE RATES)
-    // Bundled multi-day packages (3D2N, 4D3N, 5D4N, 6D5N packages) excluded.
-    // =========================================================================
-    const ENV_FEES = [
-      { id: 'fee_coron_env', dest: 'CORON', name: 'Coron Environmental Fee', regularPerPax: 200, basePerPax: 200 },
-      { id: 'fee_elnido_env', dest: 'EL_NIDO', name: 'El Nido Environmental Fee', regularPerPax: 400, basePerPax: 400 },
-      { id: 'fee_elnido_lagoon', dest: 'EL_NIDO', name: 'El Nido Lagoon Fee (Tour A)', regularPerPax: 200, basePerPax: 200 },
-      { id: 'fee_puerto_env', dest: 'PUERTO', name: 'Puerto Princesa Environmental Fee', regularPerPax: 150, basePerPax: 150 },
-      { id: 'fee_barton_env', dest: 'PORT_BARTON', name: 'Port Barton Environmental Fee', regularPerPax: 50, basePerPax: 50 }
-    ];
+    function formatFromPhp(phpAmount) {
+      if (phpAmount === null || phpAmount === undefined) return 'Custom Quote';
+      const cfg = CURRENCY_CONFIG[activeCurrency] || CURRENCY_CONFIG.PHP;
+      const converted = phpAmount * cfg.rateFromPhp;
+      const formatted = converted.toLocaleString('en-US', {
+        minimumFractionDigits: cfg.decimals,
+        maximumFractionDigits: cfg.decimals
+      });
+      return `${cfg.symbol}${formatted}`;
+    }
 
-    const CATALOG = [
-      // ---------------- CORON JOINER TOURS ----------------
-      {
-        id: 'cor_j_town', dest: 'CORON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Coron Town Tour (Joiner)', schedule: '4:00 PM – 8:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Coron_from_Mount_Tapyas.JPG',
-        imageCaption: 'Mount Tapyas View, Coron',
-        regularRate: 800, baseRate: 600,
-        spots: ['Town Plaza', 'Lualhati Park', 'Souvenir Shops', 'St. Augustine Church', 'Cashew Factory', 'Mt. Tapyas View Deck', 'Maquinit Hot-spring'],
-        notes: 'Licensed guide, tourist boat/vehicle, life vest, entrance fees & town proper pick-up/drop-off.'
-      },
-      {
-        id: 'cor_j_tour_a', dest: 'CORON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Coron Island Tour A (Joiner)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg',
-        imageCaption: 'Kayangan Lake, Coron',
-        regularRate: 1200, baseRate: 900,
-        spots: ['Kayangan Lake', 'Coral Garden', 'Sunset Beach', 'Green Lagoon', 'Quin Reef', 'CYC Beach'],
-        notes: 'Includes buffet lunch, drinking water, boat, guide, life vest & permits.'
-      },
-      {
-        id: 'cor_j_tour_b', dest: 'CORON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Coron Island Tour B (Joiner)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Twin_Lagoon,_Coron,_Palawan.jpg',
-        imageCaption: 'Twin Lagoon, Coron',
-        regularRate: 1400, baseRate: 1150,
-        spots: ['Barracuda Lake', 'Smith Beach', 'Skeleton Wreck', 'Twin Lagoon', 'Reef Garden'],
-        notes: 'Includes buffet lunch, drinking water, boat, guide, life vest & permits.'
-      },
-      {
-        id: 'cor_j_escapade', dest: 'CORON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Island Escapade Tour (Joiner)', schedule: '8:30 AM – 5:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Coron_Uson_Island_top_view_Tapyas_(Coron,_Palawan;_03-16-2024).jpg',
-        imageCaption: 'Calamian Islands, Coron',
-        regularRate: 1700, baseRate: 1300,
-        spots: ['Malcapuya Island', 'Banana Island', 'Bulog Dos Beach'],
-        notes: 'Includes buffet lunch, light snacks & drinks, drinking water, boat, guide & permits.'
-      },
-      {
-        id: 'cor_j_reef', dest: 'CORON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Reef & Wrecks Tour (Joiner)', schedule: '8:30 AM – 5:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Twin_Lagoon,_Coron,_Palawan,_Philippines_-_panoramio.jpg',
-        imageCaption: 'Coron Waters & Reefs',
-        regularRate: 1700, baseRate: 1300,
-        spots: ['Pass Island', 'Lusong Gunboat', 'Lusong Coral Garden', 'East Tangat Wreck'],
-        notes: 'Includes buffet lunch, light snacks & drinks, drinking water, boat, guide & permits.'
-      },
-      {
-        id: 'cor_j_ultimate', dest: 'CORON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Coron Ultimate Tour (Joiner)', schedule: '8:30 AM – 5:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Twin_Lagoon_of_Coron_Island.jpg',
-        imageCaption: 'Coron Island Lagoons',
-        regularRate: 1700, baseRate: 1300,
-        spots: ['Kayangan Lake', 'Twin Lagoon', 'Sunset Beach', 'Reef Garden', 'Skeleton Wreck', 'Coral Garden', 'CYC Beach'],
-        notes: 'Includes buffet lunch, snacks & drinks, water, boat, guide & permits.'
-      },
-      {
-        id: 'cor_j_barracuda_addon', dest: 'CORON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Ultimate Tour Add-On: Barracuda Lake', schedule: 'Optional Add-On',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Maquinit_Hotspring_-_Mainit_na_Bukal_ng_Maquinit_-_Hotspring_in_Coron,_Palawan,_Philippines.jpg',
-        imageCaption: 'Coron Natural Spot',
-        regularRate: 200, baseRate: 200,
-        spots: ['Barracuda Lake'],
-        notes: 'Optional add-on per pax for Coron Ultimate Tour.'
-      },
-      {
-        id: 'cor_j_super_ult', dest: 'CORON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Coron Super Ultimate Tour (Joiner)', schedule: '8:30 AM – 5:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Twin_Lagoon,_Coron,_Palawan.jpg',
-        imageCaption: 'Super Ultimate Coron',
-        regularRate: 1900, baseRate: 1500,
-        spots: ['Kayangan Lake', 'Barracuda Lake', 'Twin Lagoon', 'Sunset Beach', 'Reef Garden', 'Skeleton Wreck', 'Coral Garden', 'CYC Beach'],
-        notes: 'Includes buffet lunch, snacks & drinks, water, boat, guide & permits.'
-      },
-      {
-        id: 'cor_j_calauit', dest: 'CORON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Calauit Safari Tour (Joiner)', schedule: '7:00 AM – 4:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Calauit_Safari_Park_of_Coron.jpg',
-        imageCaption: 'Calauit Safari, Coron',
-        regularRate: 2700, baseRate: 2400,
-        spots: ['Busuanga Town', 'Calauit Safari Wildlife', 'Malbato Church', 'Black Island with Cave'],
-        notes: 'Includes land & boat transfers, buffet lunch, snacks, guide & entrance fees.'
-      },
+    function setCurrency(code) {
+      activeCurrency = CURRENCY_CONFIG[code] ? code : 'PHP';
+      const topSelect = document.getElementById('currencySelect');
+      if (topSelect) topSelect.value = activeCurrency;
 
-      // ---------------- CORON PRIVATE TOURS ----------------
-      {
-        id: 'cor_p_town', dest: 'CORON', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Coron Town Tour (Private)', schedule: '4:00 PM – 8:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Coron_from_Mount_Tapyas.JPG',
-        imageCaption: 'Coron Town (Private)',
-        brackets: [
-          { min: 1, max: 1, regular: 3500, base: 3100, label: '1 pax' },
-          { min: 2, max: 3, regular: 2300, base: 1900, label: '2–3 pax' },
-          { min: 4, max: 5, regular: 1700, base: 1400, label: '4–5 pax' },
-          { min: 6, max: 8, regular: 1600, base: 1300, label: '6–8 pax' },
-          { min: 9, max: 99, regular: 1400, base: 1000, label: '9–10+ pax' }
-        ],
-        spots: ['Town Plaza', 'Lualhati Park', 'Souvenir Shops', 'St. Augustine Church', 'Cashew Factory', 'Mt. Tapyas View Deck', 'Maquinit Hot-spring'],
-        notes: 'Private vehicle & licensed guide.'
-      },
-      {
-        id: 'cor_p_tour_a', dest: 'CORON', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Coron Island Tour A (Private)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg',
-        imageCaption: 'Kayangan Lake (Private)',
-        brackets: [
-          { min: 1, max: 1, regular: 5900, base: 5500, label: '1 pax' },
-          { min: 2, max: 3, regular: 3600, base: 3200, label: '2–3 pax' },
-          { min: 4, max: 5, regular: 2700, base: 2300, label: '4–5 pax' },
-          { min: 6, max: 8, regular: 2400, base: 2000, label: '6–8 pax' },
-          { min: 9, max: 99, regular: 2200, base: 1800, label: '9–10+ pax' }
-        ],
-        spots: ['Kayangan Lake', 'Coral Garden', 'Sunset Beach', 'Green Lagoon', 'Quin Reef', 'CYC Beach'],
-        notes: 'Exclusive boat, licensed guide, buffet lunch & permits.'
-      },
-      {
-        id: 'cor_p_tour_b', dest: 'CORON', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Coron Island Tour B (Private)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Twin_Lagoon,_Coron,_Palawan.jpg',
-        imageCaption: 'Twin Lagoon (Private)',
-        brackets: [
-          { min: 1, max: 1, regular: 6100, base: 5700, label: '1 pax' },
-          { min: 2, max: 3, regular: 3800, base: 3400, label: '2–3 pax' },
-          { min: 4, max: 5, regular: 2900, base: 2500, label: '4–5 pax' },
-          { min: 6, max: 8, regular: 2500, base: 2100, label: '6–8 pax' },
-          { min: 9, max: 99, regular: 2300, base: 1900, label: '9–10+ pax' }
-        ],
-        spots: ['Barracuda Lake', 'Smith Beach', 'Skeleton Wreck', 'Twin Lagoon', 'Reef Garden'],
-        notes: 'Exclusive boat, licensed guide, buffet lunch & permits.'
-      },
-      {
-        id: 'cor_p_escapade', dest: 'CORON', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Island Escapade Tour (Private)', schedule: '8:30 AM – 5:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Coron_Uson_Island_top_view_Tapyas_(Coron,_Palawan;_03-16-2024).jpg',
-        imageCaption: 'Island Escapade (Private)',
-        brackets: [
-          { min: 1, max: 1, regular: 6650, base: 6250, label: '1 pax' },
-          { min: 2, max: 3, regular: 4350, base: 3950, label: '2–3 pax' },
-          { min: 4, max: 5, regular: 3100, base: 2700, label: '4–5 pax' },
-          { min: 6, max: 8, regular: 2700, base: 2300, label: '6–8 pax' },
-          { min: 9, max: 99, regular: 2500, base: 2100, label: '9–10+ pax' }
-        ],
-        spots: ['Malcapuya Island', 'Banana Island', 'Bulog Dos Beach'],
-        notes: 'Exclusive boat, guide, buffet lunch, snacks & permits.'
-      },
-      {
-        id: 'cor_p_reef', dest: 'CORON', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Reef & Wrecks Tour (Private)', schedule: '8:30 AM – 5:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Twin_Lagoon,_Coron,_Palawan,_Philippines_-_panoramio.jpg',
-        imageCaption: 'Reef & Wrecks (Private)',
-        brackets: [
-          { min: 1, max: 1, regular: 6650, base: 6250, label: '1 pax' },
-          { min: 2, max: 3, regular: 4350, base: 3950, label: '2–3 pax' },
-          { min: 4, max: 5, regular: 3100, base: 2700, label: '4–5 pax' },
-          { min: 6, max: 8, regular: 2700, base: 2300, label: '6–8 pax' },
-          { min: 9, max: 99, regular: 2500, base: 2100, label: '9–10+ pax' }
-        ],
-        spots: ['Pass Island', 'Lusong Gunboat', 'Lusong Coral Garden', 'East Tangat Wreck'],
-        notes: 'Exclusive boat, guide, buffet lunch, snacks & permits.'
-      },
-      {
-        id: 'cor_p_ultimate', dest: 'CORON', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Coron Ultimate Tour (Private)', schedule: '8:30 AM – 5:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Twin_Lagoon_of_Coron_Island.jpg',
-        imageCaption: 'Coron Ultimate (Private)',
-        brackets: [
-          { min: 1, max: 1, regular: 6650, base: 6250, label: '1 pax' },
-          { min: 2, max: 3, regular: 4350, base: 3950, label: '2–3 pax' },
-          { min: 4, max: 5, regular: 3100, base: 2700, label: '4–5 pax' },
-          { min: 6, max: 8, regular: 2700, base: 2300, label: '6–8 pax' },
-          { min: 9, max: 99, regular: 2500, base: 2100, label: '9–10+ pax' }
-        ],
-        spots: ['Kayangan Lake', 'Twin Lagoon', 'Sunset Beach', 'Reef Garden', 'Skeleton Wreck', 'Coral Garden', 'CYC Beach'],
-        notes: 'Exclusive boat, guide, buffet lunch, snacks & permits.'
-      },
-      {
-        id: 'cor_p_super_ult', dest: 'CORON', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Coron Super Ultimate Tour (Private)', schedule: '8:30 AM – 5:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Twin_Lagoon,_Coron,_Palawan.jpg',
-        imageCaption: 'Super Ultimate (Private)',
-        brackets: [
-          { min: 1, max: 1, regular: 6850, base: 6450, label: '1 pax' },
-          { min: 2, max: 3, regular: 4550, base: 4150, label: '2–3 pax' },
-          { min: 4, max: 5, regular: 3300, base: 2900, label: '4–5 pax' },
-          { min: 6, max: 8, regular: 2900, base: 2500, label: '6–8 pax' },
-          { min: 9, max: 99, regular: 2700, base: 2300, label: '9–10+ pax' }
-        ],
-        spots: ['Kayangan Lake', 'Barracuda Lake', 'Twin Lagoon', 'Sunset Beach', 'Reef Garden', 'Skeleton Wreck', 'Coral Garden', 'CYC Beach'],
-        notes: 'Exclusive boat, guide, buffet lunch, snacks & permits.'
-      },
-      {
-        id: 'cor_p_calauit', dest: 'CORON', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Calauit Safari Tour (Private)', schedule: '7:00 AM – 4:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Calauit_Safari_Park_of_Coron.jpg',
-        imageCaption: 'Calauit Safari (Private)',
-        brackets: [
-          { min: 1, max: 1, regular: 12100, base: 11700, label: '1 pax' },
-          { min: 2, max: 3, regular: 7400, base: 7000, label: '2–3 pax' },
-          { min: 4, max: 5, regular: 4700, base: 4300, label: '4–5 pax' },
-          { min: 6, max: 8, regular: 3900, base: 3500, label: '6–8 pax' },
-          { min: 9, max: 99, regular: 3600, base: 3200, label: '9–10+ pax' }
-        ],
-        spots: ['Busuanga Town', 'Calauit Safari Wildlife', 'Malbato Church', 'Black Island with Cave'],
-        notes: 'Private van + private boat, guide, buffet lunch & permits.'
-      },
-
-      // ---------------- CORON TRANSFERS & RENTALS ----------------
-      {
-        id: 'cor_tr_joiner_rt', dest: 'CORON', category: 'TRANSFER', pricingType: 'PER_PAX',
-        name: 'Joiner Roundtrip Airport Transfer', schedule: 'Airport ↔ Town Proper',
-        regularRate: 500, baseRate: 400,
-        notes: 'Shared roundtrip van transfer per pax.'
-      },
-      {
-        id: 'cor_tr_priv_rt', dest: 'CORON', category: 'TRANSFER', pricingType: 'FIXED_UNIT', unitLabel: 'van(s)',
-        name: 'Private Roundtrip Airport Transfer', schedule: 'Airport ↔ Town Proper',
-        regularRate: 5000, baseRate: 4000,
-        notes: 'Exclusive roundtrip van transfer per van.'
-      },
-      {
-        id: 'cor_tr_van_4hr', dest: 'CORON', category: 'TRANSFER', pricingType: 'FIXED_UNIT', unitLabel: 'van(s) (4 hrs)',
-        name: 'Van Rental — Town Proper (4 Hours)', schedule: '4-Hour Charter',
-        regularRate: 5000, baseRate: 4000,
-        notes: 'Town proper van charter for 4 hours.'
-      },
-      {
-        id: 'cor_tr_van_hr', dest: 'CORON', category: 'TRANSFER', pricingType: 'FIXED_UNIT', unitLabel: 'addt’l hr(s)',
-        name: 'Van Rental — Additional Hour', schedule: 'Per extra hour',
-        regularRate: 500, baseRate: 400,
-        notes: 'Additional hour beyond 4-hour town proper charter.'
-      },
-      {
-        id: 'cor_r_clear_kayak', dest: 'CORON', category: 'RENTAL', pricingType: 'FIXED_UNIT', unitLabel: 'day(s)',
-        name: 'Clear Kayak Rental', schedule: 'Per Day',
-        regularRate: 1500, baseRate: 1300,
-        notes: 'Clear kayak rental per day.'
-      },
-      {
-        id: 'cor_r_gopro12', dest: 'CORON', category: 'RENTAL', pricingType: 'FIXED_UNIT', unitLabel: 'day(s)',
-        name: 'GoPro 12 Rental', schedule: 'Per Day',
-        regularRate: 1500, baseRate: 1300,
-        notes: 'GoPro 12 rental per day.'
-      },
-      {
-        id: 'cor_r_kayak2', dest: 'CORON', category: 'RENTAL', pricingType: 'FIXED_UNIT', unitLabel: 'day(s)',
-        name: 'Two-Seater Kayak Rental', schedule: 'Per Day',
-        regularRate: 1200, baseRate: 1000,
-        notes: '2-seater kayak rental per day.'
-      },
-      {
-        id: 'cor_r_kayak3', dest: 'CORON', category: 'RENTAL', pricingType: 'FIXED_UNIT', unitLabel: 'day(s)',
-        name: 'Three-Seater Kayak Rental', schedule: 'Per Day',
-        regularRate: 1500, baseRate: 1200,
-        notes: '3-seater kayak rental per day.'
-      },
-      {
-        id: 'cor_r_mask', dest: 'CORON', category: 'RENTAL', pricingType: 'FIXED_UNIT', unitLabel: 'day(s)',
-        name: 'Mask & Snorkel Rental', schedule: 'Per Day',
-        regularRate: 150, baseRate: 130,
-        notes: 'Mask & snorkel rental per day.'
-      },
-      {
-        id: 'cor_r_shoes', dest: 'CORON', category: 'RENTAL', pricingType: 'FIXED_UNIT', unitLabel: 'day(s)',
-        name: 'Aqua Shoes Rental', schedule: 'Per Day',
-        regularRate: 150, baseRate: 130,
-        notes: 'Aqua shoes rental per day.'
-      },
-
-      // ---------------- CORON ACCOMMODATIONS ----------------
-      {
-        id: 'cor_h_mvgi_dbl', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'Mountain View Garden Inn — Double Sharing (w/ Breakfast)', schedule: 'Per Room / Night',
-        regularRate: 2500, baseRate: 2000,
-        notes: 'Town Proper • Pool, Buffet Breakfast, Private CR w/ Hot & Cold Shower, Wi-Fi. Check-in 2PM / Out 12NN.'
-      },
-      {
-        id: 'cor_h_mvgi_tpl', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'Mountain View Garden Inn — Triple Sharing (w/ Breakfast)', schedule: 'Per Room / Night',
-        regularRate: 2950, baseRate: 2655,
-        notes: 'Town Proper • Includes breakfast & pool access.'
-      },
-      {
-        id: 'cor_h_mvgi_quad', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'Mountain View Garden Inn — Quad Sharing (w/ Breakfast)', schedule: 'Per Room / Night',
-        regularRate: 3850, baseRate: 3465,
-        notes: 'Town Proper • Includes breakfast & pool access.'
-      },
-      {
-        id: 'cor_h_mvgi_fam5', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'Mountain View Garden Inn — Family Room for 5 (w/ Breakfast)', schedule: 'Per Room / Night',
-        regularRate: 4750, baseRate: 4275,
-        notes: 'Town Proper • Includes breakfast & pool access.'
-      },
-      {
-        id: 'cor_h_mvgi_fam6', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'Mountain View Garden Inn — Family Room for 6 (w/ Breakfast)', schedule: 'Per Room / Night',
-        regularRate: 5650, baseRate: 5085,
-        notes: 'Town Proper • Includes breakfast & pool access.'
-      },
-      {
-        id: 'cor_h_mvgi_ext', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'Mountain View Garden Inn — Extra Mattress', schedule: 'Per Mattress / Night',
-        regularRate: 800, baseRate: 600,
-        notes: 'Extra mattress per night.'
-      },
-      {
-        id: 'cor_h_ceb_dbl', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: "Cebuana's Traveler's Inn — Double Sharing", schedule: 'Per Room / Night',
-        regularRate: 1200, baseRate: 1000,
-        notes: 'Plated Breakfast, Private CR w/ Shower, Wi-Fi.'
-      },
-      {
-        id: 'cor_h_ceb_tpl', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: "Cebuana's Traveler's Inn — Triple Sharing", schedule: 'Per Room / Night',
-        regularRate: 1800, baseRate: 1400,
-        notes: 'Includes plated breakfast.'
-      },
-      {
-        id: 'cor_h_ceb_quad', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: "Cebuana's Traveler's Inn — Quad Sharing", schedule: 'Per Room / Night',
-        regularRate: 2000, baseRate: 1700,
-        notes: 'Includes plated breakfast.'
-      },
-      {
-        id: 'cor_h_ceb_fam5', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: "Cebuana's Traveler's Inn — Family Room for 5", schedule: 'Per Room / Night',
-        regularRate: 2400, baseRate: 2100,
-        notes: 'Includes plated breakfast.'
-      },
-      {
-        id: 'cor_h_ceb_68', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'PER_PAX_NIGHT',
-        name: "Cebuana's Traveler's Inn — Room for 6–8 (Per Pax)", schedule: 'Per Pax / Night',
-        regularRate: 450, baseRate: 400,
-        notes: 'Calculated per paying pax × night.'
-      },
-      {
-        id: 'cor_h_ceb_ext', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: "Cebuana's Traveler's Inn — Extra Bed", schedule: 'Per Bed / Night',
-        regularRate: 500, baseRate: 400,
-        notes: 'Extra bed per night.'
-      },
-      {
-        id: 'cor_h_ncb_dbl', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'NCB Homestay — Double Sharing', schedule: 'Per Room / Night',
-        regularRate: 1200, baseRate: 1000,
-        notes: 'Plated Breakfast, Private CR w/ Shower, Wi-Fi.'
-      },
-      {
-        id: 'cor_h_ncb_tpl', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'NCB Homestay — Triple Sharing', schedule: 'Per Room / Night',
-        regularRate: 1800, baseRate: 1300,
-        notes: 'Includes plated breakfast.'
-      },
-      {
-        id: 'cor_h_ncb_quad', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'NCB Homestay — Quad Sharing', schedule: 'Per Room / Night',
-        regularRate: 2000, baseRate: 1700,
-        notes: 'Includes plated breakfast.'
-      },
-      {
-        id: 'cor_h_ncb_fam5', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'NCB Homestay — Family Room for 5', schedule: 'Per Room / Night',
-        regularRate: 2400, baseRate: 2100,
-        notes: 'Includes plated breakfast.'
-      },
-      {
-        id: 'cor_h_ncb_68', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'PER_PAX_NIGHT',
-        name: 'NCB Homestay — Room for 6–8 (Per Pax)', schedule: 'Per Pax / Night',
-        regularRate: 450, baseRate: 400,
-        notes: 'Calculated per paying pax × night.'
-      },
-      {
-        id: 'cor_h_ncb_ext', dest: 'CORON', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'NCB Homestay — Extra Bed', schedule: 'Per Bed / Night',
-        regularRate: 500, baseRate: 400,
-        notes: 'Extra bed per night.'
-      },
-
-      // ---------------- EL NIDO JOINER TOURS ----------------
-      {
-        id: 'eln_j_a', dest: 'EL_NIDO', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'El Nido Tour A (Joiner)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Big_Lagoon_at_El_Nido,_Palawan,_Philippines.jpg',
-        imageCaption: 'Big Lagoon, El Nido',
-        regularRate: 1200, baseRate: 850,
-        spots: ['Big Lagoon', 'Secret Lagoon', 'Payong-Payong', 'Shimizu', '7 Commandos'],
-        notes: 'Licensed guide, tourist boat w/ life vest, buffet lunch w/ water, town proper pick-up & cottage rental.'
-      },
-      {
-        id: 'eln_j_b', dest: 'EL_NIDO', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'El Nido Tour B (Joiner)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/04_Palawan_tourism_-_island_hopping_tour_B_visiting_Snake_Island_sandbar.jpg',
-        imageCaption: 'Snake Island Sandbar, El Nido',
-        regularRate: 1300, baseRate: 950,
-        spots: ['Snake Island', 'Cudugnon Cave', 'Papaya Island', 'Cathedral Cave', 'Entalula Island'],
-        notes: 'Licensed guide, tourist boat w/ life vest, buffet lunch w/ water, town proper pick-up & cottage rental.'
-      },
-      {
-        id: 'eln_j_c', dest: 'EL_NIDO', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'El Nido Tour C (Joiner)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Secret_lagoon_beach_on_Miniloc_island_-_panoramio_-_Tuderna_(1).jpg',
-        imageCaption: 'Secret Lagoon, El Nido',
-        regularRate: 1400, baseRate: 1050,
-        spots: ['Talisay Beach', 'Secret Beach', 'Helicopter Island', 'Hidden Beach', 'Matinloc Shrine (optional)'],
-        notes: 'Licensed guide, tourist boat w/ life vest, buffet lunch w/ water, town proper pick-up & cottage rental.'
-      },
-      {
-        id: 'eln_j_d', dest: 'EL_NIDO', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'El Nido Tour D (Joiner)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Entalula_Island,_El_Nido,_Philippines_-_36267109564.jpg',
-        imageCaption: 'Entalula Island, El Nido',
-        regularRate: 1200, baseRate: 850,
-        spots: ['Cadlao Lagoon', 'Paradise Beach', 'Pasandigan Beach', 'Nat Nat Beach', 'Small Lagoon'],
-        notes: 'Licensed guide, tourist boat w/ life vest, buffet lunch w/ water, town proper pick-up & cottage rental.'
-      },
-
-      // ---------------- EL NIDO PRIVATE TOURS ----------------
-      {
-        id: 'eln_p_a', dest: 'EL_NIDO', category: 'PRIVATE', pricingType: 'GROUP_BRACKET',
-        name: 'El Nido Tour A (Private)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Big_Lagoon_at_El_Nido,_Palawan,_Philippines.jpg',
-        imageCaption: 'Big Lagoon (Private)',
-        brackets: [
-          { min: 1, max: 2, regular: 11000, base: 10300, label: '1–2 pax' },
-          { min: 3, max: 4, regular: 12000, base: 11000, label: '3–4 pax' },
-          { min: 5, max: 6, regular: 14500, base: 13000, label: '5–6 pax' },
-          { min: 7, max: 8, regular: 16000, base: 14000, label: '7–8 pax' },
-          { min: 9, max: 10, regular: 17500, base: 15000, label: '9–10 pax' }
-        ],
-        extraAbove10: { regular: 1200, base: 1200 },
-        spots: ['Big Lagoon', 'Secret Lagoon', 'Payong-Payong', 'Shimizu', '7 Commandos'],
-        notes: 'Private boat w/ guide, buffet lunch, cottage & town proper pick-up (+₱1,200/pax for 11–16 pax).'
-      },
-      {
-        id: 'eln_p_b', dest: 'EL_NIDO', category: 'PRIVATE', pricingType: 'GROUP_BRACKET',
-        name: 'El Nido Tour B (Private)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Snake_Island,_El_Nido,_Philippines_(36932001352).jpg',
-        imageCaption: 'Snake Island (Private)',
-        brackets: [
-          { min: 1, max: 2, regular: 12000, base: 11300, label: '1–2 pax' },
-          { min: 3, max: 4, regular: 16000, base: 12500, label: '3–4 pax' },
-          { min: 5, max: 6, regular: 16500, base: 14500, label: '5–6 pax' },
-          { min: 7, max: 8, regular: 17500, base: 15000, label: '7–8 pax' },
-          { min: 9, max: 10, regular: 18000, base: 17000, label: '9–10 pax' }
-        ],
-        extraAbove10: { regular: 1400, base: 1400 },
-        spots: ['Snake Island', 'Cudugnon Cave', 'Papaya Island', 'Cathedral Cave', 'Entalula Island'],
-        notes: 'Private boat w/ guide, buffet lunch, cottage & town proper pick-up (+₱1,400/pax for 11–16 pax).'
-      },
-      {
-        id: 'eln_p_c', dest: 'EL_NIDO', category: 'PRIVATE', pricingType: 'GROUP_BRACKET',
-        name: 'El Nido Tour C (Private)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Secret_lagoon_beach_on_Miniloc_island_-_panoramio_-_Tuderna_(1).jpg',
-        imageCaption: 'Secret Lagoon (Private)',
-        brackets: [
-          { min: 1, max: 2, regular: 12000, base: 11300, label: '1–2 pax' },
-          { min: 3, max: 4, regular: 16000, base: 12500, label: '3–4 pax' },
-          { min: 5, max: 6, regular: 16500, base: 14500, label: '5–6 pax' },
-          { min: 7, max: 8, regular: 17500, base: 15000, label: '7–8 pax' },
-          { min: 9, max: 10, regular: 18000, base: 17000, label: '9–10 pax' }
-        ],
-        extraAbove10: { regular: 1400, base: 1400 },
-        spots: ['Talisay Beach', 'Secret Beach', 'Helicopter Island', 'Hidden Beach', 'Matinloc Shrine (optional)'],
-        notes: 'Private boat w/ guide, buffet lunch, cottage & town proper pick-up (+₱1,400/pax for 11–16 pax).'
-      },
-      {
-        id: 'eln_p_d', dest: 'EL_NIDO', category: 'PRIVATE', pricingType: 'GROUP_BRACKET',
-        name: 'El Nido Tour D (Private)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Entalula_Island,_El_Nido,_Philippines_-_36267109564.jpg',
-        imageCaption: 'Entalula Island (Private)',
-        brackets: [
-          { min: 1, max: 2, regular: 11000, base: 10300, label: '1–2 pax' },
-          { min: 3, max: 4, regular: 12000, base: 11000, label: '3–4 pax' },
-          { min: 5, max: 6, regular: 14500, base: 13000, label: '5–6 pax' },
-          { min: 7, max: 8, regular: 16000, base: 14000, label: '7–8 pax' },
-          { min: 9, max: 10, regular: 17500, base: 15000, label: '9–10 pax' }
-        ],
-        extraAbove10: { regular: 1200, base: 1200 },
-        spots: ['Cadlao Lagoon', 'Paradise Beach', 'Pasandigan Beach', 'Nat Nat Beach', 'Small Lagoon'],
-        notes: 'Private boat w/ guide, buffet lunch, cottage & town proper pick-up (+₱1,200/pax for 11–16 pax).'
-      },
-
-      // ---------------- EL NIDO TRANSFERS ----------------
-      {
-        id: 'eln_tr_j_pps', dest: 'EL_NIDO', category: 'TRANSFER', pricingType: 'PER_PAX',
-        name: 'Joiner Van: PPS – El Nido (One-Way)', schedule: 'One-Way Land Transfer',
-        regularRate: 750, baseRate: 550,
-        notes: 'Per pax one-way shared van transfer.'
-      },
-      {
-        id: 'eln_tr_p_pps', dest: 'EL_NIDO', category: 'TRANSFER', pricingType: 'FIXED_UNIT', unitLabel: 'van-way(s)',
-        name: 'Private Van: PPS – El Nido (One-Way)', schedule: 'One-Way Private Van',
-        regularRate: 7500, baseRate: 5500,
-        notes: 'Per van one-way transfer.'
-      },
-      {
-        id: 'eln_tr_lio', dest: 'EL_NIDO', category: 'TRANSFER', pricingType: 'FIXED_UNIT', unitLabel: 'van-way(s)',
-        name: 'Lio to El Nido Town Transfer', schedule: 'Private Van',
-        regularRate: 1700, baseRate: 1500,
-        notes: 'Per van transfer between Lio and El Nido Town.'
-      },
-      {
-        id: 'eln_tr_nacpan', dest: 'EL_NIDO', category: 'TRANSFER', pricingType: 'FIXED_UNIT', unitLabel: 'van(s)',
-        name: 'Private Van to Nacpan', schedule: 'Private Van',
-        regularRate: 5000, baseRate: 4500,
-        notes: 'Per van transfer to Nacpan.'
-      },
-
-      // ---------------- PUERTO PRINCESA JOINER TOURS ----------------
-      {
-        id: 'pps_j_city', dest: 'PUERTO', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Puerto Princesa City Tour (Joiner)', schedule: '8:00 AM–12:00 NN or 1:00 PM–4:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Puerto_Princesa_Subterranean_River_National_Park,_One_of_The_new_7_Wonders_of_Nature_Palawan.jpg',
-        imageCaption: 'Puerto Princesa, Palawan',
-        regularRate: 800, baseRate: 550,
-        spots: ['Mitra Ranch', 'Butterfly Garden', 'Crocodile Farm', "Baker's Hill", 'Concepcion Cathedral', 'Baywalk', 'Plaza Cuartel'],
-        notes: 'Includes light snacks, guide, pick-up/drop-off & entrance fees.'
-      },
-      {
-        id: 'pps_j_ur', dest: 'PUERTO', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Underground River Tour (Joiner)', schedule: 'Full Day',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Underground_River_of_Puerto_Princesa_City.jpg',
-        imageCaption: 'Underground River, PPS',
-        regularRate: 2200, baseRate: 1750,
-        spots: ['Underground River', 'Sabang Wharf'],
-        notes: 'Includes guide, boat, buffet lunch, pick-up/drop-off & permits.'
-      },
-      {
-        id: 'pps_j_hb', dest: 'PUERTO', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Honda Bay Island Hopping (Joiner)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Luli_Island,_Honda_Bay,_Palawan,_Philippines.jpg',
-        imageCaption: 'Luli Island, Honda Bay',
-        regularRate: 2000, baseRate: 1450,
-        spots: ['Honda Bay', 'Luli Island', 'Starfish Island', 'Cowrie Island'],
-        notes: 'Includes tourist boat w/ life vest, buffet lunch w/ water, cottage & pick-up/drop-off.'
-      },
-      {
-        id: 'pps_j_firefly', dest: 'PUERTO', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Firefly with Dinner (Joiner)', schedule: 'Evening Tour',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Honda_Bay,_Palawan,_2.jpg',
-        imageCaption: 'Puerto Princesa Evening',
-        regularRate: 1600, baseRate: 1500,
-        spots: ['Firefly Watching Spot'],
-        notes: 'Includes dinner, guide, boat & pick-up/drop-off.'
-      },
-
-      // ---------------- PUERTO PRINCESA PRIVATE TOURS ----------------
-      {
-        id: 'pps_p_city', dest: 'PUERTO', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Puerto Princesa City Tour (Private)', schedule: '8:00 AM–12:00 NN or 1:00 PM–4:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Puerto_Princesa_Subterranean_River_National_Park,_One_of_The_new_7_Wonders_of_Nature_Palawan.jpg',
-        imageCaption: 'Puerto Princesa (Private)',
-        brackets: [
-          { min: 1, max: 2, regular: 2400, base: 2200, label: '2 pax' },
-          { min: 3, max: 3, regular: 1900, base: 1700, label: '3 pax' },
-          { min: 4, max: 4, regular: 1700, base: 1500, label: '4 pax' },
-          { min: 5, max: 5, regular: 1500, base: 1300, label: '5 pax' },
-          { min: 6, max: 6, regular: 1400, base: 1200, label: '6 pax' },
-          { min: 7, max: 7, regular: 1300, base: 1100, label: '7 pax' },
-          { min: 8, max: 8, regular: 1200, base: 1000, label: '8 pax' },
-          { min: 9, max: 9, regular: 1200, base: 1000, label: '9 pax' },
-          { min: 10, max: 99, regular: 800, base: 600, label: '10+ pax' }
-        ],
-        spots: ['Mitra Ranch', 'Butterfly Garden', 'Crocodile Farm', "Baker's Hill", 'Concepcion Cathedral', 'Baywalk', 'Plaza Cuartel'],
-        notes: 'Private tour per pax based on headcount.'
-      },
-      {
-        id: 'pps_p_hb', dest: 'PUERTO', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Honda Bay Island Hopping (Private)', schedule: '8:30 AM – 4:30 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Barlas_Island,_Honda_Bay,_Palawan,_Philippines_-_23878605339.jpg',
-        imageCaption: 'Honda Bay (Private)',
-        brackets: [
-          { min: 1, max: 2, regular: 4800, base: 4400, label: '2 pax' },
-          { min: 3, max: 3, regular: 3600, base: 3400, label: '3 pax' },
-          { min: 4, max: 4, regular: 3100, base: 2900, label: '4 pax' },
-          { min: 5, max: 5, regular: 2800, base: 2600, label: '5 pax' },
-          { min: 6, max: 6, regular: 2700, base: 2500, label: '6 pax' },
-          { min: 7, max: 7, regular: 2600, base: 2400, label: '7 pax' },
-          { min: 8, max: 8, regular: 2400, base: 2200, label: '8 pax' },
-          { min: 9, max: 9, regular: 2300, base: 2100, label: '9 pax' },
-          { min: 10, max: 99, regular: 2200, base: 2000, label: '10+ pax' }
-        ],
-        spots: ['Honda Bay', 'Luli Island', 'Starfish Island', 'Cowrie Island'],
-        notes: 'Private boat, buffet lunch, cottage & guide per pax.'
-      },
-      {
-        id: 'pps_p_ur', dest: 'PUERTO', category: 'PRIVATE', pricingType: 'BRACKET_PER_PAX',
-        name: 'Underground River Tour (Private)', schedule: 'Full Day',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Underground_River_of_Puerto_Princesa_City.jpg',
-        imageCaption: 'Underground River (Private)',
-        brackets: [
-          { min: 1, max: 2, regular: 5700, base: 5500, label: '2 pax' },
-          { min: 3, max: 3, regular: 4600, base: 4400, label: '3 pax' },
-          { min: 4, max: 4, regular: 3800, base: 3600, label: '4 pax' },
-          { min: 5, max: 5, regular: 3400, base: 3200, label: '5 pax' },
-          { min: 6, max: 6, regular: 3200, base: 3000, label: '6 pax' },
-          { min: 7, max: 7, regular: 3000, base: 2800, label: '7 pax' },
-          { min: 8, max: 8, regular: 2900, base: 2700, label: '8 pax' },
-          { min: 9, max: 9, regular: 2900, base: 2700, label: '9 pax' },
-          { min: 10, max: 99, regular: 2700, base: 2500, label: '10+ pax' }
-        ],
-        spots: ['Underground River', 'Sabang Wharf'],
-        notes: 'Private van, boat, guide, buffet lunch & permits per pax.'
-      },
-
-      // ---------------- PORT BARTON TOURS & TRANSFERS ----------------
-      {
-        id: 'pb_j_daytour', dest: 'PORT_BARTON', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Port Barton Day Tour w/ RT Van from PPS (Joiner)', schedule: '6:00 AM – 7:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Port_barton_palawan.jpg',
-        imageCaption: 'Port Barton, Palawan',
-        regularRate: 3800, baseRate: 3300,
-        spots: ['Twin Reef', 'Maxima Island', 'Paradise Island', 'Fantastic Reef', 'Sand Bar'],
-        notes: 'Includes RT van PPS–Port Barton, island hopping w/ lunch, mask & snorkel, and local guide.'
-      },
-      {
-        id: 'pb_p_daytour', dest: 'PORT_BARTON', category: 'PRIVATE', pricingType: 'BASE_PLUS_PAX',
-        name: 'Port Barton Private Tour Only (No Transfers)', schedule: '9:00 AM – 4:00 PM',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Port_barton_palawan.jpg',
-        imageCaption: 'Port Barton (Private)',
-        basePax: 2,
-        regularBase: 8000, baseBase: 8000,
-        regularExtra: 1700, baseExtra: 1700,
-        spots: ['Twin Reef', 'Maxima Island', 'Paradise Island', 'Fantastic Reef', 'Sand Bar'],
-        notes: 'Private island hopping for 2 pax + ₱1,700 per additional pax (no van transfers).'
-      },
-      {
-        id: 'pb_tr_van', dest: 'PORT_BARTON', category: 'TRANSFER', pricingType: 'FIXED_UNIT', unitLabel: 'way/van',
-        name: 'PPS – Port Barton Van Transfer', schedule: 'Per Way / Van',
-        regularRate: 6000, baseRate: 6000,
-        notes: 'Van transfer per way between Puerto Princesa and Port Barton.'
-      },
-
-      // ---------------- BALABAC À LA CARTE OPTIONS ----------------
-      {
-        id: 'bal_ala_hopping', dest: 'BALABAC', category: 'JOINER', pricingType: 'PER_PAX',
-        name: 'Balabac Island Hopping Slot (À La Carte)', schedule: 'Day / Boat Slot',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Onuk_Island_Beach.jpg',
-        imageCaption: 'Onuk Island, Balabac',
-        regularRate: 14500, baseRate: 13000,
-        spots: ['Canimeran', 'Patonggong', 'Patawan', 'Braggy Island', 'Sebaring', 'Hellen Sandbar', 'Mansalangan Sandbar', 'Canibungan', 'Sicsican', 'Candaraman', 'Onok Island'],
-        notes: 'Individual à la carte rate reference (no bundled multi-day package label).'
-      },
-      {
-        id: 'bal_ala_van', dest: 'BALABAC', category: 'TRANSFER', pricingType: 'FIXED_UNIT', unitLabel: 'van-way(s)',
-        name: 'PPS – Buliluyan Port Van Transfer (À La Carte)', schedule: 'Land Transfer',
-        regularRate: 6000, baseRate: 5000,
-        notes: 'One-way land transfer between Puerto Princesa and Buliluyan Port.'
-      },
-      {
-        id: 'bal_ala_tent', dest: 'BALABAC', category: 'ACCOMMODATION', pricingType: 'ROOM_NIGHT',
-        name: 'Sebaring / Town Overnight Stay (À La Carte)', schedule: 'Per Night',
-        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Benlen_Sandbar_of_Balabac.jpg',
-        imageCaption: 'Balabac Coast & Sandbar',
-        regularRate: 1500, baseRate: 1200,
-        notes: 'Single-night à la carte accommodation add-on.'
+      const quickSelect = document.getElementById('quickTargetCurrency');
+      if (quickSelect && activeCurrency !== 'PHP') {
+        quickSelect.value = activeCurrency;
       }
-    ];
+
+      document.getElementById('rateNoteLabel').textContent = `Display: ${CURRENCY_CONFIG[activeCurrency].label}`;
+      updateQuickConverter();
+      renderPackages();
+    }
+
+    function syncCurrencyFromQuick(code) {
+      setCurrency(code);
+    }
+
+    function updateQuickConverter() {
+      const amt = parseFloat(document.getElementById('convertAmountInput').value) || 0;
+      const targetCode = document.getElementById('quickTargetCurrency').value || 'USD';
+      const cfg = CURRENCY_CONFIG[targetCode] || CURRENCY_CONFIG.USD;
+      const converted = amt * cfg.rateFromPhp;
+      const formatted = converted.toLocaleString('en-US', {
+        minimumFractionDigits: cfg.decimals,
+        maximumFractionDigits: cfg.decimals
+      });
+      document.getElementById('quickConvertedOutput').textContent = `${cfg.symbol}${formatted}`;
+    }
 
     // =========================================================================
-    // 3. STATE
+    // 2. TABBED DESTINATIONS (PER TAB IN LOCAL & INTERNATIONAL)
     // =========================================================================
-    const state = {
-      topSection: 'LOCAL', // 'LOCAL' | 'INTERNATIONAL'
-      palawanDest: 'CORON',
-      intlDest: 'VIETNAM_DANANG',
-      categoryFilter: 'ALL',
-      searchQuery: '',
-      pax: { adults: 2, kids: 0, infants: 0 },
-      cart: [], // [{ id, qty }]
-      selectedFees: new Set(),
-      discount: 0
+    const DESTINATION_TABS = {
+      LOCAL: [
+        {
+          tabId: 'PALAWAN',
+          tabLabel: 'Palawan',
+          items: [
+            {
+              title: 'Coron, Palawan',
+              subtitle: 'Lagoons, Wrecks & Island Hopping',
+              badge: 'Calculator Ready',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg',
+              highlights: ['Tours A & B, Ultimate & Super Ultimate', 'Island Escapade & Calauit Safari', 'Airport Transfers & Private Van'],
+              link: 'calculator.html?dest=CORON'
+            },
+            {
+              title: 'El Nido, Palawan',
+              subtitle: 'Big & Small Lagoons, Secret Beaches',
+              badge: 'Calculator Ready',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Big_Lagoon_El_Nido.jpg',
+              highlights: ['Tours A, B, C & D (Joiner/Private)', 'Lio / PPS Van Transfers', 'Kayak & Gear Rentals'],
+              link: 'calculator.html?dest=EL_NIDO'
+            },
+            {
+              title: 'Puerto Princesa',
+              subtitle: 'Underground River & Honda Bay',
+              badge: 'Calculator Ready',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Puerto_Princesa_Subterranean_River_National_Park.jpg',
+              highlights: ['Underground River with Lunch', 'Honda Bay Island Hopping', 'City Tour & Transfers'],
+              link: 'calculator.html?dest=PUERTO'
+            },
+            {
+              title: 'Port Barton',
+              subtitle: 'San Vicente Island Hopping',
+              badge: 'Calculator Ready',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Port_Barton_Beach.jpg',
+              highlights: ['Turtle Sanctuary & Reefs', 'Private & Joiner Boat Tours', 'Van Transfers'],
+              link: 'calculator.html?dest=PORT_BARTON'
+            },
+            {
+              title: 'Balabac, Palawan',
+              subtitle: 'Onuk Island & Sandbars',
+              badge: 'Custom Quote',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Onuk_Island,_Balabac,_Palawan.jpg',
+              highlights: ['Onuk & Candaraman Sandbar', 'Patawan & Sicsican Island', 'Land & Boat Transfers'],
+              link: 'calculator.html?dest=BALABAC'
+            }
+          ]
+        },
+        {
+          tabId: 'BORACAY',
+          tabLabel: 'Boracay',
+          items: [
+            {
+              title: 'Boracay Island Hopping & Activities',
+              subtitle: 'White Beach, Puka Beach & Crystal Cove',
+              badge: 'Custom Quote',
+              image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+              highlights: ['Island Hopping with Lunch', 'Paraw Sailing & Water Activities', 'Caticlan / Kalibo Transfers'],
+              link: 'calculator.html?section=LOCAL&dest=CORON'
+            }
+          ]
+        },
+        {
+          tabId: 'BOHOL',
+          tabLabel: 'Bohol',
+          items: [
+            {
+              title: 'Bohol Countryside & Panglao',
+              subtitle: 'Chocolate Hills, Loboc River & Balicasag',
+              badge: 'Custom Quote',
+              image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80',
+              highlights: ['Countryside & Loboc River Cruise', 'Balicasag & Virgin Island', 'Private Car/Van & Transfers'],
+              link: 'calculator.html?section=LOCAL&dest=CORON'
+            }
+          ]
+        },
+        {
+          tabId: 'CEBU',
+          tabLabel: 'Cebu',
+          items: [
+            {
+              title: 'South Cebu & Cebu City',
+              subtitle: 'Oslob, Moalboal, Kawasan & City Highlights',
+              badge: 'Custom Quote',
+              image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80',
+              highlights: ['South Cebu Adventure', 'Cebu City & Highland Stops', 'Customizable Group Pace'],
+              link: 'calculator.html?section=LOCAL&dest=CORON'
+            }
+          ]
+        },
+        {
+          tabId: 'SIARGAO',
+          tabLabel: 'Siargao',
+          items: [
+            {
+              title: 'Siargao Tri-Island & Land Tour',
+              subtitle: 'Naked, Daku, Guyam & Maasin River',
+              badge: 'Custom Quote',
+              image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
+              highlights: ['Tri-Island Hopping', 'Maasin River & Coconut View', 'Sugba Lagoon / Magpupungko'],
+              link: 'calculator.html?section=LOCAL&dest=CORON'
+            }
+          ]
+        },
+        {
+          tabId: 'LUZON',
+          tabLabel: 'Luzon (Baguio / Sagada / Ilocos)',
+          items: [
+            {
+              title: 'Cordillera & Ilocos Routes',
+              subtitle: 'Baguio, Sagada, Banaue, Vigan & Ilocos Norte',
+              badge: 'Custom Quote',
+              image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+              highlights: ['Baguio & Sagada / Banaue', 'Vigan & Ilocos Norte Coast', 'Van Charter & Custom Pace'],
+              link: 'calculator.html?section=LOCAL&dest=CORON'
+            }
+          ]
+        }
+      ],
+
+      INTERNATIONAL: [
+        {
+          tabId: 'VIETNAM',
+          tabLabel: 'Vietnam',
+          items: [
+            {
+              title: 'Vietnam — Da Nang & Hoi An',
+              subtitle: 'Ba Na Hills, Golden Bridge & Ancient Town',
+              badge: 'International',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Bridge_Ba_Na_Hills.jpg',
+              highlights: ['Ba Na Hills & Golden Bridge', 'Hoi An Lantern Town', 'Airport & Private Van'],
+              link: 'calculator.html?section=INTERNATIONAL&dest=VIETNAM_DANANG'
+            },
+            {
+              title: 'Vietnam — Hanoi & Sapa',
+              subtitle: 'Fansipan, Cat Cat Village & Ha Long Bay',
+              badge: 'International',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sapa_rice_terraces.jpg',
+              highlights: ['Fansipan Cable Car & Sapa', 'Hanoi Old Quarter', 'Ha Long Bay Cruise'],
+              link: 'calculator.html?section=INTERNATIONAL&dest=VIETNAM_HANOI_SAPA'
+            }
+          ]
+        },
+        {
+          tabId: 'HK_MACAU',
+          tabLabel: 'Hong Kong & Macau',
+          items: [
+            {
+              title: 'Hong Kong Only',
+              subtitle: 'Disneyland, Victoria Peak & Ngong Ping 360',
+              badge: 'International',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hong_Kong_Skyline_Restitch_-_Dec_2007.jpg',
+              highlights: ['Theme Parks & City Spots', 'Airport Transfers', 'Flexible Pace'],
+              link: 'calculator.html?section=INTERNATIONAL&dest=HK_ONLY'
+            },
+            {
+              title: 'Hong Kong & Macau',
+              subtitle: 'Twin City via HZMB Golden Bus',
+              badge: 'International',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hong_Kong_Skyline_Restitch_-_Dec_2007.jpg',
+              highlights: ['HK Highlights + HZMB Bus', 'Macau Heritage & Cotai', 'Custom Itinerary'],
+              link: 'calculator.html?section=INTERNATIONAL&dest=HK_MACAU'
+            },
+            {
+              title: 'Macau Only',
+              subtitle: 'Cotai Strip & Heritage Sites',
+              badge: 'International',
+              image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=800&q=80',
+              highlights: ['Ruins of St. Paul & Senado', 'Cotai Resorts', 'Custom Quote'],
+              link: 'calculator.html?section=INTERNATIONAL&dest=MACAU_ONLY'
+            }
+          ]
+        },
+        {
+          tabId: 'THAILAND',
+          tabLabel: 'Thailand',
+          items: [
+            {
+              title: 'Thailand (Bangkok / Phuket)',
+              subtitle: 'Temples, Markets & Islands',
+              badge: 'International',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wat_Arun_Bangkok.jpg',
+              highlights: ['Bangkok City & Day Trips', 'Phuket / Island Options', 'Custom Quote'],
+              link: 'calculator.html?section=INTERNATIONAL&dest=THAILAND'
+            }
+          ]
+        },
+        {
+          tabId: 'BALI',
+          tabLabel: 'Bali Indonesia',
+          items: [
+            {
+              title: 'Bali & Nusa Penida',
+              subtitle: 'Ubud, Nusa Penida & Uluwatu',
+              badge: 'International',
+              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kelingking_Beach_Nusa_Penida.jpg',
+              highlights: ['Nusa Penida & Ubud', 'Beach Clubs & Cliffs', 'Custom Quote'],
+              link: 'calculator.html?section=INTERNATIONAL&dest=BALI'
+            }
+          ]
+        },
+        {
+          tabId: 'TAIWAN',
+          tabLabel: 'Taiwan',
+          items: [
+            {
+              title: 'Taiwan (Taipei & North Coast)',
+              subtitle: 'Jiufen, Shifen & Taipei City',
+              badge: 'International',
+              image: 'https://images.unsplash.com/photo-1470004914212-05527e49370b?auto=format&fit=crop&w=800&q=80',
+              highlights: ['North Coast Day Tour', 'Taipei City & Night Markets', 'Custom Quote'],
+              link: 'calculator.html?section=INTERNATIONAL&dest=TAIWAN'
+            }
+          ]
+        }
+      ]
     };
 
     // =========================================================================
-    // 4. PRICING & PROFIT CALCULATION ENGINE (INTERNAL / EMAIL REPORTING)
+    // 3. AVAILABLE PACKAGES
     // =========================================================================
-    function getPayingPax() {
-      return state.pax.adults + (state.pax.kids * 0.5);
-    }
-
-    function getTotalGuests() {
-      return state.pax.adults + state.pax.kids + state.pax.infants;
-    }
-
-    function getBracketHeadcount() {
-      return Math.max(1, Math.ceil(getPayingPax()));
-    }
-
-    function formatPeso(num) {
-      return '₱' + Math.round(Number(num) || 0).toLocaleString('en-PH');
-    }
-
-    function computeSingleUnitRates(item) {
-      const paying = getPayingPax();
-      const bPax = getBracketHeadcount();
-
-      if (item.pricingType === 'PER_PAX' || item.pricingType === 'PER_PAX_NIGHT') {
-        return {
-          regularUnit: item.regularRate * paying,
-          baseUnit: item.baseRate * paying,
-          detail: `${formatPeso(item.regularRate)}/pax × ${paying} paying pax`
-        };
+    const PACKAGES = [
+      {
+        type: 'LOCAL',
+        tag: 'Local • 3D2N',
+        title: 'Coron Highlights Package',
+        duration: '3 Days / 2 Nights',
+        fromPhp: 3999,
+        inclusions: [
+          'Busuanga Airport Van Transfers',
+          'Coron Town Tour + Maquinit Hot Spring',
+          'Coron Super Ultimate Tour with Lunch',
+          'Ultra-Budget to Luxury Stay Options'
+        ],
+        ctaText: 'Customize in Calculator',
+        ctaLink: 'calculator.html?dest=CORON'
+      },
+      {
+        type: 'LOCAL',
+        tag: 'Local • 4D3N',
+        title: 'El Nido Lagoons & Beaches',
+        duration: '4 Days / 3 Nights',
+        fromPhp: 4899,
+        inclusions: [
+          'El Nido Island Hopping Tours',
+          'Buffet Picnic Lunch & Guide',
+          'Flexible Pace & Energy Planning',
+          'Customizable Hotel & Transfers'
+        ],
+        ctaText: 'Customize in Calculator',
+        ctaLink: 'calculator.html?dest=EL_NIDO'
+      },
+      {
+        type: 'INTERNATIONAL',
+        tag: 'International • 4D3N',
+        title: 'Da Nang & Ba Na Hills Escape',
+        duration: '4 Days / 3 Nights',
+        fromPhp: null,
+        inclusions: [
+          'Da Nang Airport Transfers',
+          'Ba Na Hills & Golden Bridge',
+          'Hoi An Ancient Town',
+          'Tailored to Your Group Pace'
+        ],
+        ctaText: 'Request Vietnam Quote',
+        ctaLink: 'calculator.html?section=INTERNATIONAL&dest=VIETNAM_DANANG'
       }
+    ];
 
-      if (item.pricingType === 'FIXED_UNIT' || item.pricingType === 'ROOM_NIGHT') {
-        return {
-          regularUnit: item.regularRate,
-          baseUnit: item.baseRate,
-          detail: `${formatPeso(item.regularRate)} / ${item.pricingType === 'ROOM_NIGHT' ? 'night' : (item.unitLabel || 'unit')}`
-        };
-      }
+    let currentMainMode = 'LOCAL';
+    let currentSubTabId = 'PALAWAN';
+    let currentPkgFilter = 'ALL';
 
-      if (item.pricingType === 'BRACKET_PER_PAX') {
-        const br = item.brackets.find(b => bPax >= b.min && bPax <= b.max) || item.brackets[item.brackets.length - 1];
-        return {
-          regularUnit: br.regular * paying,
-          baseUnit: br.base * paying,
-          detail: `${formatPeso(br.regular)}/pax (${br.label}) × ${paying} paying pax`
-        };
-      }
+    function setMainMode(mode) {
+      currentMainMode = mode;
+      const tabLocal = document.getElementById('mainTabLocal');
+      const tabIntl = document.getElementById('mainTabIntl');
 
-      if (item.pricingType === 'GROUP_BRACKET') {
-        if (bPax <= 10) {
-          const br = item.brackets.find(b => bPax >= b.min && bPax <= b.max) || item.brackets[0];
-          return {
-            regularUnit: br.regular,
-            baseUnit: br.base,
-            detail: `${formatPeso(br.regular)} group rate (${br.label})`
-          };
-        }
-        const br10 = item.brackets[item.brackets.length - 1];
-        const extra = bPax - 10;
-        return {
-          regularUnit: br10.regular + (extra * item.extraAbove10.regular),
-          baseUnit: br10.base + (extra * item.extraAbove10.base),
-          detail: `${formatPeso(br10.regular)} (10 pax) + ${extra} extra pax × ${formatPeso(item.extraAbove10.regular)}`
-        };
-      }
-
-      if (item.pricingType === 'BASE_PLUS_PAX') {
-        if (paying <= item.basePax) {
-          return {
-            regularUnit: item.regularBase,
-            baseUnit: item.baseBase,
-            detail: `${formatPeso(item.regularBase)} base (up to ${item.basePax} pax)`
-          };
-        }
-        const extra = paying - item.basePax;
-        return {
-          regularUnit: item.regularBase + (extra * item.regularExtra),
-          baseUnit: item.baseBase + (extra * item.baseExtra),
-          detail: `${formatPeso(item.regularBase)} (2 pax) + ${extra} extra pax × ${formatPeso(item.regularExtra)}`
-        };
-      }
-
-      return { regularUnit: 0, baseUnit: 0, detail: '' };
-    }
-
-    function calculateTotals() {
-      const paying = getPayingPax();
-      let itemsRegularTotal = 0;
-      let itemsBaseTotal = 0;
-
-      const lines = state.cart.map(entry => {
-        const item = CATALOG.find(i => i.id === entry.id);
-        const unit = computeSingleUnitRates(item);
-        const regLine = unit.regularUnit * entry.qty;
-        const baseLine = unit.baseUnit * entry.qty;
-        itemsRegularTotal += regLine;
-        itemsBaseTotal += baseLine;
-        return {
-          ...entry,
-          item,
-          detail: unit.detail,
-          regLine,
-          baseLine,
-          diffLine: regLine - baseLine
-        };
-      });
-
-      let feesRegularTotal = 0;
-      let feesBaseTotal = 0;
-      const activeFees = [];
-
-      state.selectedFees.forEach(feeId => {
-        const fee = ENV_FEES.find(f => f.id === feeId);
-        if (fee) {
-          const rFee = fee.regularPerPax * paying;
-          const bFee = fee.basePerPax * paying;
-          feesRegularTotal += rFee;
-          feesBaseTotal += bFee;
-          activeFees.push({ ...fee, rFee, bFee });
-        }
-      });
-
-      const grossRegularTotal = itemsRegularTotal + feesRegularTotal;
-      const totalBaseRate = itemsBaseTotal + feesBaseTotal;
-      const discount = Math.max(0, Number(state.discount) || 0);
-      const guestTotal = Math.max(0, grossRegularTotal - discount);
-      const priceDifference = grossRegularTotal - totalBaseRate;
-      const netTubo = guestTotal - totalBaseRate;
-      const perPayingPax = paying > 0 ? guestTotal / paying : 0;
-
-      return {
-        lines,
-        activeFees,
-        grossRegularTotal,
-        totalBaseRate,
-        discount,
-        guestTotal,
-        priceDifference,
-        netTubo,
-        perPayingPax,
-        paying
-      };
-    }
-
-    // =========================================================================
-    // 5. RENDERING
-    // =========================================================================
-    function renderSubMenuBar() {
-      const bar = document.getElementById('subMenuBar');
-      if (state.topSection === 'LOCAL') {
-        bar.innerHTML = `
-          <span class="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mr-1">Palawan:</span>
-          ${PALAWAN_SUBMENUS.map(sub => {
-            const active = state.palawanDest === sub.id;
-            return `
-              <button
-                onclick="selectPalawanDest('${sub.id}')"
-                class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                  active ? 'bg-slate-900 text-white shadow-2xs' : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
-                }"
-              >
-                ${sub.label}
-              </button>
-            `;
-          }).join('')}
-        `;
+      if (mode === 'LOCAL') {
+        tabLocal.className = 'px-5 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-600 text-white shadow-2xs cursor-pointer';
+        tabIntl.className = 'px-5 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer';
       } else {
-        bar.innerHTML = `
-          <span class="text-[11px] font-extrabold text-sky-700 uppercase tracking-wider mr-1">International:</span>
-          ${INTERNATIONAL_SUBMENUS.map(sub => {
-            const active = state.intlDest === sub.id;
-            return `
-              <button
-                onclick="selectIntlDest('${sub.id}')"
-                class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                  active ? 'bg-sky-700 text-white shadow-2xs' : 'bg-white text-slate-700 border border-slate-200 hover:bg-sky-50'
-                }"
-              >
-                ${sub.label}
-              </button>
-            `;
-          }).join('')}
-        `;
+        tabIntl.className = 'px-5 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-600 text-white shadow-2xs cursor-pointer';
+        tabLocal.className = 'px-5 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer';
       }
+
+      const subTabs = DESTINATION_TABS[mode] || [];
+      currentSubTabId = subTabs.length ? subTabs[0].tabId : '';
+      renderSubTabs();
+      renderDestinationCards();
     }
 
-    function renderCatalog() {
-      const destObj = PALAWAN_SUBMENUS.find(d => d.id === state.palawanDest);
-      document.getElementById('activePalawanHeading').textContent = destObj ? destObj.label : 'Coron';
+    function selectSubTab(tabId) {
+      currentSubTabId = tabId;
+      renderSubTabs();
+      renderDestinationCards();
+    }
 
-      const q = state.searchQuery.trim().toLowerCase();
-      const filtered = CATALOG.filter(item => {
-        if (item.dest !== state.palawanDest) return false;
-        if (state.categoryFilter !== 'ALL' && item.category !== state.categoryFilter) return false;
-        if (q) {
-          const text = `${item.name} ${item.notes || ''} ${(item.spots || []).join(' ')}`.toLowerCase();
-          if (!text.includes(q)) return false;
-        }
-        return true;
+    function renderSubTabs() {
+      const container = document.getElementById('subTabsContainer');
+      const tabs = DESTINATION_TABS[currentMainMode] || [];
+
+      container.innerHTML = tabs.map(t => {
+        const isActive = t.tabId === currentSubTabId;
+        return `
+          <button
+            type="button"
+            onclick="selectSubTab('${t.tabId}')"
+            class="px-4 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all cursor-pointer ${
+              isActive
+                ? 'bg-slate-900 text-white shadow-2xs'
+                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+            }"
+          >
+            ${t.tabLabel}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderDestinationCards() {
+      const grid = document.getElementById('destinationCardsGrid');
+      const tabs = DESTINATION_TABS[currentMainMode] || [];
+      const activeTab = tabs.find(t => t.tabId === currentSubTabId) || tabs[0];
+      const items = activeTab ? activeTab.items : [];
+
+      grid.innerHTML = items.map(item => `
+        <a href="${item.link}" class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md hover:border-brand-300 transition-all flex flex-col">
+          <div class="relative h-44 bg-slate-200 overflow-hidden">
+            <img
+              src="${item.image}"
+              alt="${item.title}"
+              onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-slate-900/80 text-white backdrop-blur-2xs">
+              ${item.badge}
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900 group-hover:text-brand-700 transition-colors">${item.title}</h3>
+              <p class="text-xs text-slate-500 mt-0.5">${item.subtitle}</p>
+              <ul class="mt-3 space-y-1.5">
+                ${item.highlights.map(h => `
+                  <li class="text-xs text-slate-700 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+                    <span>${h}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-extrabold text-brand-700">
+              <span>Open</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function filterPackages(filter) {
+      currentPkgFilter = filter;
+      const buttons = {
+        ALL: document.getElementById('pkgFilterAll'),
+        LOCAL: document.getElementById('pkgFilterLocal'),
+        INTERNATIONAL: document.getElementById('pkgFilterIntl')
+      };
+
+      Object.keys(buttons).forEach(key => {
+        buttons[key].className = key === filter
+          ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white cursor-pointer'
+          : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer';
       });
 
-      const listEl = document.getElementById('catalogList');
-      if (filtered.length === 0) {
-        listEl.innerHTML = `
-          <div class="bg-white rounded-2xl border border-slate-200 p-6 text-center text-xs text-slate-500">
-            No items match your current filter in ${destObj.label}.
-          </div>
-        `;
-        return;
-      }
+      renderPackages();
+    }
 
-      const bPax = getBracketHeadcount();
-      listEl.innerHTML = filtered.map(item => {
-        const cartItem = state.cart.find(c => c.id === item.id);
-        const qty = cartItem ? cartItem.qty : 0;
+    function renderPackages() {
+      const grid = document.getElementById('packagesGrid');
+      const filtered = currentPkgFilter === 'ALL'
+        ? PACKAGES
+        : PACKAGES.filter(p => p.type === currentPkgFilter);
 
-        let displayRate = '';
-        let subInfo = '';
-
-        if (item.pricingType === 'PER_PAX' || item.pricingType === 'PER_PAX_NIGHT') {
-          displayRate = `${formatPeso(item.regularRate)}<span class="text-xs font-medium text-slate-500">/${item.pricingType === 'PER_PAX_NIGHT' ? 'pax/night' : 'pax'}</span>`;
-        } else if (item.pricingType === 'FIXED_UNIT' || item.pricingType === 'ROOM_NIGHT') {
-          const u = item.pricingType === 'ROOM_NIGHT' ? 'night' : (item.unitLabel || 'unit');
-          displayRate = `${formatPeso(item.regularRate)}<span class="text-xs font-medium text-slate-500">/${u}</span>`;
-        } else if (item.pricingType === 'BRACKET_PER_PAX') {
-          const br = item.brackets.find(b => bPax >= b.min && bPax <= b.max) || item.brackets[item.brackets.length - 1];
-          displayRate = `${formatPeso(br.regular)}<span class="text-xs font-medium text-slate-500">/pax</span>`;
-          subInfo = `${br.label} rate`;
-        } else if (item.pricingType === 'GROUP_BRACKET') {
-          if (bPax <= 10) {
-            const br = item.brackets.find(b => bPax >= b.min && bPax <= b.max) || item.brackets[0];
-            displayRate = `${formatPeso(br.regular)}<span class="text-xs font-medium text-slate-500">/group</span>`;
-            subInfo = `${br.label} rate`;
-          } else {
-            const br10 = item.brackets[item.brackets.length - 1];
-            const tot = br10.regular + ((bPax - 10) * item.extraAbove10.regular);
-            displayRate = `${formatPeso(tot)}<span class="text-xs font-medium text-slate-500">/group</span>`;
-            subInfo = `${bPax} pax`;
-          }
-        } else if (item.pricingType === 'BASE_PLUS_PAX') {
-          displayRate = `${formatPeso(item.regularBase)}<span class="text-xs font-medium text-slate-500"> (2 pax)</span>`;
-          subInfo = `+${formatPeso(item.regularExtra)}/extra pax`;
-        }
-
-        const photoBlock = item.imageUrl
-          ? `<div class="w-full sm:w-36 h-28 sm:h-28 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0 relative">
-              <img
-                src="${item.imageUrl}"
-                alt="${escapeHtml(item.name)}"
-                loading="lazy"
-                onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
-                class="w-full h-full object-cover"
-              />
-              <div class="hidden w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-brand-50 to-sky-100 text-brand-900 p-2 text-center">
-                <span class="text-lg">🌴</span>
-                <span class="text-[10px] font-bold leading-tight mt-0.5">${escapeHtml(item.imageCaption || item.dest)}</span>
-              </div>
-            </div>`
-          : '';
-
+      grid.innerHTML = filtered.map(pkg => {
+        const priceDisplay = pkg.fromPhp ? `From ${formatFromPhp(pkg.fromPhp)}` : 'Custom Quote';
         return `
-          <div class="bg-white rounded-2xl border ${qty > 0 ? 'border-brand-500 ring-1 ring-brand-500/20' : 'border-slate-200'} p-4 shadow-xs transition-all">
-            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-              ${photoBlock}
-              <div class="space-y-1 flex-1 min-w-0">
-                <div class="flex flex-wrap items-center gap-1.5">
-                  <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-slate-100 text-slate-700 border border-slate-200">
-                    ${item.category}
-                  </span>
-                  ${item.schedule ? `<span class="text-[11px] text-slate-500">${item.schedule}</span>` : ''}
-                </div>
-                <h3 class="text-sm font-bold text-slate-900">${item.name}</h3>
-                ${item.notes ? `<p class="text-xs text-slate-500 leading-relaxed">${item.notes}</p>` : ''}
-                ${
-                  item.spots && item.spots.length > 0
-                    ? `<div class="pt-1 flex flex-wrap gap-1">
-                        ${item.spots.map(s => `<span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-50 text-slate-600 border border-slate-200/80">${s}</span>`).join('')}
-                      </div>`
-                    : ''
-                }
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-2xs flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold ${pkg.type === 'LOCAL' ? 'bg-brand-50 text-brand-700 border border-brand-200' : 'bg-sky-50 text-sky-700 border border-sky-200'}">
+                  ${pkg.tag}
+                </span>
+                <span class="text-[11px] font-semibold text-slate-500">${pkg.duration}</span>
               </div>
 
-              <div class="flex sm:flex-col items-center sm:items-end justify-between gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 shrink-0">
-                <div class="sm:text-right">
-                  <div class="text-base font-extrabold text-brand-700">${displayRate}</div>
-                  ${subInfo ? `<div class="text-[10px] text-slate-400">${subInfo}</div>` : ''}
-                </div>
-                ${
-                  qty === 0
-                    ? `<button onclick="addItem('${item.id}')" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold transition-colors">+ Add</button>`
-                    : `<div class="flex items-center gap-1 bg-brand-50 border border-brand-200 rounded-xl p-1">
-                        <button onclick="updateItemQty('${item.id}', -1)" class="w-7 h-7 rounded-lg bg-white text-slate-800 font-bold text-xs shadow-2xs">−</button>
-                        <span class="px-2 text-xs font-extrabold text-brand-900">${qty}</span>
-                        <button onclick="updateItemQty('${item.id}', 1)" class="w-7 h-7 rounded-lg bg-brand-600 text-white font-bold text-xs shadow-2xs">+</button>
-                      </div>`
-                }
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900">${pkg.title}</h3>
+                <div class="mt-1 text-lg font-extrabold text-brand-700">${priceDisplay}</div>
               </div>
+
+              <ul class="space-y-2 pt-2 border-t border-slate-100">
+                ${pkg.inclusions.map(inc => `
+                  <li class="text-xs text-slate-600 flex items-start gap-2">
+                    <span class="text-brand-600 font-bold">✓</span>
+                    <span>${inc}</span>
+                  </li>
+                `).join('')}
+              </ul>
             </div>
+
+            <a
+              href="${pkg.ctaLink}"
+              class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-brand-600 text-white text-center text-xs font-extrabold transition-colors"
+            >
+              ${pkg.ctaText}
+            </a>
           </div>
         `;
       }).join('');
     }
 
-    function renderFees() {
-      const container = document.getElementById('feesList');
-      container.innerHTML = ENV_FEES.map(fee => {
-        const checked = state.selectedFees.has(fee.id);
-        return `
-          <label class="flex items-start gap-2 p-2 rounded-xl border cursor-pointer text-xs ${
-            checked ? 'bg-white border-sky-400' : 'bg-white/60 border-sky-200/70 hover:bg-white'
-          }">
-            <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleFee('${fee.id}')" class="mt-0.5 rounded text-brand-600" />
-            <div class="leading-tight">
-              <div class="font-semibold text-slate-800 text-[11px]">${fee.name}</div>
-              <div class="text-[10px] text-sky-700 font-bold">${formatPeso(fee.regularPerPax)}/pax</div>
-            </div>
-          </label>
-        `;
-      }).join('');
-    }
-
-    function renderSummary() {
-      const tot = calculateTotals();
-      document.getElementById('adultsCount').textContent = state.pax.adults;
-      document.getElementById('kidsCount').textContent = state.pax.kids;
-      document.getElementById('infantsCount').textContent = state.pax.infants;
-      document.getElementById('paxSummaryLabel').textContent = `${getTotalGuests()} Guest(s) • ${tot.paying} Paying`;
-
-      document.getElementById('selectedCount').textContent = tot.lines.length;
-      const selEl = document.getElementById('selectedItemsList');
-
-      if (tot.lines.length === 0) {
-        selEl.innerHTML = `
-          <div class="text-center py-5 px-3 rounded-xl border border-dashed border-slate-300 bg-slate-50/60 text-xs text-slate-500">
-            No items selected yet. Tap <strong>+ Add</strong> on any tour, transfer, room, or rental.
-          </div>
-        `;
-      } else {
-        selEl.innerHTML = tot.lines.map(line => `
-          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-2">
-            <div class="min-w-0 flex-1">
-              <div class="text-xs font-bold text-slate-900 truncate">${line.item.name}</div>
-              <div class="text-[10px] text-slate-500">${line.detail}</div>
-              <div class="flex items-center gap-1.5 mt-1">
-                <button onclick="updateItemQty('${line.id}', -1)" class="w-6 h-6 rounded-md bg-white border border-slate-200 text-xs font-bold">−</button>
-                <span class="text-xs font-extrabold px-1">${line.qty}</span>
-                <button onclick="updateItemQty('${line.id}', 1)" class="w-6 h-6 rounded-md bg-white border border-slate-200 text-xs font-bold">+</button>
-              </div>
-            </div>
-            <div class="text-right shrink-0">
-              <div class="text-xs font-extrabold text-slate-900">${formatPeso(line.regLine)}</div>
-              <button onclick="removeItem('${line.id}')" class="text-[10px] text-rose-600 hover:underline mt-1">Remove</button>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      document.getElementById('guestTotalAmount').textContent = formatPeso(tot.guestTotal);
-      document.getElementById('perPaxEstimate').textContent = `${formatPeso(tot.perPayingPax)} / paying pax`;
-
-      // Mobile bar
-      document.getElementById('mobileItemCount').textContent = tot.lines.length;
-      document.getElementById('mobileGuestTotal').textContent = formatPeso(tot.guestTotal);
-    }
-
-    function renderAll() {
-      renderSubMenuBar();
-      const intlView = document.getElementById('internationalView');
-      const localView = document.getElementById('localCalculatorView');
-      const mobileBar = document.getElementById('mobileStickyBar');
-      const tabLocal = document.getElementById('topTabLocal');
-      const tabIntl = document.getElementById('topTabIntl');
-
-      if (state.topSection === 'LOCAL') {
-        localView.classList.remove('hidden');
-        intlView.classList.add('hidden');
-        mobileBar.classList.remove('hidden');
-        tabLocal.className = 'px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all bg-brand-600 text-white shadow-2xs';
-        tabIntl.className = 'px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white';
-        renderCatalog();
-        renderFees();
-        renderSummary();
-      } else {
-        localView.classList.add('hidden');
-        intlView.classList.remove('hidden');
-        mobileBar.classList.add('hidden');
-        tabIntl.className = 'px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all bg-sky-700 text-white shadow-2xs';
-        tabLocal.className = 'px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white';
-        const subObj = INTERNATIONAL_SUBMENUS.find(s => s.id === state.intlDest);
-        document.getElementById('intlSelectedTitle').textContent = subObj ? subObj.label : 'International';
-      }
-    }
-
-    // =========================================================================
-    // 6. EVENT HANDLERS
-    // =========================================================================
-    function setTopSection(sec) {
-      state.topSection = sec;
-      renderAll();
-    }
-
-    function selectPalawanDest(destId) {
-      state.palawanDest = destId;
-      renderCatalog();
-      renderSubMenuBar();
-    }
-
-    function selectIntlDest(intlId) {
-      state.intlDest = intlId;
-      renderSubMenuBar();
-      const subObj = INTERNATIONAL_SUBMENUS.find(s => s.id === intlId);
-      document.getElementById('intlSelectedTitle').textContent = subObj ? subObj.label : 'International';
-    }
-
-    function handleSearch(val) {
-      state.searchQuery = val;
-      renderCatalog();
-    }
-
-    function handleCategoryChange(val) {
-      state.categoryFilter = val;
-      renderCatalog();
-    }
-
-    function changePax(type, delta) {
-      const next = state.pax[type] + delta;
-      if (next < 0) return;
-      if (type === 'adults' && next === 0 && state.pax.kids === 0) return;
-      state.pax[type] = next;
-      renderCatalog();
-      renderSummary();
-    }
-
-    function addItem(id) {
-      const found = state.cart.find(c => c.id === id);
-      if (found) found.qty += 1;
-      else state.cart.push({ id, qty: 1 });
-      renderCatalog();
-      renderSummary();
-      showToast('Added to calculator');
-    }
-
-    function updateItemQty(id, delta) {
-      const idx = state.cart.findIndex(c => c.id === id);
-      if (idx === -1) return;
-      const next = state.cart[idx].qty + delta;
-      if (next <= 0) state.cart.splice(idx, 1);
-      else state.cart[idx].qty = next;
-      renderCatalog();
-      renderSummary();
-    }
-
-    function removeItem(id) {
-      state.cart = state.cart.filter(c => c.id !== id);
-      renderCatalog();
-      renderSummary();
-    }
-
-    function toggleFee(feeId) {
-      if (state.selectedFees.has(feeId)) state.selectedFees.delete(feeId);
-      else state.selectedFees.add(feeId);
-      renderFees();
-      renderSummary();
-    }
-
-    function updateDiscount(val) {
-      state.discount = Math.max(0, parseFloat(val) || 0);
-      renderSummary();
-    }
-
-    function resetCalculator() {
-      state.cart = [];
-      state.selectedFees.clear();
-      state.discount = 0;
-      document.getElementById('discountInput').value = 0;
-      renderCatalog();
-      renderFees();
-      renderSummary();
-      showToast('Calculator reset');
-    }
-
-    function scrollToInquiryForm() {
-      document.getElementById('inquirySidebar').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // =========================================================================
-    // 7. GUEST QUOTE COPY & EMAIL SUBMISSION TO alvirestrella08@gmail.com
-    // =========================================================================
-    function buildGuestQuoteString(overrideFormData) {
-      const tot = calculateTotals();
-      const nameVal = overrideFormData ? overrideFormData.name : document.getElementById('guestName').value.trim();
-      const datesVal = overrideFormData ? overrideFormData.dates : document.getElementById('travelDates').value.trim();
-      const priceMatchVal = overrideFormData ? overrideFormData.priceMatch : document.getElementById('priceMatchAnswer').value.trim();
-      const reqVal = overrideFormData ? overrideFormData.requests : document.getElementById('otherRequests').value.trim();
-
-      const lines = [];
-      lines.push('ALVIR CUSTOMIZE TOUR — GUEST QUOTE');
-      if (nameVal) lines.push(`Guest: ${nameVal}`);
-      if (datesVal) lines.push(`Travel Dates: ${datesVal}`);
-      lines.push(`Guests: ${state.pax.adults} Adult(s), ${state.pax.kids} Kid(s) 3-5 yrs, ${state.pax.infants} Infant(s) 0-2 yrs`);
-      lines.push('----------------------------------------');
-
-      if (tot.lines.length === 0 && tot.activeFees.length === 0) {
-        lines.push('(No items selected yet)');
-      } else {
-        tot.lines.forEach((l, i) => {
-          lines.push(`${i + 1}. ${l.item.name}${l.qty > 1 ? ` (x${l.qty})` : ''} — ${formatPeso(l.regLine)}`);
-        });
-        tot.activeFees.forEach(f => {
-          lines.push(`• ${f.name} — ${formatPeso(f.rFee)}`);
-        });
-      }
-
-      lines.push('----------------------------------------');
-      if (tot.discount > 0) {
-        lines.push(`Subtotal (Regular Rates): ${formatPeso(tot.grossRegularTotal)}`);
-        lines.push(`Discount: -${formatPeso(tot.discount)}`);
-      }
-      lines.push(`ESTIMATED GUEST TOTAL: ${formatPeso(tot.guestTotal)}`);
-      if (priceMatchVal) lines.push(`Price Match Note: ${priceMatchVal}`);
-      if (reqVal) lines.push(`Other Requests: ${reqVal}`);
-      return lines.join('\n');
-    }
-
-    function copyGuestSummary() {
-      copyToClipboard(buildGuestQuoteString(), 'Guest summary copied to clipboard');
-    }
-
-    function buildFullEmailReport(formData) {
-      const tot = calculateTotals();
-      const out = [];
-      out.push('NEW INQUIRY — ALVIR CUSTOMIZE TOUR');
-      out.push('====================================');
-      out.push(`Guest Name: ${formData.name}`);
-      out.push(`Contact: ${formData.contact}`);
-      out.push(`Travel Dates: ${formData.dates}`);
-      out.push(`Guests: ${state.pax.adults} Adult(s), ${state.pax.kids} Kid(s) (3-5), ${state.pax.infants} Infant(s) (0-2)`);
-      out.push(`Price Match Answer: ${formData.priceMatch}`);
-      out.push(`Other Requests: ${formData.requests}`);
-      out.push('');
-      out.push('--- SECTION 1: GUEST TOTAL & REGULAR RATE BREAKDOWN ---');
-      tot.lines.forEach((l, i) => {
-        out.push(`${i + 1}. ${l.item.name} (x${l.qty}) — Regular: ${formatPeso(l.regLine)}`);
-      });
-      tot.activeFees.forEach(f => {
-        out.push(`• ${f.name} — Regular: ${formatPeso(f.rFee)}`);
-      });
-      out.push(`Gross Regular Subtotal: ${formatPeso(tot.grossRegularTotal)}`);
-      out.push(`Guest Discount: -${formatPeso(tot.discount)}`);
-      out.push(`GUEST TOTAL: ${formatPeso(tot.guestTotal)}`);
-      out.push('');
-      out.push('--- SECTION 2: CONTRACTED RATES & NET TUBO BREAKDOWN (EMAIL RESULTS) ---');
-      tot.lines.forEach((l, i) => {
-        out.push(`${i + 1}. ${l.item.name} (x${l.qty}) | Reg: ${formatPeso(l.regLine)} | Base/Contracted: ${formatPeso(l.baseLine)} | Diff: ${formatPeso(l.diffLine)}`);
-      });
-      tot.activeFees.forEach(f => {
-        out.push(`• ${f.name} | Reg: ${formatPeso(f.rFee)} | Base/Contracted: ${formatPeso(f.bFee)} | Diff: ${formatPeso(f.rFee - f.bFee)}`);
-      });
-      out.push(`Total Contracted / Base Rate: ${formatPeso(tot.totalBaseRate)}`);
-      out.push(`Price Difference (Regular vs Contracted): ${formatPeso(tot.priceDifference)}`);
-      out.push(`Discount Given: -${formatPeso(tot.discount)}`);
-      out.push(`NET TUBO: ${formatPeso(tot.netTubo)}`);
-      return out.join('\n');
-    }
-
-    async function handleInquirySubmit(e) {
-      e.preventDefault();
-      const formData = {
-        name: document.getElementById('guestName').value.trim(),
-        contact: document.getElementById('guestContact').value.trim(),
-        dates: document.getElementById('travelDates').value.trim(),
-        priceMatch: document.getElementById('priceMatchAnswer').value.trim(),
-        requests: document.getElementById('otherRequests').value.trim()
-      };
-
-      const tot = calculateTotals();
-      const fullPayload = buildFullEmailReport(formData);
-      const guestSafeSummary = buildGuestQuoteString(formData);
-
-      // Populate Client-Safe Confirmation Modal (No Tubo / Base Cost Shown On-Screen)
-      document.getElementById('modalGuestMeta').innerHTML = `
-        <div><strong>Guest:</strong> ${escapeHtml(formData.name)} • <strong>Contact:</strong> ${escapeHtml(formData.contact)}</div>
-        <div><strong>Travel Dates:</strong> ${escapeHtml(formData.dates)} • <strong>Guests:</strong> ${state.pax.adults} Adult(s), ${state.pax.kids} Kid(s) 3–5, ${state.pax.infants} Infant(s) 0–2</div>
-        <div><strong>Price Match:</strong> ${escapeHtml(formData.priceMatch)}</div>
-        <div><strong>Other Requests:</strong> ${escapeHtml(formData.requests)}</div>
-      `;
-
-      const guestRows = tot.lines.map(l => `
-        <div class="flex justify-between gap-2">
-          <span>${escapeHtml(l.item.name)} (x${l.qty})</span>
-          <span class="font-bold">${formatPeso(l.regLine)}</span>
-        </div>
-      `).concat(tot.activeFees.map(f => `
-        <div class="flex justify-between gap-2 text-sky-900">
-          <span>${escapeHtml(f.name)}</span>
-          <span class="font-bold">${formatPeso(f.rFee)}</span>
-        </div>
-      `));
-
-      if (tot.discount > 0) {
-        guestRows.push(`<div class="flex justify-between gap-2 text-rose-700"><span>Discount</span><span class="font-bold">−${formatPeso(tot.discount)}</span></div>`);
-      }
-
-      document.getElementById('modalGuestBreakdown').innerHTML =
-        guestRows.length > 0 ? guestRows.join('') : '<div class="text-slate-500">No items selected</div>';
-      document.getElementById('modalGuestTotalVal').textContent = formatPeso(tot.guestTotal);
-      document.getElementById('fullEmailPayload').textContent = guestSafeSummary;
-
-      // Setup mailto fallback link with full internal report for alvirestrella08@gmail.com
-      const subject = encodeURIComponent(`Alvir Customize Tour Inquiry — ${formData.name} (${formData.dates})`);
-      const body = encodeURIComponent(fullPayload);
-      document.getElementById('mailtoFallbackLink').href = `mailto:alvirestrella08@gmail.com?subject=${subject}&body=${body}`;
-
-      // Send via FormSubmit AJAX endpoint to alvirestrella08@gmail.com
-      const statusEl = document.getElementById('emailDeliveryStatus');
-      statusEl.textContent = 'Sending inquiry to alvirestrella08@gmail.com...';
-
-      try {
-        const res = await fetch('https://formsubmit.co/ajax/alvirestrella08@gmail.com', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            _subject: `Alvir Customize Tour Inquiry — ${formData.name} (${formData.dates})`,
-            guest_name: formData.name,
-            contact: formData.contact,
-            travel_dates: formData.dates,
-            guests: `${state.pax.adults} Adults, ${state.pax.kids} Kids (3-5), ${state.pax.infants} Infants (0-2)`,
-            price_match_answer: formData.priceMatch,
-            other_requests: formData.requests,
-            guest_total: formatPeso(tot.guestTotal),
-            total_contracted_rate: formatPeso(tot.totalBaseRate),
-            price_difference: formatPeso(tot.priceDifference),
-            discount_given: formatPeso(tot.discount),
-            net_tubo: formatPeso(tot.netTubo),
-            full_report: fullPayload
-          })
-        });
-
-        if (res.ok) {
-          statusEl.textContent = 'Sent to alvirestrella08@gmail.com! (Check inbox/spam for activation on first test)';
-        } else {
-          statusEl.textContent = 'Ready to send via "Open Email App" or copy summary';
-        }
-      } catch (err) {
-        statusEl.textContent = 'Ready to send via "Open Email App" or copy summary';
-      }
-
-      document.getElementById('resultsModal').classList.remove('hidden');
-    }
-
-    function copyEmailPayload() {
-      copyToClipboard(document.getElementById('fullEmailPayload').textContent, 'Guest summary copied');
-    }
-
-    function closeResultsModal() {
-      document.getElementById('resultsModal').classList.add('hidden');
-    }
-
-    function copyToClipboard(text, message) {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      try {
-        document.execCommand('copy');
-        showToast(message);
-      } catch (err) {
-        showToast('Copy failed');
-      }
-      document.body.removeChild(ta);
-    }
-
-    function escapeHtml(str) {
-      return String(str || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    }
-
-    let toastTimer;
-    function showToast(msg) {
-      const banner = document.getElementById('toastBanner');
-      document.getElementById('toastText').textContent = msg;
-      banner.classList.remove('translate-x-full', 'opacity-0');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        banner.classList.add('translate-x-full', 'opacity-0');
-      }, 2500);
-    }
-
-    window.addEventListener('DOMContentLoaded', renderAll);
+    // Init
+    setMainMode('LOCAL');
+    renderPackages();
+    updateQuickConverter();
   </script>
 </body>
 </html>
