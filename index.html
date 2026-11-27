@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alvir Travel and Tours — Customize your travel</title>
+  <title>Alvir Travel and tours — Customize your travel</title>
   <meta name="description" content="Customize your travel with Alvir Travel and tours. Local and international tours, packages, hotels, and activities." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -89,7 +89,7 @@
         <label for="currencySelect" class="sr-only">Currency</label>
         <select id="currencySelect" class="px-2.5 py-2 rounded-xl bg-slate-100 border border-slate-200 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"></select>
 
-        <button id="cartBtn" type="button" aria-label="Open cart" class="relative px-3.5 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold shadow-sm transition-colors flex items-center gap-2">
+        <button id="cartBtn" type="button" onclick="openCartDrawer()" aria-label="Open cart" class="relative z-10 px-3.5 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold shadow-sm transition-colors flex items-center gap-2 cursor-pointer">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
           <span class="hidden sm:inline">Cart</span>
           <span id="cartCount" class="min-w-[1.4rem] h-6 px-1.5 rounded-full bg-white text-brand-600 text-xs font-extrabold flex items-center justify-center">0</span>
@@ -100,56 +100,57 @@
     <!-- MAIN TABS -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div role="tablist" aria-label="Browse" class="flex gap-6 overflow-x-auto no-scrollbar">
-        <button role="tab" id="tab-tours" data-tab="tours" aria-selected="true" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Tours</button>
-        <button role="tab" id="tab-packages" data-tab="packages" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Tour Packages</button>
-        <button role="tab" id="tab-hotels" data-tab="hotels" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Hotels</button>
-        <button role="tab" id="tab-services" data-tab="services" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Transfers &amp; Rentals</button>
-        <button role="tab" id="tab-info" data-tab="info" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Policies</button>
+        <button role="tab" id="tab-tours" data-tab="tours" aria-selected="true" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap cursor-pointer">Tours</button>
+        <button role="tab" id="tab-packages" data-tab="packages" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap cursor-pointer">Tour Packages</button>
+        <button role="tab" id="tab-hotels" data-tab="hotels" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap cursor-pointer">Hotels</button>
+        <button role="tab" id="tab-services" data-tab="services" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap cursor-pointer">Transfers &amp; Rentals</button>
+        <button role="tab" id="tab-info" data-tab="info" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap cursor-pointer">Policies</button>
         <a href="#about" class="py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Meet Alvir</a>
       </div>
     </div>
   </header>
 
-  <!-- WELCOME HERO BANNER -->
-  <section id="top" class="relative overflow-hidden bg-navy-950 text-white">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-40" onerror="this.remove()" />
-    <div class="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900/90 to-navy-900/55"></div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-16 space-y-5">
+  <!-- BANNER 1: MEET THE OWNER (FREEDIVING + TRAVEL THEME) -->
+  <section id="top" class="relative overflow-hidden bg-cyan-950 text-white border-b-4 border-cyan-400">
+    <img src="dp.jpg" alt="Meet the Owner — Freediving and Travel" class="absolute inset-0 w-full h-full object-cover opacity-40" onerror="this.remove()" />
+    <div class="absolute inset-0 bg-gradient-to-r from-cyan-950/95 via-sky-950/80 to-navy-950/55"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
       <div class="space-y-3 max-w-2xl">
-        <span class="inline-block px-3 py-1 rounded-full bg-brand-500/25 border border-brand-400/40 text-brand-200 text-xs font-bold">Customize your travel • Published rates • Lowest rate price match</span>
-        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Are you ready to book?</h1>
-        <p class="text-sm sm:text-base text-slate-200 leading-relaxed">Build your trip one tour at a time or pick a ready-made package tailored to your schedule, budget, and daily energy.</p>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-3">
-        <a href="#panel-packages" onclick="document.getElementById('tab-packages')?.click()" class="px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm shadow-lg transition-colors">
-          Click this button to explore tours and packages
-        </a>
-      </div>
-
-      <form id="searchForm" class="flex flex-col sm:flex-row gap-2 max-w-2xl pt-1" role="search">
-        <label for="searchInput" class="sr-only">Search</label>
-        <input id="searchInput" type="search" placeholder="Search tours, packages, hotels (e.g. Coron, Japan, Vietnam)" class="flex-1 px-4 py-3 rounded-2xl text-navy-900 text-sm focus:outline-none focus:ring-4 focus:ring-brand-400" />
-        <button type="submit" class="px-6 py-3 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/20 font-extrabold text-sm transition-colors">Search</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- MEET THE OWNER BANNER (FREEDIVING + TRAVEL THEME) -->
-  <section id="owner-banner" class="relative overflow-hidden bg-cyan-950 text-white border-y-4 border-cyan-500/50">
-    <img src="dp.jpg" alt="Freediving and travel with Alvir" class="absolute inset-0 w-full h-full object-cover opacity-40" onerror="this.remove()" />
-    <div class="absolute inset-0 bg-gradient-to-r from-cyan-950/95 via-sky-950/80 to-transparent"></div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-11 sm:py-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
-      <div class="space-y-2 max-w-2xl">
-        <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/25 border border-cyan-300/40 text-cyan-200 text-xs font-extrabold uppercase tracking-wider">Freediving &amp; Travel Theme</span>
-        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Meet the Owner</h2>
-        <p class="text-xs sm:text-sm text-cyan-50/90 leading-relaxed">Personal freediving and travel experience behind every customized local and international trip.</p>
+        <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/25 border border-cyan-300/40 text-cyan-200 text-xs font-extrabold uppercase tracking-wider">Freediving &amp; Travel Theme • Customize your travel</span>
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Meet the Owner</h1>
+        <p class="text-sm sm:text-base text-cyan-50/90 leading-relaxed">Freediving and travel with Alvir — customized local and international journeys shaped by ocean exploration, smart pacing, and firsthand experience.</p>
       </div>
       <div class="shrink-0">
         <a href="#about" class="inline-block px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm shadow-lg transition-colors">
           Explore
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- BANNER 2: ARE YOU READY TO BOOK? -->
+  <section id="booking-banner" class="relative overflow-hidden bg-navy-950 text-white border-b border-navy-800">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg" alt="Palawan Lagoon" class="absolute inset-0 w-full h-full object-cover opacity-35" onerror="this.remove()" />
+    <div class="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900/90 to-navy-900/60"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 space-y-5">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="space-y-2 max-w-2xl">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-brand-400">Published rates • Lowest rate price match</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Are you ready to book?</h2>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Add individual tours to your cart or pick a ready-made package. Send your quote to Alvir and let him handle the rest.</p>
+        </div>
+        <div class="shrink-0">
+          <a href="#panel-packages" onclick="document.getElementById('tab-packages')?.click()" class="inline-block px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm shadow-lg transition-colors">
+            Click this button to explore tours and packages
+          </a>
+        </div>
+      </div>
+
+      <form id="searchForm" class="flex flex-col sm:flex-row gap-2 max-w-2xl" role="search">
+        <label for="searchInput" class="sr-only">Search</label>
+        <input id="searchInput" type="search" placeholder="Search tours, packages, hotels (e.g. Coron, Japan, Vietnam)" class="flex-1 px-4 py-3 rounded-2xl text-navy-900 text-sm focus:outline-none focus:ring-4 focus:ring-brand-400" />
+        <button type="submit" class="px-6 py-3 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/20 font-extrabold text-sm transition-colors cursor-pointer">Search</button>
+      </form>
     </div>
   </section>
 
@@ -185,12 +186,12 @@
     <section id="panel-tours" role="tabpanel" aria-labelledby="tab-tours" class="space-y-6">
       <div>
         <h2 class="text-2xl sm:text-3xl font-extrabold">Tours</h2>
-        <p class="text-sm text-slate-500 mt-1">Pumili ng isa-isang tour. <strong>Joiner</strong> = kasama ang ibang guests (per pax). <strong>Private</strong> = grupo mo lang.</p>
+        <p class="text-sm text-slate-500 mt-1">Select individual tours. <strong>Joiner</strong> = shared with other guests (per pax). <strong>Private</strong> = exclusive to your group.</p>
       </div>
       <div class="flex flex-wrap items-center gap-3">
         <div id="modeToggle" class="inline-flex rounded-full bg-slate-200 p-1" role="group" aria-label="Tour type">
-          <button type="button" data-mode="joiner" aria-pressed="true" class="mode-btn px-5 py-2 rounded-full text-sm font-extrabold">Joiner</button>
-          <button type="button" data-mode="private" aria-pressed="false" class="mode-btn px-5 py-2 rounded-full text-sm font-extrabold">Private</button>
+          <button type="button" data-mode="joiner" aria-pressed="true" class="mode-btn px-5 py-2 rounded-full text-sm font-extrabold cursor-pointer">Joiner</button>
+          <button type="button" data-mode="private" aria-pressed="false" class="mode-btn px-5 py-2 rounded-full text-sm font-extrabold cursor-pointer">Private</button>
         </div>
         <div id="tourChips" class="flex flex-wrap gap-2" role="group" aria-label="Filter tours by place"></div>
       </div>
@@ -199,8 +200,8 @@
 
       <div class="pt-8 space-y-4">
         <div>
-          <h3 class="text-xl font-extrabold">Iba pang destinations (custom quote)</h3>
-          <p class="text-sm text-slate-500 mt-1">Wala pang naka-publish na rate? I-add sa cart at i-quote ni Alvir.</p>
+          <h3 class="text-xl font-extrabold">Other destinations (custom quote)</h3>
+          <p class="text-sm text-slate-500 mt-1">No published rate yet? Add to cart and Alvir will prepare a custom quote.</p>
         </div>
         <div id="customGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 fade-in"></div>
       </div>
@@ -210,7 +211,7 @@
     <section id="panel-packages" role="tabpanel" aria-labelledby="tab-packages" class="space-y-6 hidden">
       <div>
         <h2 class="text-2xl sm:text-3xl font-extrabold">Tour Packages</h2>
-        <p class="text-sm text-slate-500 mt-1">Hotel + daily breakfast + tours + transfers. Published per-pax rates. Sa Coron, pumili ng hotel.</p>
+        <p class="text-sm text-slate-500 mt-1">Hotel + daily breakfast + tours + transfers. Published per-pax rates. For Coron, choose your hotel tier.</p>
       </div>
       <div id="pkgChips" class="flex flex-wrap gap-2" role="group" aria-label="Filter packages by place"></div>
       <div id="packagesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in"></div>
@@ -220,7 +221,7 @@
     <section id="panel-hotels" role="tabpanel" aria-labelledby="tab-hotels" class="space-y-6 hidden">
       <div>
         <h2 class="text-2xl sm:text-3xl font-extrabold">Hotels in Coron</h2>
-        <p class="text-sm text-slate-500 mt-1">Published rate kada gabi, may breakfast. Pumili ng room, bilang ng rooms at gabi.</p>
+        <p class="text-sm text-slate-500 mt-1">Published nightly rate with breakfast. Choose room type, number of rooms, and nights.</p>
       </div>
       <div id="hotelsGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-6 fade-in"></div>
       <p class="text-xs text-slate-500" id="hotelTimes"></p>
@@ -230,7 +231,7 @@
     <section id="panel-services" role="tabpanel" aria-labelledby="tab-services" class="space-y-6 hidden">
       <div>
         <h2 class="text-2xl sm:text-3xl font-extrabold">Transfers &amp; Rentals</h2>
-        <p class="text-sm text-slate-500 mt-1">Airport transfers, van, kayak at iba pang gears.</p>
+        <p class="text-sm text-slate-500 mt-1">Airport transfers, van rentals, kayaks, and other gear.</p>
       </div>
       <div id="svcChips" class="flex flex-wrap gap-2" role="group" aria-label="Filter by place"></div>
       <div id="servicesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 fade-in"></div>
@@ -265,17 +266,17 @@
             <span class="text-xs font-extrabold uppercase tracking-wider text-brand-600">Meet the Owner</span>
             <h2 class="text-2xl font-extrabold mt-1">Why clients keep coming back</h2>
           </div>
-          <p class="text-sm text-slate-600 leading-relaxed">Friendly at approachable, lalo na pagdating sa presyo. Passionate sa travel, freediving at pakikipagkaibigan, kaya maraming repeat clients dahil sa practical na flight guidance, madaling usapan sa presyo, at itineraries na swak sa schedule at energy ng grupo.</p>
+          <p class="text-sm text-slate-600 leading-relaxed">Friendly and approachable—especially when it comes to pricing. Passionate about travel, freediving, and meeting new friends, with repeat clients drawn to practical flight guidance, flexible price discussions, and itineraries tailored to each group's schedule and energy.</p>
           <ul class="space-y-2.5 text-sm text-slate-700">
-            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>Smart itinerary &amp; daily energy guide:</strong> Malinaw na gabay para swak ang pace ng trip sa grupo mo.</span></li>
-            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>First-hand experience:</strong> Personal na na-explore ni Alvir ang bawat tour at route, kasama ang trusted local operators.</span></li>
-            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>On-tour photo &amp; guide option:</strong> Pwedeng sumama at kumuha ng pictures kapag hiniling.</span></li>
-            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>Budget to midrange:</strong> Malinaw na choices mula budget inn hanggang hotel na may pool.</span></li>
+            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>Smart itinerary &amp; daily energy guide:</strong> Clear pacing guidance so each day fits your group's energy.</span></li>
+            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>First-hand experience:</strong> Personally explored routes and tours partnered with trusted local operators.</span></li>
+            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>On-tour photo &amp; guide option:</strong> Available to join, guide, and take photos throughout the tour upon request.</span></li>
+            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>Budget to midrange:</strong> Clear accommodation choices from budget stays to pool hotels.</span></li>
           </ul>
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 border border-slate-200 rounded-2xl p-4">
             <div class="space-y-2">
               <div class="text-sm font-extrabold">15-Minute Trip Call on Messenger</div>
-              <p class="text-sm text-slate-600">Pag-usapan ang flight timing, pace, budget at preferences kay Alvir.</p>
+              <p class="text-sm text-slate-600">Discuss flight timing, pace, budget, and preferences with Alvir.</p>
               <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-extrabold transition-colors">Book a 15-Minute Call</a>
             </div>
             <div class="flex sm:flex-col items-center gap-2.5 shrink-0 bg-white p-2.5 rounded-xl border border-slate-200">
@@ -297,24 +298,24 @@
 
   <!-- MOBILE CART BAR -->
   <div id="mobileBar" class="lg:hidden fixed bottom-0 inset-x-0 z-20 p-3 bg-white/95 backdrop-blur border-t border-slate-200 hidden">
-    <button id="mobileCartBtn" type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-brand-500 text-white font-extrabold shadow-lg">
-      <span><span id="mobileCartCount">0</span> item(s) sa cart</span>
+    <button id="mobileCartBtn" type="button" onclick="openCartDrawer()" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-brand-500 text-white font-extrabold shadow-lg cursor-pointer">
+      <span><span id="mobileCartCount">0</span> item(s) in cart</span>
       <span id="mobileCartTotal">View</span>
     </button>
   </div>
 
   <!-- CART DRAWER -->
-  <div id="cartOverlay" class="fixed inset-0 z-40 bg-navy-950/60 no-print" aria-hidden="true"></div>
-  <aside id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col">
+  <div id="cartOverlay" onclick="closeCartDrawer()" class="fixed inset-0 z-40 bg-navy-950/60 hidden no-print" aria-hidden="true"></div>
+  <aside id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col translate-x-full transition-transform duration-200">
     <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200 no-print">
       <h2 id="cartTitle" class="text-lg font-extrabold">Your Cart</h2>
-      <button id="cartClose" type="button" aria-label="Close cart" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 font-bold">✕</button>
+      <button id="cartClose" type="button" onclick="closeCartDrawer()" aria-label="Close cart" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 font-bold cursor-pointer">✕</button>
     </div>
 
     <div class="flex-1 overflow-y-auto px-5 py-4 space-y-5">
       <div id="cartEmpty" class="text-center py-10 text-slate-500 text-sm">
-        <p class="font-bold text-navy-900 mb-1">Wala pang laman ang cart</p>
-        <p>Mag-add ng tour o package para makabuo ng quote.</p>
+        <p class="font-bold text-navy-900 mb-1">Your cart is empty</p>
+        <p>Add tours or packages to build a quote.</p>
       </div>
       <ul id="cartItems" class="space-y-3"></ul>
 
@@ -324,12 +325,12 @@
           <input id="travelDates" type="text" placeholder="e.g., Dec 10–13, 2026" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
         </div>
         <div>
-          <label for="priceMatch" class="block text-sm font-extrabold mb-1">May mas mababang quote sa iba?</label>
-          <textarea id="priceMatch" rows="2" placeholder='Ilagay ang quote at inclusions para ma-price match, o "None"' class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+          <label for="priceMatch" class="block text-sm font-extrabold mb-1">Found a lower quote elsewhere?</label>
+          <textarea id="priceMatch" rows="2" placeholder='Share the quote and inclusions for price match review, or "None"' class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
         </div>
         <div>
           <label for="notes" class="block text-sm font-extrabold mb-1">Other requests / notes</label>
-          <textarea id="notes" rows="2" placeholder='Flight details, dietary notes, o "None"' class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+          <textarea id="notes" rows="2" placeholder='Flight details, dietary notes, or "None"' class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
         </div>
       </div>
       <div id="cartSummary" class="hidden"></div>
@@ -342,20 +343,34 @@
       </div>
       <p id="cartTotalNote" class="text-xs text-slate-500 leading-snug"></p>
       <div class="grid grid-cols-2 gap-2 no-print">
-        <button id="shotBtn" type="button" class="col-span-2 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold transition-colors">Save summary as image &amp; send to Alvir</button>
-        <button id="sendMessenger" type="button" class="col-span-2 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-extrabold transition-colors">Send text quote via Messenger</button>
-        <button id="sendEmail" type="button" class="py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-sm font-extrabold transition-colors">Email</button>
-        <button id="copyQuote" type="button" class="py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-sm font-extrabold transition-colors">Copy</button>
-        <button id="printQuote" type="button" class="py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-sm font-extrabold transition-colors">Print</button>
-        <button id="clearCart" type="button" class="py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors">Clear cart</button>
+        <button id="shotBtn" type="button" class="col-span-2 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold transition-colors cursor-pointer">Save summary as image &amp; send to Alvir</button>
+        <button id="sendMessenger" type="button" class="col-span-2 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-extrabold transition-colors cursor-pointer">Send text quote via Messenger</button>
+        <button id="sendEmail" type="button" class="py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-sm font-extrabold transition-colors cursor-pointer">Email</button>
+        <button id="copyQuote" type="button" class="py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-sm font-extrabold transition-colors cursor-pointer">Copy</button>
+        <button id="printQuote" type="button" class="py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-sm font-extrabold transition-colors cursor-pointer">Print</button>
+        <button id="clearCart" type="button" class="py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors cursor-pointer">Clear cart</button>
       </div>
-      <p class="text-xs text-slate-500 leading-snug no-print">Sa phone, piliin ang Messenger sa share menu. Sa computer, ma-download ang larawan at i-attach ito sa chat kay Alvir. Indicative conversion lang ang ibang currency; ang final rate ay kukumpirmahin ni Alvir. 😄 Galingan mong tumawad!</p>
+      <p class="text-xs text-slate-500 leading-snug no-print">On mobile, select Messenger in the share menu. On desktop, download the image and attach it to your chat with Alvir. Non-PHP conversions are indicative only; final rates are confirmed by Alvir.</p>
     </div>
   </aside>
 
   <div id="toast" role="status" aria-live="polite" class="fixed bottom-24 lg:bottom-8 left-1/2 z-[60] px-4 py-2.5 rounded-xl bg-navy-900 text-white text-sm font-bold shadow-xl"></div>
 
   <script>
+    function openCartDrawer() {
+      const overlay = document.getElementById('cartOverlay');
+      const panel = document.getElementById('cartPanel');
+      overlay?.classList.remove('hidden');
+      panel?.classList.remove('translate-x-full');
+    }
+
+    function closeCartDrawer() {
+      const overlay = document.getElementById('cartOverlay');
+      const panel = document.getElementById('cartPanel');
+      overlay?.classList.add('hidden');
+      panel?.classList.add('translate-x-full');
+    }
+
     let explorerRegion = 'LOCAL';
     let explorerSubTab = 'TOURS';
 
