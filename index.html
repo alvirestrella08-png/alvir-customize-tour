@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alvir Customize Tour — Customized Local &amp; International Travel</title>
+  <title>Alvir Travel and tours — Customize your travel</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Serif+JP:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rampart+One&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
@@ -46,6 +46,40 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+    /* Jeepney karatula lettering style for Local */
+    .jeepney-sign {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      background: #1e293b;
+      color: #facc15;
+      border: 3px solid #ef4444;
+      outline: 2px solid #3b82f6;
+      border-radius: 8px;
+      padding: 4px 10px;
+      display: inline-block;
+      box-shadow: 2px 3px 0 #0f172a;
+    }
+
+    /* International country theme styles */
+    .theme-japan-box {
+      background: #ffffff;
+      border: 2px solid #dc2626;
+      color: #dc2626;
+    }
+    .font-japan-semi {
+      font-family: 'Rampart One', 'Noto Serif JP', serif;
+    }
+    .theme-vietnam-box {
+      background: #dc2626;
+      border: 2px solid #facc15;
+      color: #facc15;
+    }
+    .font-vietnam-semi {
+      font-family: 'Archivo Black', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
     @media print {
       header, footer, .no-print { display: none !important; }
       body { background: #ffffff !important; color: #000000 !important; }
@@ -57,26 +91,35 @@
 
   <!-- Top Navigation Header + Currency Switcher -->
   <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-2xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
       <a href="#top" class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-500 to-amber-500 flex items-center justify-center text-white font-extrabold text-base shadow-sm">
-          AC
+          AT
         </div>
         <div>
           <span class="block text-base sm:text-lg font-extrabold tracking-tight text-navy-900 leading-tight">
-            Alvir Customize Tour
+            Alvir Travel and tours
           </span>
-          <span class="block text-[11px] font-medium text-slate-500">Tailor-Made Local &amp; International Travel</span>
+          <span class="block text-[11px] font-medium text-slate-500">Customize your travel</span>
         </div>
       </a>
 
-      <nav class="hidden lg:flex items-center gap-6 text-xs font-bold text-slate-700">
+      <nav class="hidden lg:flex items-center gap-5 text-xs font-bold text-slate-700">
         <a href="#destinations" onclick="setMainMode('LOCAL')" class="hover:text-brand-500 transition-colors">Local Tours</a>
         <a href="#destinations" onclick="setMainMode('INTERNATIONAL')" class="hover:text-brand-500 transition-colors">International</a>
         <a href="#packages" class="hover:text-brand-500 transition-colors">Available Packages</a>
-        <a href="#the-owner" class="hover:text-brand-500 transition-colors">Meet the Owner</a>
-        <a href="#quote-section" class="hover:text-brand-500 transition-colors">Send Quote to Alvir</a>
+        <a href="#owner-banner" class="hover:text-brand-500 transition-colors">Meet the Owner</a>
       </nav>
+
+      <!-- Yellow Route Box: Have a quote already? Send it to Alvir -->
+      <div class="flex flex-wrap items-center gap-2 bg-amber-50 border-2 border-amber-400 rounded-xl px-2.5 py-1.5 text-[11px] font-bold text-navy-900">
+        <span>Have a quote already? Send it to Alvir</span>
+        <div class="flex items-center gap-1">
+          <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded-md bg-white border border-amber-300 text-sky-700 hover:bg-sky-600 hover:text-white transition-colors">Messenger</a>
+          <a href="mailto:alvirestrella08@gmail.com?subject=Existing%20Quote%20for%20Alvir" class="px-2 py-0.5 rounded-md bg-white border border-amber-300 text-navy-900 hover:bg-navy-900 hover:text-white transition-colors">Email</a>
+          <a href="tel:+639163345946" class="px-2 py-0.5 rounded-md bg-white border border-amber-300 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-colors">Phone</a>
+        </div>
+      </div>
 
       <!-- Currency Switcher at Top -->
       <div class="flex items-center gap-2">
@@ -107,7 +150,7 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Welcome Hero Section -->
   <section id="top" class="relative overflow-hidden bg-navy-950 text-white">
     <div class="absolute inset-0 opacity-35">
       <img
@@ -118,7 +161,7 @@
     </div>
     <div class="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900/90 to-navy-900/60"></div>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
       <div class="lg:col-span-8 space-y-4">
         <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/20 border border-brand-400/40 text-brand-200 text-xs font-bold">
           <span>Published Rates</span>
@@ -129,38 +172,25 @@
         </div>
 
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-          Build Your Dream Trip, <span class="text-brand-400">Your Way.</span>
+          Are you ready to book?
         </h1>
 
         <p class="text-sm sm:text-base text-slate-200 max-w-xl leading-relaxed">
-          Choose from curated local and international packages or customize your own itinerary paced to your schedule, budget, and daily energy.
+          Customize your travel—choose from curated local and international tours, hotels, and activities paced to your schedule, budget, and daily energy.
         </p>
 
         <div class="pt-1 flex flex-wrap items-center gap-3">
           <a
             href="#destinations"
             onclick="setMainMode('LOCAL')"
-            class="px-5 py-3 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-brand-500/25 transition-all"
+            class="px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-brand-500/25 transition-all"
           >
-            Explore Local →
-          </a>
-          <a
-            href="#destinations"
-            onclick="setMainMode('INTERNATIONAL')"
-            class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-extrabold text-xs sm:text-sm backdrop-blur transition-all"
-          >
-            Explore International
-          </a>
-          <a
-            href="#quote-section"
-            class="px-5 py-3 rounded-2xl bg-navy-800/90 hover:bg-navy-800 border border-sky-400/30 text-sky-200 font-bold text-xs sm:text-sm transition-all"
-          >
-            Send Quote to Alvir
+            Click this button to explore tours and packages
           </a>
         </div>
       </div>
 
-      <!-- Compact Currency Display Selector (Not a Calculator) -->
+      <!-- Compact Currency Display Selector -->
       <div class="lg:col-span-4">
         <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 space-y-2.5 shadow-lg max-w-sm lg:ml-auto">
           <div class="flex items-center justify-between">
@@ -192,10 +222,44 @@
     </div>
   </section>
 
+  <!-- Meet the Owner Welcome Banner (Freediving + Travel Theme) -->
+  <section id="owner-banner" class="relative overflow-hidden bg-cyan-950 text-white border-y-4 border-cyan-500/60">
+    <div class="absolute inset-0 opacity-40">
+      <img
+        src="dp.jpg"
+        alt="Freediving and travel with Alvir"
+        class="w-full h-full object-cover object-center"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-cyan-950/95 via-sky-950/80 to-transparent"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
+      <div class="max-w-2xl space-y-3">
+        <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/25 border border-cyan-300/40 text-cyan-200 text-[11px] font-extrabold uppercase tracking-wider">
+          Freediving &amp; Travel Theme
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          Meet the Owner
+        </h2>
+        <p class="text-sm sm:text-base text-cyan-50/90 leading-relaxed">
+          Dive into customized local and international journeys guided by firsthand freediving, ocean exploration, and practical travel planning.
+        </p>
+        <div class="pt-2 flex flex-wrap gap-3">
+          <a
+            href="#the-owner"
+            class="px-6 py-3 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all"
+          >
+            Explore
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Main Content -->
   <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-12 space-y-16 flex-1">
 
-    <!-- SECTION 1: TABBED LOCAL & INTERNATIONAL DESTINATIONS -->
+    <!-- SECTION 1: TABBED LOCAL & INTERNATIONAL DESTINATIONS + SUB-TABS -->
     <section id="destinations" class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
@@ -203,13 +267,13 @@
           <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mt-1">Destinations</h2>
         </div>
 
-        <!-- Level 1 Tabs: LOCAL vs INTERNATIONAL -->
-        <div class="inline-flex bg-slate-200/80 p-1.5 rounded-2xl border border-slate-200 self-start">
+        <!-- Two Large Main Tabs: LOCAL vs INTERNATIONAL -->
+        <div class="grid grid-cols-2 gap-2.5 bg-slate-200/80 p-1.5 rounded-2xl border border-slate-200 w-full sm:w-auto sm:min-w-[360px]">
           <button
             type="button"
             id="mainTabLocal"
             onclick="setMainMode('LOCAL')"
-            class="px-5 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-500 text-white shadow-2xs cursor-pointer"
+            class="px-6 py-3 rounded-xl text-sm font-extrabold transition-all bg-brand-500 text-white shadow-sm cursor-pointer"
           >
             Local
           </button>
@@ -217,17 +281,40 @@
             type="button"
             id="mainTabIntl"
             onclick="setMainMode('INTERNATIONAL')"
-            class="px-5 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer"
+            class="px-6 py-3 rounded-xl text-sm font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer"
           >
             International
           </button>
         </div>
       </div>
 
-      <!-- Level 2 Sub-Tabs Bar -->
+      <!-- Sub-Tabs: Tours, Hotels, Activities -->
       <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-2xs">
-        <div id="subTabsContainer" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-          <!-- Rendered by JS -->
+        <div id="subTabsContainer" class="grid grid-cols-3 gap-2">
+          <button
+            type="button"
+            data-subtab="TOURS"
+            onclick="setSubTab('TOURS')"
+            class="subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-navy-900 text-white cursor-pointer transition-all"
+          >
+            Tours
+          </button>
+          <button
+            type="button"
+            data-subtab="HOTELS"
+            onclick="setSubTab('HOTELS')"
+            class="subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:bg-slate-100 cursor-pointer transition-all"
+          >
+            Hotels
+          </button>
+          <button
+            type="button"
+            data-subtab="ACTIVITIES"
+            onclick="setSubTab('ACTIVITIES')"
+            class="subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:bg-slate-100 cursor-pointer transition-all"
+          >
+            Activities
+          </button>
         </div>
       </div>
 
@@ -457,7 +544,7 @@
   <footer class="bg-navy-950 text-slate-400 border-t border-navy-800 py-8 px-4 sm:px-6 text-xs">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
-        <span class="font-extrabold text-white">Alvir Customize Tour</span> • Alvir • 09163345946 • alvirestrella08@gmail.com
+        <span class="font-extrabold text-white">Alvir Travel and tours</span> • Alvir • 09163345946 • alvirestrella08@gmail.com
       </div>
       <div class="flex flex-wrap items-center gap-4">
         <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Messenger (@alvirski)</a>
@@ -468,7 +555,6 @@
   </footer>
 
   <script>
-    // Exchange rates relative to 1 PHP (Nov 2026 indicative rates)
     const CURRENCY_CONFIG = {
       PHP: { symbol: '₱', rateFromPhp: 1, decimals: 0, label: 'PHP (₱)' },
       USD: { symbol: '$', rateFromPhp: 0.01571, decimals: 2, label: 'USD ($)' },
@@ -483,7 +569,7 @@
 
     let activeCurrency = 'PHP';
     let activeMainMode = 'LOCAL';
-    let activeSubTab = 'PALAWAN';
+    let activeSubTab = 'TOURS';
     let activePackageRegion = 'ALL';
 
     function formatFromPhp(phpAmount) {
@@ -509,452 +595,150 @@
       updateQuotePreview();
     }
 
-    const DESTINATION_TABS = {
-      LOCAL: [
+    const LOCAL_BY_SUBTAB = {
+      TOURS: [
+        { sign: 'CORON', subtitle: 'Lagoons, Wrecks & Islands • JY Travel and Tours', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg', highlights: ['Town, Tour A/B, Ultimate & Escapade', 'Budget B, Budget A & Midrange Hotel', '3D2N–6D5N Packages'], regionFilter: 'CORON' },
+        { sign: 'EL NIDO', subtitle: 'Big & Small Lagoons • JY Travel and Tours', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Big_Lagoon_El_Nido.jpg', highlights: ['Tours A, B, C & D', 'PPS / Lio Van Transfers', '3D2N–5D4N Packages'], regionFilter: 'EL_NIDO' },
+        { sign: 'PUERTO', subtitle: 'Underground River & Honda Bay • JY Travel and Tours', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Puerto_Princesa_Subterranean_River_National_Park.jpg', highlights: ['City Tour & Underground River', 'Honda Bay & Firefly w/ Dinner', '3D2N–5D4N Packages'], regionFilter: 'PUERTO' },
+        { sign: 'BALABAC', subtitle: 'Onuk Island & Sandbars • JY Travel and Tours', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Onuk_Island,_Balabac,_Palawan.jpg', highlights: ['Onuk, Candaraman & Sandbars', 'Camp Sebaring & Town Stay', 'Selected Dates Package'], regionFilter: 'BALABAC' },
+        { sign: 'SIARGAO', subtitle: 'Partner: Siargana Travel and Tours', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80', highlights: ['Tri-Island Hopping', 'Maasin River & Coconut View', 'Lagoon & Surfing Spots'], regionFilter: 'ALL' },
+        { sign: 'BOHOL', subtitle: 'Partner: Kuya Cyril Pasicaran', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80', highlights: ['Chocolate Hills & Loboc River', 'Balicasag & Virgin Island', 'Private Car/Van & Transfers'], regionFilter: 'ALL' },
+        { sign: 'CEBU', subtitle: 'Partner: Highland Canyoneering', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80', highlights: ['Highland Canyoneering', 'South Cebu & City Stops', 'Customizable Group Pace'], regionFilter: 'ALL' },
+        { sign: 'BATANES', subtitle: 'Rolling Hills, Lighthouses & Stone Houses', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80', highlights: ['North & South Batan Tours', 'Sabtang Island Day Tour', 'Airport & Local Transfers'], regionFilter: 'ALL' }
+      ],
+      HOTELS: [
+        { sign: 'CORON STAY', subtitle: 'Budget B, Budget A & Midrange Hotel Options', badge: 'Published Tiers', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg', highlights: ['Town & Coastal Stays', 'Paired w/ 3D2N–6D5N Packages', 'Flexible Group Pacing'], regionFilter: 'CORON' },
+        { sign: 'EL NIDO STAY', subtitle: 'Hotel w/ Breakfast Options', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Big_Lagoon_El_Nido.jpg', highlights: ['Town & Beachfront Choices', 'Paired w/ Tour A, B & C', 'Van Transfers Included'], regionFilter: 'EL_NIDO' },
+        { sign: 'BORACAY STAY', subtitle: 'Klook • Bamboo Beach • La Carmela', badge: 'Partner Rates', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80', highlights: ['Station & Beachfront Options', 'Custom Stay Duration', 'Caticlan / Kalibo Transfers'], regionFilter: 'ALL' }
+      ],
+      ACTIVITIES: [
+        { sign: 'FREEDIVE', subtitle: 'Ocean Exploration & Freediving w/ Alvir', badge: 'Owner Specialty', image: 'dp.jpg', highlights: ['Freedive-Friendly Pacing', 'Photo & Guide Option', 'Tailored Sea Conditions'], regionFilter: 'ALL' },
+        { sign: 'ISLAND HOP', subtitle: 'Lagoons, Sandbars & Marine Sanctuaries', badge: 'Published Rates', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Onuk_Island,_Balabac,_Palawan.jpg', highlights: ['Coron, El Nido, Honda Bay & Balabac', 'Siargao Tri-Island & Bohol', 'Boat & Env. Fees Guided'], regionFilter: 'ALL' },
+        { sign: 'CANYONEER', subtitle: 'Partner: Highland Canyoneering • Cebu', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80', highlights: ['Waterfalls & River Treks', 'South Cebu Add-Ons', 'Custom Group Pace'], regionFilter: 'ALL' }
+      ]
+    };
+
+    const INTERNATIONAL_BY_SUBTAB = {
+      TOURS: [
         {
-          tabId: 'PALAWAN',
-          tabLabel: 'Palawan',
-          items: [
-            {
-              title: 'El Nido, Palawan',
-              subtitle: 'Big & Small Lagoons • JY Travel and Tours',
-              badge: 'Rates Updated',
-              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Big_Lagoon_El_Nido.jpg',
-              highlights: ['Tours A, B, C & D', 'PPS / Lio Van Transfers', '3D2N–5D4N Packages'],
-              regionFilter: 'EL_NIDO'
-            },
-            {
-              title: 'Coron, Palawan',
-              subtitle: 'Lagoons, Wrecks & Islands • JY Travel and Tours',
-              badge: 'Rates Updated',
-              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg',
-              highlights: ['Town, Tour A/B, Ultimate & Escapade', 'Budget B, Budget A & Midrange Hotel', '3D2N–6D5N Packages'],
-              regionFilter: 'CORON'
-            },
-            {
-              title: 'Puerto Princesa',
-              subtitle: 'Underground River & Honda Bay • JY Travel and Tours',
-              badge: 'Rates Updated',
-              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Puerto_Princesa_Subterranean_River_National_Park.jpg',
-              highlights: ['City Tour & Underground River', 'Honda Bay & Firefly w/ Dinner', '3D2N–5D4N Packages'],
-              regionFilter: 'PUERTO'
-            },
-            {
-              title: 'Balabac, Palawan',
-              subtitle: 'Onuk Island & Sandbars • JY Travel and Tours',
-              badge: 'Rates Updated',
-              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Onuk_Island,_Balabac,_Palawan.jpg',
-              highlights: ['Onuk, Candaraman & Sandbars', 'Camp Sebaring & Town Stay', 'Selected Dates Package'],
-              regionFilter: 'BALABAC'
-            }
-          ]
+          country: 'JAPAN',
+          themeClass: 'theme-japan-box',
+          fontClass: 'font-japan-semi',
+          title: 'JAPAN — TOURS',
+          subtitle: 'Tokyo, Kyoto, Osaka & Custom Routes',
+          badge: 'Japan Theme',
+          image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80',
+          highlights: ['Tokyo, Kyoto & Osaka', 'Rail & City Pacing', 'Custom Group Itinerary']
         },
         {
-          tabId: 'BORACAY',
-          tabLabel: 'Boracay',
-          items: [
-            {
-              title: 'Boracay Island & Activities',
-              subtitle: 'Klook • Bamboo Beach • La Carmela • Beach Partner',
-              badge: 'Partner Rates',
-              image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Island Hopping & Water Activities', 'Bamboo Beach & La Carmela Options', 'Caticlan / Kalibo Transfers'],
-              regionFilter: 'ALL'
-            }
-          ]
+          country: 'VIETNAM',
+          themeClass: 'theme-vietnam-box',
+          fontClass: 'font-vietnam-semi',
+          title: 'VIETNAM — TOURS',
+          subtitle: 'Da Nang Golden Hands, Ba Na Hills & Hanoi/Sapa',
+          badge: 'Vietnam Theme • Golden Hands',
+          image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Bridge_Ba_Na_Hills.jpg',
+          highlights: ['Da Nang & Golden Bridge', 'Hoi An, Hanoi & Sapa', 'Private Van & Custom Pace']
         },
         {
-          tabId: 'BOHOL',
-          tabLabel: 'Bohol',
-          items: [
-            {
-              title: 'Bohol Countryside & Panglao',
-              subtitle: 'Partner: Kuya Cyril Pasicaran',
-              badge: 'Custom Quote',
-              image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Chocolate Hills & Loboc River', 'Balicasag & Virgin Island', 'Private Car/Van & Transfers'],
-              regionFilter: 'ALL'
-            }
-          ]
-        },
-        {
-          tabId: 'CEBU',
-          tabLabel: 'Cebu',
-          items: [
-            {
-              title: 'Cebu & Canyoneering',
-              subtitle: 'Partner: Highland Canyoneering',
-              badge: 'Custom Quote',
-              image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Highland Canyoneering', 'South Cebu & City Stops', 'Customizable Group Pace'],
-              regionFilter: 'ALL'
-            }
-          ]
-        },
-        {
-          tabId: 'SIARGAO',
-          tabLabel: 'Siargao',
-          items: [
-            {
-              title: 'Siargao Tri-Island & Land Tour',
-              subtitle: 'Partner: Siargana Travel and Tours',
-              badge: 'Custom Quote',
-              image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Tri-Island Hopping', 'Maasin River & Coconut View', 'Lagoon & Surfing Spots'],
-              regionFilter: 'ALL'
-            }
-          ]
-        },
-        {
-          tabId: 'BATANES',
-          tabLabel: 'Batanes',
-          items: [
-            {
-              title: 'Batanes North, South & Sabtang',
-              subtitle: 'Rolling Hills, Lighthouses & Stone Houses',
-              badge: 'Custom Quote',
-              image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-              highlights: ['North & South Batan Tours', 'Sabtang Island Day Tour', 'Airport & Local Transfers'],
-              regionFilter: 'ALL'
-            }
-          ]
-        },
-        {
-          tabId: 'ILOILO',
-          tabLabel: 'Iloilo',
-          items: [
-            {
-              title: 'Iloilo Heritage & Islands',
-              subtitle: 'Islas de Gigantes, Heritage & Food Trip',
-              badge: 'Custom Quote',
-              image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Islas de Gigantes', 'Heritage & Sightseeing', 'Custom Group Itinerary'],
-              regionFilter: 'ALL'
-            }
-          ]
-        },
-        {
-          tabId: 'GUIMARAS',
-          tabLabel: 'Guimaras',
-          items: [
-            {
-              title: 'Guimaras Island & Mango Tour',
-              subtitle: 'Beaches, Islands & Countryside',
-              badge: 'Custom Quote',
-              image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Island Hopping', 'Land Tour & Viewpoints', 'Custom Group Pace'],
-              regionFilter: 'ALL'
-            }
-          ]
-        },
-        {
-          tabId: 'NEGROS_OCCIDENTAL',
-          tabLabel: 'Negros Occidental (Bacolod)',
-          items: [
-            {
-              title: 'Bacolod, Silay & Surrounding Stops',
-              subtitle: 'Heritage, Landmarks & Food Trip',
-              badge: 'Custom Quote',
-              image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Bacolod & Silay Highlights', 'Food & Pasalubong Stops', 'Private Van / Custom Pace'],
-              regionFilter: 'ALL'
-            }
-          ]
-        },
-        {
-          tabId: 'NEGROS_ORIENTAL',
-          tabLabel: 'Negros Oriental (Dumaguete)',
-          items: [
-            {
-              title: 'Dumaguete, Apo Island & Highlights',
-              subtitle: 'Marine Sanctuary, Coast & Countryside',
-              badge: 'Custom Quote',
-              image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Apo Island & Coastal Tours', 'City & Nearby Sightseeing', 'Custom Group Itinerary'],
-              regionFilter: 'ALL'
-            }
-          ]
-        },
-        {
-          tabId: 'SIQUIJOR',
-          tabLabel: 'Siquijor',
-          items: [
-            {
-              title: 'Siquijor Island Loop',
-              subtitle: 'Waterfalls, Beaches & Heritage Spots',
-              badge: 'Custom Quote',
-              image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Falls, Beaches & Old Trees', 'Full-Day Island Loop', 'Custom Group Pace'],
-              regionFilter: 'ALL'
-            }
-          ]
+          country: 'HONG KONG & MACAU',
+          themeClass: 'bg-white border-2 border-navy-900 text-navy-900',
+          fontClass: 'font-extrabold',
+          title: 'HONG KONG & MACAU — TOURS',
+          subtitle: 'City Skyline, Theme Parks & Cross-Bridge Trip',
+          badge: 'International',
+          image: 'https://images.unsplash.com/photo-1506970810-dc53884c9039?auto=format&fit=crop&w=800&q=80',
+          highlights: ['HK City & Theme Parks', 'Macau Day Trip', 'Tailored Pace']
         }
       ],
-      INTERNATIONAL: [
+      HOTELS: [
         {
-          tabId: 'VIETNAM',
-          tabLabel: 'Vietnam',
-          items: [
-            {
-              title: 'Vietnam — Da Nang & Hoi An',
-              subtitle: 'Ba Na Hills, Golden Bridge & Ancient Town',
-              badge: 'International',
-              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Bridge_Ba_Na_Hills.jpg',
-              highlights: ['Ba Na Hills & Golden Bridge', 'Hoi An Lantern Town', 'Airport & Private Van'],
-              regionFilter: 'ALL'
-            },
-            {
-              title: 'Vietnam — Hanoi & Sapa',
-              subtitle: 'Fansipan, Cat Cat Village & Ha Long Bay',
-              badge: 'International',
-              image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sapa_rice_terraces.jpg',
-              highlights: ['Hanoi Old Quarter & Sapa', 'Fansipan & Mountain Views', 'Custom Group Pace'],
-              regionFilter: 'ALL'
-            }
-          ]
+          country: 'JAPAN',
+          themeClass: 'theme-japan-box',
+          fontClass: 'font-japan-semi',
+          title: 'JAPAN — HOTELS',
+          subtitle: 'City Business Hotels, Ryokans & Station Stays',
+          badge: 'Japan Theme',
+          image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80',
+          highlights: ['Accessible Transit Stays', 'Ryokan & Modern Options', 'Custom Room Mix']
         },
         {
-          tabId: 'HONGKONG_MACAU',
-          tabLabel: 'Hong Kong & Macau',
-          items: [
-            {
-              title: 'Hong Kong & Macau City Escape',
-              subtitle: 'Theme Parks, Skyline & Cross-Bridge Day Trip',
-              badge: 'International',
-              image: 'https://images.unsplash.com/photo-1506970810-dc53884c9039?auto=format&fit=crop&w=800&q=80',
-              highlights: ['HK City & Theme Park Options', 'Macau Day Trip', 'Tailored Pace'],
-              regionFilter: 'ALL'
-            }
-          ]
+          country: 'VIETNAM',
+          themeClass: 'theme-vietnam-box',
+          fontClass: 'font-vietnam-semi',
+          title: 'VIETNAM — HOTELS',
+          subtitle: 'Da Nang Beach, Ba Na Hills & Hanoi/Sapa Stays',
+          badge: 'Vietnam Theme • Golden Hands',
+          image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sapa_rice_terraces.jpg',
+          highlights: ['Coastal & Highland Stays', 'Couples, Barkada & Family', 'Airport Transfer Options']
         },
         {
-          tabId: 'THAILAND',
-          tabLabel: 'Thailand',
-          items: [
-            {
-              title: 'Bangkok & Phuket / Pattaya',
-              subtitle: 'Temples, Street Food & Island Escapes',
-              badge: 'International',
-              image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',
-              highlights: ['Bangkok Culture & Markets', 'Phuket / Coastal Add-Ons', 'Custom Group Itinerary'],
-              regionFilter: 'ALL'
-            }
-          ]
+          country: 'THAILAND',
+          themeClass: 'bg-white border-2 border-navy-900 text-navy-900',
+          fontClass: 'font-extrabold',
+          title: 'THAILAND — HOTELS',
+          subtitle: 'Bangkok City & Coastal Resort Options',
+          badge: 'International',
+          image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',
+          highlights: ['Central & Night-Market Access', 'Resort Add-Ons', 'Custom Dates']
+        }
+      ],
+      ACTIVITIES: [
+        {
+          country: 'JAPAN',
+          themeClass: 'theme-japan-box',
+          fontClass: 'font-japan-semi',
+          title: 'JAPAN — ACTIVITIES',
+          subtitle: 'Cultural Experiences, Sightseeing & Passes',
+          badge: 'Japan Theme',
+          image: 'https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=800&q=80',
+          highlights: ['Shrines, Districts & Views', 'Energy-Fit Daily Plans', 'Custom Add-Ons']
+        },
+        {
+          country: 'VIETNAM',
+          themeClass: 'theme-vietnam-box',
+          fontClass: 'font-vietnam-semi',
+          title: 'VIETNAM — ACTIVITIES',
+          subtitle: 'Golden Hands Bridge, Lantern Boats & Mountain Treks',
+          badge: 'Vietnam Theme • Golden Hands',
+          image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Bridge_Ba_Na_Hills.jpg',
+          highlights: ['Ba Na Hills & Golden Bridge', 'Hoi An & Sapa Highlights', 'Tailored Group Pace']
+        },
+        {
+          country: 'THAILAND',
+          themeClass: 'bg-white border-2 border-navy-900 text-navy-900',
+          fontClass: 'font-extrabold',
+          title: 'THAILAND — ACTIVITIES',
+          subtitle: 'Temples, Food Walks & Island Day Trips',
+          badge: 'International',
+          image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',
+          highlights: ['Day Tours & Experiences', 'Custom Group Pace', 'Flexible Quote']
         }
       ]
     };
 
-    // Published Rates Packages (No Contracted Rates Shown)
     const PACKAGES_DATA = [
-      // CORON
-      {
-        region: 'CORON',
-        tag: 'Coron • Published Rate',
-        title: '3D2N Explore Package',
-        itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Departure',
-        tiers: [
-          { label: 'Budget B', php: 3400 },
-          { label: 'Budget A', php: 3450 },
-          { label: 'Midrange Hotel', php: 4700 }
-        ],
-        note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.'
-      },
-      {
-        region: 'CORON',
-        tag: 'Coron • Published Rate',
-        title: '3D2N Highlights Package',
-        itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Departure',
-        tiers: [
-          { label: 'Budget B', php: 4000 },
-          { label: 'Budget A', php: 4050 },
-          { label: 'Midrange Hotel', php: 5300 }
-        ],
-        note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.'
-      },
-      {
-        region: 'CORON',
-        tag: 'Coron • Published Rate',
-        title: '4D3N Explore Package',
-        itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Tour B • Day 4: Departure',
-        tiers: [
-          { label: 'Budget B', php: 5200 },
-          { label: 'Budget A', php: 5250 },
-          { label: 'Midrange Hotel', php: 7150 }
-        ],
-        note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.'
-      },
-      {
-        region: 'CORON',
-        tag: 'Coron Best-Seller • Published Rate',
-        title: '4D3N Highlights Package',
-        itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Island Escapade • Day 4: Departure',
-        tiers: [
-          { label: 'Budget B', php: 6100 },
-          { label: 'Budget A', php: 6150 },
-          { label: 'Midrange Hotel', php: 8050 }
-        ],
-        note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.'
-      },
-      {
-        region: 'CORON',
-        tag: 'Coron • Published Rate',
-        title: '5D4N Explore Package',
-        itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Tour B • Day 4: Escapade Tour • Day 5: Departure',
-        tiers: [
-          { label: 'Budget B', php: 7300 },
-          { label: 'Budget A', php: 7350 },
-          { label: 'Midrange Hotel', php: 9900 }
-        ],
-        note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.'
-      },
-      {
-        region: 'CORON',
-        tag: 'Coron Best-Seller • Published Rate',
-        title: '5D4N Highlights Package',
-        itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Escapade Tour • Day 4: Reef & Wrecks • Day 5: Departure',
-        tiers: [
-          { label: 'Budget B', php: 8200 },
-          { label: 'Budget A', php: 8250 },
-          { label: 'Midrange Hotel', php: 10800 }
-        ],
-        note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.'
-      },
-      {
-        region: 'CORON',
-        tag: 'Coron w/ Optional Safari • Published Rate',
-        title: '5D4N Explore Package (Optional Day 5 Calauit Safari)',
-        itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Tour B • Day 4: Escapade • Day 5: Opt. Calauit Safari • Day 6: Departure',
-        tiers: [
-          { label: 'Budget B', php: 7900 },
-          { label: 'Budget A', php: 7950 },
-          { label: 'Midrange Hotel', php: 11150 }
-        ],
-        note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.'
-      },
-      {
-        region: 'CORON',
-        tag: 'Coron • Published Rate',
-        title: '6D5N Highlights Package',
-        itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Escapade • Day 4: Reef & Wrecks • Day 5: Opt. Calauit Safari • Day 6: Departure',
-        tiers: [
-          { label: 'Budget B', php: 8800 },
-          { label: 'Budget A', php: 8850 },
-          { label: 'Midrange Hotel', php: 12050 }
-        ],
-        note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.'
-      },
-
-      // EL NIDO
-      {
-        region: 'EL_NIDO',
-        tag: 'El Nido • Published Rate',
-        title: '3D2N El Nido Package',
-        itinerary: 'Day 1: Arrival at PPS Airport • Day 2: El Nido Tour A • Day 3: Departure',
-        tiers: [{ label: 'Published Rate / pax', php: 5300 }],
-        note: 'Incl. hotel w/ breakfast, RT airport transfer, Tour A w/ lunch, El Nido ₱400 env. fee & ₱200 lagoon fee. Excl. airfare & gears.'
-      },
-      {
-        region: 'EL_NIDO',
-        tag: 'El Nido • Published Rate',
-        title: '4D3N El Nido Package',
-        itinerary: 'Day 1: Arrival at PPS Airport • Day 2: El Nido Tour A • Day 3: Tour C • Day 4: Departure',
-        tiers: [{ label: 'Published Rate / pax', php: 7700 }],
-        note: 'Incl. hotel w/ breakfast, RT airport transfer, Tours A & C w/ lunch, env. & lagoon fees. Excl. airfare & gears.'
-      },
-      {
-        region: 'EL_NIDO',
-        tag: 'El Nido Best-Seller • Published Rate',
-        title: '5D4N El Nido Package',
-        itinerary: 'Day 1: Arrival at PPS Airport • Day 2: El Nido Tour A • Day 3: Tour B • Day 4: Tour C • Day 5: Departure',
-        tiers: [{ label: 'Published Rate / pax', php: 10100 }],
-        note: 'Incl. hotel w/ breakfast, RT airport transfer, Tours A, B & C w/ lunch, env. & lagoon fees. Excl. airfare & gears.'
-      },
-
-      // PUERTO PRINCESA
-      {
-        region: 'PUERTO',
-        tag: 'Puerto Princesa • Published Rate',
-        title: '3D2N Puerto Package',
-        itinerary: 'Day 1: City Tour • Day 2: Underground River • Day 3: Departure',
-        tiers: [{ label: 'Published Rate / pax', php: 5000 }],
-        note: 'Incl. hotel w/ breakfast, RT airport transfer, tours w/ lunch & ₱150/pax env. fee. Excl. airfare & gears.'
-      },
-      {
-        region: 'PUERTO',
-        tag: 'Puerto Best-Seller • Published Rate',
-        title: '4D3N Puerto Package',
-        itinerary: 'Day 1: City Tour • Day 2: Underground River • Day 3: Honda Bay Island Hopping • Day 4: Departure',
-        tiers: [{ label: 'Published Rate / pax', php: 8000 }],
-        note: 'Incl. hotel w/ breakfast, RT airport transfer, tours w/ lunch & ₱150/pax env. fee. Excl. airfare & gears.'
-      },
-      {
-        region: 'PUERTO',
-        tag: 'Puerto Princesa • Published Rate',
-        title: '5D4N Puerto Package',
-        itinerary: 'Day 1: City Tour • Day 2: Underground River • Day 3: Honda Bay • Day 4: Firefly Watching w/ Dinner • Day 5: Departure',
-        tiers: [{ label: 'Published Rate / pax', php: 10600 }],
-        note: 'Incl. hotel w/ breakfast, RT airport transfer, tours w/ lunch/dinner & ₱150/pax env. fee. Excl. airfare & gears.'
-      },
-
-      // COMBO PACKAGES
-      {
-        region: 'COMBO',
-        tag: 'El Nido + Puerto • Published Rate',
-        title: '4D3N El Nido + Puerto (Best-Seller)',
-        itinerary: 'Day 1: Arrival • Day 2: El Nido Tour A • Day 3: Underground River • Day 4: Departure',
-        tiers: [{ label: 'Published Rate / pax', php: 8100 }],
-        note: 'Incl. hotel w/ breakfast, RT airport & PPS–El Nido van transfer, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.'
-      },
-      {
-        region: 'COMBO',
-        tag: 'El Nido + Puerto • Published Rate',
-        title: '5D4N El Nido + Puerto (Best-Seller)',
-        itinerary: 'Day 1: Arrival • Day 2: El Nido Tour A • Day 3: El Nido Tour C • Day 4: Underground River • Day 5: Departure',
-        tiers: [{ label: 'Published Rate / pax', php: 10300 }],
-        note: 'Incl. hotel w/ breakfast, transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.'
-      },
-      {
-        region: 'COMBO',
-        tag: 'El Nido + Puerto • Published Rate',
-        title: '6D5N El Nido + Puerto',
-        itinerary: 'Day 1: Arrival • Day 2: El Nido Tour A • Day 3: El Nido Tour C • Day 4: Underground River • Day 5: City Tour • Day 6: Departure',
-        tiers: [{ label: 'Published Rate / pax', php: 12100 }],
-        note: 'Incl. hotel w/ breakfast, transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.'
-      },
-      {
-        region: 'COMBO',
-        tag: 'Coron + El Nido • Published Rate',
-        title: '5D4N Coron + El Nido (Best-Seller)',
-        itinerary: 'Day 1: Arrival @ PPS, van to El Nido • Day 2: El Nido Tour A • Day 3: Ferry to Coron • Day 4: Coron Tour A • Day 5: Depart Busuanga',
-        tiers: [{ label: 'Published Rate / pax', php: 10700 }],
-        note: 'Incl. hotel w/ breakfast, PPS–El Nido van, El Nido–Coron ferry, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.'
-      },
-      {
-        region: 'COMBO',
-        tag: 'Coron + El Nido • Published Rate',
-        title: '6D5N Coron + El Nido (Best-Seller)',
-        itinerary: 'Day 1: Arrival @ PPS, van to El Nido • Day 2: El Nido Tour A • Day 3: Ferry to Coron • Day 4: Coron Tour A • Day 5: Tour B • Day 6: Depart Busuanga',
-        tiers: [{ label: 'Published Rate / pax', php: 12850 }],
-        note: 'Incl. hotel w/ breakfast, van & ferry transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.'
-      },
-      {
-        region: 'COMBO',
-        tag: 'Tri-City • Published Rate',
-        title: '6D5N Tri-City (Coron + El Nido + PPS)',
-        itinerary: 'Day 1: Arrival @ PPS, City Tour • Day 2: Underground then van to El Nido • Day 3: Tour A • Day 4: Ferry to Coron • Day 5: Coron Tour A • Day 6: Depart Busuanga',
-        tiers: [{ label: 'Published Rate / pax', php: 14999 }],
-        note: 'Incl. hotel w/ breakfast, van & ferry transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.'
-      },
-
-      // BALABAC
-      {
-        region: 'BALABAC',
-        tag: 'Balabac Selected Dates • Published Rate',
-        title: 'Balabac Island Hopping & Camp Package',
-        itinerary: 'Day 1: PPS Arrival • Day 2: Buliluyan van + islands & Sebaring camp • Day 3–4: Sandbars & Onok Island • Day 5: Return to PPS',
-        tiers: [{ label: 'Published Rate / pax', php: 14500 }],
-        note: 'Incl. min camping at Camp Sebaring, 2N town stay, B/L/D, van & boat transfers, guide, env. fees & travel insurance.'
-      }
+      { region: 'CORON', tag: 'Coron • Published Rate', title: '3D2N Explore Package', itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Departure', tiers: [{ label: 'Budget B', php: 3400 }, { label: 'Budget A', php: 3450 }, { label: 'Midrange Hotel', php: 4700 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
+      { region: 'CORON', tag: 'Coron • Published Rate', title: '3D2N Highlights Package', itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Departure', tiers: [{ label: 'Budget B', php: 4000 }, { label: 'Budget A', php: 4050 }, { label: 'Midrange Hotel', php: 5300 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
+      { region: 'CORON', tag: 'Coron • Published Rate', title: '4D3N Explore Package', itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Tour B • Day 4: Departure', tiers: [{ label: 'Budget B', php: 5200 }, { label: 'Budget A', php: 5250 }, { label: 'Midrange Hotel', php: 7150 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
+      { region: 'CORON', tag: 'Coron Best-Seller • Published Rate', title: '4D3N Highlights Package', itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Island Escapade • Day 4: Departure', tiers: [{ label: 'Budget B', php: 6100 }, { label: 'Budget A', php: 6150 }, { label: 'Midrange Hotel', php: 8050 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
+      { region: 'CORON', tag: 'Coron • Published Rate', title: '5D4N Explore Package', itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Tour B • Day 4: Escapade Tour • Day 5: Departure', tiers: [{ label: 'Budget B', php: 7300 }, { label: 'Budget A', php: 7350 }, { label: 'Midrange Hotel', php: 9900 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
+      { region: 'CORON', tag: 'Coron Best-Seller • Published Rate', title: '5D4N Highlights Package', itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Escapade Tour • Day 4: Reef & Wrecks • Day 5: Departure', tiers: [{ label: 'Budget B', php: 8200 }, { label: 'Budget A', php: 8250 }, { label: 'Midrange Hotel', php: 10800 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
+      { region: 'CORON', tag: 'Coron w/ Optional Safari • Published Rate', title: '5D4N Explore Package (Optional Day 5 Calauit Safari)', itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Tour B • Day 4: Escapade • Day 5: Opt. Calauit Safari • Day 6: Departure', tiers: [{ label: 'Budget B', php: 7900 }, { label: 'Budget A', php: 7950 }, { label: 'Midrange Hotel', php: 11150 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
+      { region: 'CORON', tag: 'Coron • Published Rate', title: '6D5N Highlights Package', itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Escapade • Day 4: Reef & Wrecks • Day 5: Opt. Calauit Safari • Day 6: Departure', tiers: [{ label: 'Budget B', php: 8800 }, { label: 'Budget A', php: 8850 }, { label: 'Midrange Hotel', php: 12050 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
+      { region: 'EL_NIDO', tag: 'El Nido • Published Rate', title: '3D2N El Nido Package', itinerary: 'Day 1: Arrival at PPS Airport • Day 2: El Nido Tour A • Day 3: Departure', tiers: [{ label: 'Published Rate / pax', php: 5300 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, Tour A w/ lunch, El Nido ₱400 env. fee & ₱200 lagoon fee. Excl. airfare & gears.' },
+      { region: 'EL_NIDO', tag: 'El Nido • Published Rate', title: '4D3N El Nido Package', itinerary: 'Day 1: Arrival at PPS Airport • Day 2: El Nido Tour A • Day 3: Tour C • Day 4: Departure', tiers: [{ label: 'Published Rate / pax', php: 7700 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, Tours A & C w/ lunch, env. & lagoon fees. Excl. airfare & gears.' },
+      { region: 'EL_NIDO', tag: 'El Nido Best-Seller • Published Rate', title: '5D4N El Nido Package', itinerary: 'Day 1: Arrival at PPS Airport • Day 2: El Nido Tour A • Day 3: Tour B • Day 4: Tour C • Day 5: Departure', tiers: [{ label: 'Published Rate / pax', php: 10100 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, Tours A, B & C w/ lunch, env. & lagoon fees. Excl. airfare & gears.' },
+      { region: 'PUERTO', tag: 'Puerto Princesa • Published Rate', title: '3D2N Puerto Package', itinerary: 'Day 1: City Tour • Day 2: Underground River • Day 3: Departure', tiers: [{ label: 'Published Rate / pax', php: 5000 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, tours w/ lunch & ₱150/pax env. fee. Excl. airfare & gears.' },
+      { region: 'PUERTO', tag: 'Puerto Best-Seller • Published Rate', title: '4D3N Puerto Package', itinerary: 'Day 1: City Tour • Day 2: Underground River • Day 3: Honda Bay Island Hopping • Day 4: Departure', tiers: [{ label: 'Published Rate / pax', php: 8000 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, tours w/ lunch & ₱150/pax env. fee. Excl. airfare & gears.' },
+      { region: 'PUERTO', tag: 'Puerto Princesa • Published Rate', title: '5D4N Puerto Package', itinerary: 'Day 1: City Tour • Day 2: Underground River • Day 3: Honda Bay • Day 4: Firefly Watching w/ Dinner • Day 5: Departure', tiers: [{ label: 'Published Rate / pax', php: 10600 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, tours w/ lunch/dinner & ₱150/pax env. fee. Excl. airfare & gears.' },
+      { region: 'COMBO', tag: 'El Nido + Puerto • Published Rate', title: '4D3N El Nido + Puerto (Best-Seller)', itinerary: 'Day 1: Arrival • Day 2: El Nido Tour A • Day 3: Underground River • Day 4: Departure', tiers: [{ label: 'Published Rate / pax', php: 8100 }], note: 'Incl. hotel w/ breakfast, RT airport & PPS–El Nido van transfer, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
+      { region: 'COMBO', tag: 'El Nido + Puerto • Published Rate', title: '5D4N El Nido + Puerto (Best-Seller)', itinerary: 'Day 1: Arrival • Day 2: El Nido Tour A • Day 3: El Nido Tour C • Day 4: Underground River • Day 5: Departure', tiers: [{ label: 'Published Rate / pax', php: 10300 }], note: 'Incl. hotel w/ breakfast, transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
+      { region: 'COMBO', tag: 'El Nido + Puerto • Published Rate', title: '6D5N El Nido + Puerto', itinerary: 'Day 1: Arrival • Day 2: El Nido Tour A • Day 3: El Nido Tour C • Day 4: Underground River • Day 5: City Tour • Day 6: Departure', tiers: [{ label: 'Published Rate / pax', php: 12100 }], note: 'Incl. hotel w/ breakfast, transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
+      { region: 'COMBO', tag: 'Coron + El Nido • Published Rate', title: '5D4N Coron + El Nido (Best-Seller)', itinerary: 'Day 1: Arrival @ PPS, van to El Nido • Day 2: El Nido Tour A • Day 3: Ferry to Coron • Day 4: Coron Tour A • Day 5: Depart Busuanga', tiers: [{ label: 'Published Rate / pax', php: 10700 }], note: 'Incl. hotel w/ breakfast, PPS–El Nido van, El Nido–Coron ferry, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
+      { region: 'COMBO', tag: 'Coron + El Nido • Published Rate', title: '6D5N Coron + El Nido (Best-Seller)', itinerary: 'Day 1: Arrival @ PPS, van to El Nido • Day 2: El Nido Tour A • Day 3: Ferry to Coron • Day 4: Coron Tour A • Day 5: Tour B • Day 6: Depart Busuanga', tiers: [{ label: 'Published Rate / pax', php: 12850 }], note: 'Incl. hotel w/ breakfast, van & ferry transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
+      { region: 'COMBO', tag: 'Tri-City • Published Rate', title: '6D5N Tri-City (Coron + El Nido + PPS)', itinerary: 'Day 1: Arrival @ PPS, City Tour • Day 2: Underground then van to El Nido • Day 3: Tour A • Day 4: Ferry to Coron • Day 5: Coron Tour A • Day 6: Depart Busuanga', tiers: [{ label: 'Published Rate / pax', php: 14999 }], note: 'Incl. hotel w/ breakfast, van & ferry transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
+      { region: 'BALABAC', tag: 'Balabac Selected Dates • Published Rate', title: 'Balabac Island Hopping & Camp Package', itinerary: 'Day 1: PPS Arrival • Day 2: Buliluyan van + islands & Sebaring camp • Day 3–4: Sandbars & Onok Island • Day 5: Return to PPS', tiers: [{ label: 'Published Rate / pax', php: 14500 }], note: 'Incl. min camping at Camp Sebaring, 2N town stay, B/L/D, van & boat transfers, guide, env. fees & travel insurance.' }
     ];
 
     function setMainMode(mode) {
@@ -963,73 +747,90 @@
       const intlBtn = document.getElementById('mainTabIntl');
 
       if (mode === 'LOCAL') {
-        localBtn.className = 'px-5 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-500 text-white shadow-2xs cursor-pointer';
-        intlBtn.className = 'px-5 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer';
+        localBtn.className = 'px-6 py-3 rounded-xl text-sm font-extrabold transition-all bg-brand-500 text-white shadow-sm cursor-pointer';
+        intlBtn.className = 'px-6 py-3 rounded-xl text-sm font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer';
       } else {
-        intlBtn.className = 'px-5 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-500 text-white shadow-2xs cursor-pointer';
-        localBtn.className = 'px-5 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer';
+        intlBtn.className = 'px-6 py-3 rounded-xl text-sm font-extrabold transition-all bg-brand-500 text-white shadow-sm cursor-pointer';
+        localBtn.className = 'px-6 py-3 rounded-xl text-sm font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer';
       }
-
-      const tabs = DESTINATION_TABS[mode] || [];
-      activeSubTab = tabs[0] ? tabs[0].tabId : '';
-      renderSubTabs();
       renderDestinationCards();
     }
 
-    function setSubTab(tabId) {
-      activeSubTab = tabId;
-      renderSubTabs();
+    function setSubTab(subtab) {
+      activeSubTab = subtab;
+      document.querySelectorAll('.subtab-btn').forEach(btn => {
+        const isActive = btn.dataset.subtab === subtab;
+        btn.className = isActive
+          ? 'subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-navy-900 text-white cursor-pointer transition-all'
+          : 'subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:bg-slate-100 cursor-pointer transition-all';
+      });
       renderDestinationCards();
-    }
-
-    function renderSubTabs() {
-      const container = document.getElementById('subTabsContainer');
-      const tabs = DESTINATION_TABS[activeMainMode] || [];
-      container.innerHTML = tabs.map(t => {
-        const isActive = t.tabId === activeSubTab;
-        const cls = isActive
-          ? 'bg-navy-900 text-white shadow-2xs'
-          : 'bg-slate-100 text-slate-700 hover:bg-slate-200/70';
-        return `<button type="button" onclick="setSubTab('${t.tabId}')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all cursor-pointer ${cls}">${t.tabLabel}</button>`;
-      }).join('');
     }
 
     function renderDestinationCards() {
       const grid = document.getElementById('destinationCardsGrid');
-      const tabs = DESTINATION_TABS[activeMainMode] || [];
-      const currentTab = tabs.find(t => t.tabId === activeSubTab) || tabs[0];
-      const items = currentTab ? currentTab.items : [];
 
-      grid.innerHTML = items.map(item => {
-        const actionBtn = item.regionFilter && item.regionFilter !== 'ALL'
-          ? `<a href="#packages" onclick="setPackageRegion('${item.regionFilter}')" class="inline-flex items-center gap-1 text-xs font-extrabold text-brand-600 hover:text-brand-700">View Published Rates →</a>`
-          : `<a href="#quote-section" class="inline-flex items-center gap-1 text-xs font-extrabold text-brand-600 hover:text-brand-700">Request Custom Quote →</a>`;
+      if (activeMainMode === 'LOCAL') {
+        const items = LOCAL_BY_SUBTAB[activeSubTab] || LOCAL_BY_SUBTAB.TOURS;
+        grid.innerHTML = items.map(item => {
+          const actionBtn = item.regionFilter && item.regionFilter !== 'ALL'
+            ? `<a href="#packages" onclick="setPackageRegion('${item.regionFilter}')" class="inline-flex items-center gap-1 text-xs font-extrabold text-brand-600 hover:text-brand-700">View Published Rates →</a>`
+            : `<a href="#quote-section" class="inline-flex items-center gap-1 text-xs font-extrabold text-brand-600 hover:text-brand-700">Request Custom Quote →</a>`;
 
-        return `
-          <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs flex flex-col justify-between hover:border-brand-300 transition-all">
+          return `
+            <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs flex flex-col justify-between hover:border-brand-300 transition-all">
+              <div>
+                <div class="relative h-44 bg-slate-200 overflow-hidden">
+                  <img src="${item.image}" alt="${item.sign}" class="w-full h-full object-cover" />
+                  <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-navy-950/85 text-white text-[10px] font-extrabold tracking-wide">
+                    ${item.badge}
+                  </span>
+                </div>
+                <div class="p-4 space-y-2.5">
+                  <div>
+                    <div class="jeepney-sign text-sm">${item.sign}</div>
+                    <p class="text-xs text-slate-500 mt-2">${item.subtitle}</p>
+                  </div>
+                  <ul class="space-y-1 text-xs text-slate-700 pt-1">
+                    ${item.highlights.map(h => `<li class="flex items-center gap-1.5"><span class="text-brand-500 font-bold">•</span><span>${h}</span></li>`).join('')}
+                  </ul>
+                </div>
+              </div>
+              <div class="px-4 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                ${actionBtn}
+              </div>
+            </article>
+          `;
+        }).join('');
+      } else {
+        const items = INTERNATIONAL_BY_SUBTAB[activeSubTab] || INTERNATIONAL_BY_SUBTAB.TOURS;
+        grid.innerHTML = items.map(item => `
+          <article class="rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between ${item.themeClass}">
             <div>
               <div class="relative h-44 bg-slate-200 overflow-hidden">
                 <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" />
-                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-navy-950/85 text-white text-[10px] font-extrabold tracking-wide">
+                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-black/75 text-white text-[10px] font-extrabold tracking-wide">
                   ${item.badge}
                 </span>
               </div>
               <div class="p-4 space-y-2.5">
                 <div>
-                  <h3 class="text-base font-extrabold text-navy-900">${item.title}</h3>
-                  <p class="text-xs text-slate-500">${item.subtitle}</p>
+                  <h3 class="text-lg ${item.fontClass} leading-snug">${item.title}</h3>
+                  <p class="text-xs opacity-90 mt-1">${item.subtitle}</p>
                 </div>
-                <ul class="space-y-1 text-xs text-slate-700 pt-1">
-                  ${item.highlights.map(h => `<li class="flex items-center gap-1.5"><span class="text-brand-500 font-bold">•</span><span>${h}</span></li>`).join('')}
+                <ul class="space-y-1 text-xs opacity-95 pt-1">
+                  ${item.highlights.map(h => `<li class="flex items-center gap-1.5"><span>•</span><span>${h}</span></li>`).join('')}
                 </ul>
               </div>
             </div>
-            <div class="px-4 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-              ${actionBtn}
+            <div class="px-4 py-3 border-t border-current/15 flex items-center justify-between">
+              <a href="#quote-section" class="inline-flex items-center gap-1 text-xs font-extrabold underline">
+                Request Custom Quote →
+              </a>
             </div>
           </article>
-        `;
-      }).join('');
+        `).join('');
+      }
     }
 
     function setPackageRegion(region) {
@@ -1134,7 +935,6 @@
       });
     }
 
-    // Initialize
     setMainMode('LOCAL');
     setCurrency('PHP');
   </script>
