@@ -89,10 +89,9 @@
         <label for="currencySelect" class="sr-only">Currency</label>
         <select id="currencySelect" class="px-2.5 py-2 rounded-xl bg-slate-100 border border-slate-200 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"></select>
 
-        <button id="cartBtn" type="button" onclick="openCartDrawer()" aria-label="Open cart" class="relative z-10 px-3.5 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold shadow-sm transition-colors flex items-center gap-2 cursor-pointer">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
-          <span class="hidden sm:inline">Cart</span>
-          <span id="cartCount" class="min-w-[1.4rem] h-6 px-1.5 rounded-full bg-white text-brand-600 text-xs font-extrabold flex items-center justify-center">0</span>
+        <button id="selectedBtn" type="button" onclick="toggleSelectedDrawer(true)" aria-label="View selected picks" class="relative px-3.5 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold shadow-sm transition-colors flex items-center gap-2 cursor-pointer">
+          <span>Selected</span>
+          <span id="selectedCount" class="min-w-[1.4rem] h-6 px-1.5 rounded-full bg-white text-brand-600 text-xs font-extrabold flex items-center justify-center">0</span>
         </button>
       </div>
     </div>
@@ -137,10 +136,10 @@
         <div class="space-y-2 max-w-2xl">
           <span class="text-xs font-extrabold uppercase tracking-wider text-brand-400">Published rates • Lowest rate price match</span>
           <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Are you ready to book?</h2>
-          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Add individual tours to your cart or pick a ready-made package. Send your quote to Alvir and let him handle the rest.</p>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Click options to save them to your list, remove any item anytime, and send your list to Alvir for a quote.</p>
         </div>
         <div class="shrink-0">
-          <a href="#panel-packages" onclick="document.getElementById('tab-packages')?.click()" class="inline-block px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm shadow-lg transition-colors">
+          <a href="#region-explorer" class="inline-block px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm shadow-lg transition-colors">
             Click this button to explore tours and packages
           </a>
         </div>
@@ -148,7 +147,7 @@
 
       <form id="searchForm" class="flex flex-col sm:flex-row gap-2 max-w-2xl" role="search">
         <label for="searchInput" class="sr-only">Search</label>
-        <input id="searchInput" type="search" placeholder="Search tours, packages, hotels (e.g. Coron, Japan, Vietnam)" class="flex-1 px-4 py-3 rounded-2xl text-navy-900 text-sm focus:outline-none focus:ring-4 focus:ring-brand-400" />
+        <input id="searchInput" type="search" placeholder="Search destinations, tours, packages, hotels (e.g. Coron, Japan, Vietnam)" class="flex-1 px-4 py-3 rounded-2xl text-navy-900 text-sm focus:outline-none focus:ring-4 focus:ring-brand-400" />
         <button type="submit" class="px-6 py-3 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/20 font-extrabold text-sm transition-colors cursor-pointer">Search</button>
       </form>
     </div>
@@ -186,7 +185,7 @@
     <section id="panel-tours" role="tabpanel" aria-labelledby="tab-tours" class="space-y-6">
       <div>
         <h2 class="text-2xl sm:text-3xl font-extrabold">Tours</h2>
-        <p class="text-sm text-slate-500 mt-1">Select individual tours. <strong>Joiner</strong> = shared with other guests (per pax). <strong>Private</strong> = exclusive to your group.</p>
+        <p class="text-sm text-slate-500 mt-1">Click items to add them to your selected list. <strong>Joiner</strong> = shared with other guests. <strong>Private</strong> = exclusive to your group.</p>
       </div>
       <div class="flex flex-wrap items-center gap-3">
         <div id="modeToggle" class="inline-flex rounded-full bg-slate-200 p-1" role="group" aria-label="Tour type">
@@ -201,7 +200,7 @@
       <div class="pt-8 space-y-4">
         <div>
           <h3 class="text-xl font-extrabold">Other destinations (custom quote)</h3>
-          <p class="text-sm text-slate-500 mt-1">No published rate yet? Add to cart and Alvir will prepare a custom quote.</p>
+          <p class="text-sm text-slate-500 mt-1">Click to add to your selected list for a custom quote from Alvir.</p>
         </div>
         <div id="customGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 fade-in"></div>
       </div>
@@ -211,7 +210,7 @@
     <section id="panel-packages" role="tabpanel" aria-labelledby="tab-packages" class="space-y-6 hidden">
       <div>
         <h2 class="text-2xl sm:text-3xl font-extrabold">Tour Packages</h2>
-        <p class="text-sm text-slate-500 mt-1">Hotel + daily breakfast + tours + transfers. Published per-pax rates. For Coron, choose your hotel tier.</p>
+        <p class="text-sm text-slate-500 mt-1">Click a package to save it to your selected list for quote review.</p>
       </div>
       <div id="pkgChips" class="flex flex-wrap gap-2" role="group" aria-label="Filter packages by place"></div>
       <div id="packagesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in"></div>
@@ -221,7 +220,7 @@
     <section id="panel-hotels" role="tabpanel" aria-labelledby="tab-hotels" class="space-y-6 hidden">
       <div>
         <h2 class="text-2xl sm:text-3xl font-extrabold">Hotels in Coron</h2>
-        <p class="text-sm text-slate-500 mt-1">Published nightly rate with breakfast. Choose room type, number of rooms, and nights.</p>
+        <p class="text-sm text-slate-500 mt-1">Select room preferences and add to your selected list.</p>
       </div>
       <div id="hotelsGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-6 fade-in"></div>
       <p class="text-xs text-slate-500" id="hotelTimes"></p>
@@ -296,83 +295,52 @@
     </div>
   </footer>
 
-  <!-- MOBILE CART BAR -->
-  <div id="mobileBar" class="lg:hidden fixed bottom-0 inset-x-0 z-20 p-3 bg-white/95 backdrop-blur border-t border-slate-200 hidden">
-    <button id="mobileCartBtn" type="button" onclick="openCartDrawer()" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-brand-500 text-white font-extrabold shadow-lg cursor-pointer">
-      <span><span id="mobileCartCount">0</span> item(s) in cart</span>
-      <span id="mobileCartTotal">View</span>
+  <!-- MOBILE SELECTED BAR -->
+  <div id="mobileBar" class="lg:hidden fixed bottom-0 inset-x-0 z-20 p-3 bg-white/95 backdrop-blur border-t border-slate-200">
+    <button id="mobileSelectedBtn" type="button" onclick="toggleSelectedDrawer(true)" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-brand-500 text-white font-extrabold shadow-lg cursor-pointer">
+      <span><span id="mobileSelectedCount">0</span> selected item(s)</span>
+      <span>View List</span>
     </button>
   </div>
 
-  <!-- CART DRAWER -->
-  <div id="cartOverlay" onclick="closeCartDrawer()" class="fixed inset-0 z-40 bg-navy-950/60 hidden no-print" aria-hidden="true"></div>
-  <aside id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col translate-x-full transition-transform duration-200">
-    <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200 no-print">
-      <h2 id="cartTitle" class="text-lg font-extrabold">Your Cart</h2>
-      <button id="cartClose" type="button" onclick="closeCartDrawer()" aria-label="Close cart" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 font-bold cursor-pointer">✕</button>
+  <!-- SELECTED PICKS DRAWER (NO PAYMENT/CHECKOUT) -->
+  <div id="selectedOverlay" onclick="toggleSelectedDrawer(false)" class="fixed inset-0 z-40 bg-navy-950/50 hidden" aria-hidden="true"></div>
+  <aside id="selectedPanel" role="dialog" aria-modal="true" aria-labelledby="selectedTitle" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col hidden">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200">
+      <div>
+        <h2 id="selectedTitle" class="text-lg font-extrabold">Your Selected Picks</h2>
+        <p class="text-xs text-slate-500">Review or remove items before sending to Alvir</p>
+      </div>
+      <button id="selectedClose" type="button" onclick="toggleSelectedDrawer(false)" aria-label="Close selected list" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 font-bold cursor-pointer">✕</button>
     </div>
 
-    <div class="flex-1 overflow-y-auto px-5 py-4 space-y-5">
-      <div id="cartEmpty" class="text-center py-10 text-slate-500 text-sm">
-        <p class="font-bold text-navy-900 mb-1">Your cart is empty</p>
-        <p>Add tours or packages to build a quote.</p>
+    <div class="flex-1 overflow-y-auto px-5 py-4 space-y-4">
+      <div id="selectedEmpty" class="text-center py-10 text-slate-500 text-sm">
+        <p class="font-bold text-navy-900 mb-1">No items selected yet</p>
+        <p>Click any destination, tour, or package to add it to your list.</p>
       </div>
-      <ul id="cartItems" class="space-y-3"></ul>
-
-      <div id="cartForm" class="space-y-3 hidden">
-        <div>
-          <label for="travelDates" class="block text-sm font-extrabold mb-1">Travel dates *</label>
-          <input id="travelDates" type="text" placeholder="e.g., Dec 10–13, 2026" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-        </div>
-        <div>
-          <label for="priceMatch" class="block text-sm font-extrabold mb-1">Found a lower quote elsewhere?</label>
-          <textarea id="priceMatch" rows="2" placeholder='Share the quote and inclusions for price match review, or "None"' class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
-        </div>
-        <div>
-          <label for="notes" class="block text-sm font-extrabold mb-1">Other requests / notes</label>
-          <textarea id="notes" rows="2" placeholder='Flight details, dietary notes, or "None"' class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
-        </div>
-      </div>
-      <div id="cartSummary" class="hidden"></div>
+      <ul id="selectedList" class="space-y-2.5"></ul>
     </div>
 
-    <div id="cartFooter" class="border-t border-slate-200 px-5 py-4 space-y-3 hidden">
-      <div class="flex items-end justify-between">
-        <span class="text-sm font-bold text-slate-600">Estimated total</span>
-        <span id="cartTotal" class="text-xl font-extrabold text-brand-600">—</span>
+    <div class="border-t border-slate-200 px-5 py-4 space-y-2.5 bg-slate-50">
+      <button type="button" onclick="copySelectedList()" id="copySelectedBtn" class="w-full py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-extrabold transition-colors cursor-pointer">
+        Copy Selected List for Alvir
+      </button>
+      <div class="grid grid-cols-2 gap-2">
+        <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="text-center py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-extrabold transition-colors">
+          Send via Messenger
+        </a>
+        <button type="button" onclick="clearSelectedItems()" class="py-2.5 rounded-xl bg-white hover:bg-red-50 border border-red-200 text-red-600 text-xs font-extrabold transition-colors cursor-pointer">
+          Remove All
+        </button>
       </div>
-      <p id="cartTotalNote" class="text-xs text-slate-500 leading-snug"></p>
-      <div class="grid grid-cols-2 gap-2 no-print">
-        <button id="shotBtn" type="button" class="col-span-2 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold transition-colors cursor-pointer">Save summary as image &amp; send to Alvir</button>
-        <button id="sendMessenger" type="button" class="col-span-2 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-extrabold transition-colors cursor-pointer">Send text quote via Messenger</button>
-        <button id="sendEmail" type="button" class="py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-sm font-extrabold transition-colors cursor-pointer">Email</button>
-        <button id="copyQuote" type="button" class="py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-sm font-extrabold transition-colors cursor-pointer">Copy</button>
-        <button id="printQuote" type="button" class="py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-sm font-extrabold transition-colors cursor-pointer">Print</button>
-        <button id="clearCart" type="button" class="py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors cursor-pointer">Clear cart</button>
-      </div>
-      <p class="text-xs text-slate-500 leading-snug no-print">On mobile, select Messenger in the share menu. On desktop, download the image and attach it to your chat with Alvir. Non-PHP conversions are indicative only; final rates are confirmed by Alvir.</p>
     </div>
   </aside>
 
-  <div id="toast" role="status" aria-live="polite" class="fixed bottom-24 lg:bottom-8 left-1/2 z-[60] px-4 py-2.5 rounded-xl bg-navy-900 text-white text-sm font-bold shadow-xl"></div>
-
   <script>
-    function openCartDrawer() {
-      const overlay = document.getElementById('cartOverlay');
-      const panel = document.getElementById('cartPanel');
-      overlay?.classList.remove('hidden');
-      panel?.classList.remove('translate-x-full');
-    }
-
-    function closeCartDrawer() {
-      const overlay = document.getElementById('cartOverlay');
-      const panel = document.getElementById('cartPanel');
-      overlay?.classList.add('hidden');
-      panel?.classList.add('translate-x-full');
-    }
-
     let explorerRegion = 'LOCAL';
     let explorerSubTab = 'TOURS';
+    let selectedItems = [];
 
     const EXPLORER_DATA = {
       LOCAL: {
@@ -408,6 +376,88 @@
       }
     };
 
+    function toggleSelectedDrawer(show) {
+      const overlay = document.getElementById('selectedOverlay');
+      const panel = document.getElementById('selectedPanel');
+      if (!overlay || !panel) return;
+      if (show) {
+        overlay.classList.remove('hidden');
+        panel.classList.remove('hidden');
+      } else {
+        overlay.classList.add('hidden');
+        panel.classList.add('hidden');
+      }
+    }
+
+    function addSelectedItem(label, category) {
+      if (!selectedItems.some(item => item.label === label)) {
+        selectedItems.push({ label, category });
+      }
+      renderSelectedList();
+      toggleSelectedDrawer(true);
+    }
+
+    function removeSelectedItem(index) {
+      selectedItems.splice(index, 1);
+      renderSelectedList();
+    }
+
+    function clearSelectedItems() {
+      selectedItems = [];
+      renderSelectedList();
+    }
+
+    function renderSelectedList() {
+      const count = selectedItems.length;
+      const countEl = document.getElementById('selectedCount');
+      const mobileCountEl = document.getElementById('mobileSelectedCount');
+      const emptyEl = document.getElementById('selectedEmpty');
+      const listEl = document.getElementById('selectedList');
+
+      if (countEl) countEl.textContent = String(count);
+      if (mobileCountEl) mobileCountEl.textContent = String(count);
+
+      if (!listEl || !emptyEl) return;
+      if (count === 0) {
+        emptyEl.classList.remove('hidden');
+        listEl.innerHTML = '';
+        return;
+      }
+
+      emptyEl.classList.add('hidden');
+      listEl.innerHTML = selectedItems.map((item, idx) => `
+        <li class="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="min-w-0">
+            <div class="text-xs font-extrabold text-navy-900 truncate">${item.label}</div>
+            <div class="text-[11px] text-slate-500">${item.category}</div>
+          </div>
+          <button type="button" onclick="removeSelectedItem(${idx})" class="px-2.5 py-1 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold shrink-0 cursor-pointer">
+            Remove
+          </button>
+        </li>
+      `).join('');
+    }
+
+    function copySelectedList() {
+      const lines = selectedItems.length
+        ? selectedItems.map((item, i) => `${i + 1}. [${item.category}] ${item.label}`)
+        : ['No items selected yet.'];
+
+      const payload = [
+        'Alvir Travel and tours — Customize your travel',
+        'Selected items for Alvir (09163345946 / alvirestrella08@gmail.com):',
+        ...lines
+      ].join('\n');
+
+      navigator.clipboard?.writeText(payload).then(() => {
+        const btn = document.getElementById('copySelectedBtn');
+        if (!btn) return;
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = orig; }, 1400);
+      });
+    }
+
     function setExplorerRegion(region) {
       explorerRegion = region;
       const localBtn = document.getElementById('explorerLocalBtn');
@@ -439,25 +489,27 @@
       if (explorerRegion === 'LOCAL') {
         const list = EXPLORER_DATA.LOCAL[explorerSubTab] || [];
         container.innerHTML = list.map(item => `
-          <div class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 space-y-2">
+          <div onclick="addSelectedItem('${item.sign} — ${explorerSubTab}', 'Local')" class="rounded-2xl border border-slate-200 bg-slate-50/70 hover:border-brand-400 p-4 space-y-2 cursor-pointer transition-all">
             <div class="jeepney-sign text-sm">${item.sign}</div>
             <p class="text-xs text-slate-600 pt-1">${item.desc}</p>
+            <div class="text-[11px] font-extrabold text-brand-600 pt-1">+ Add to Selected List</div>
           </div>
         `).join('');
       } else {
         const list = EXPLORER_DATA.INTERNATIONAL[explorerSubTab] || [];
         container.innerHTML = list.map(item => `
-          <div class="rounded-2xl p-4 space-y-2 shadow-2xs ${item.themeClass}">
+          <div onclick="addSelectedItem('${item.title}', 'International')" class="rounded-2xl p-4 space-y-2 shadow-2xs cursor-pointer transition-transform hover:-translate-y-0.5 ${item.themeClass}">
             <div class="text-base ${item.fontClass}">${item.title}</div>
             <p class="text-xs opacity-90">${item.desc}</p>
+            <div class="text-[11px] font-extrabold underline pt-1">+ Add to Selected List</div>
           </div>
         `).join('');
       }
     }
 
     renderExplorerCards();
+    renderSelectedList();
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>
