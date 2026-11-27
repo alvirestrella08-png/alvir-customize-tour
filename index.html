@@ -3,934 +3,272 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alvir Travel and tours — Customize your travel</title>
+  <title>Alvir Travel and Tours — Customize your travel</title>
+  <meta name="description" content="Book Palawan tours one by one or choose a ready-made package. Coron, El Nido, Puerto Princesa, Balabac and custom trips with Alvir." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Serif+JP:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rampart+One&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-          colors: {
-            brand: {
-              50: '#fff4ed',
-              100: '#ffe6d5',
-              200: '#feccaa',
-              300: '#fda974',
-              400: '#fb7a3c',
-              500: '#ff5b00',
-              600: '#e04800',
-              700: '#b83700',
-              800: '#932c08',
-              900: '#77270b',
-            },
-            navy: {
-              800: '#163a5f',
-              900: '#0f2942',
-              950: '#091929',
-            }
-          }
+      theme: { extend: {
+        fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+        colors: {
+          brand: { 50:'#fff4ed',100:'#ffe6d5',200:'#feccaa',300:'#fda974',400:'#fb7a3c',500:'#ff5b00',600:'#e04800',700:'#b83700' },
+          navy: { 800:'#163a5f', 900:'#0f2942', 950:'#091929' }
         }
-      }
+      } }
     };
   </script>
-  <style>
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #f8fafc;
-      color: #0f2942;
-      scroll-behavior: smooth;
-    }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-    /* Jeepney karatula lettering style for Local */
-    .jeepney-sign {
-      font-family: 'Archivo Black', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      background: #1e293b;
-      color: #facc15;
-      border: 3px solid #ef4444;
-      outline: 2px solid #3b82f6;
-      border-radius: 8px;
-      padding: 4px 10px;
-      display: inline-block;
-      box-shadow: 2px 3px 0 #0f172a;
-    }
-
-    /* International country theme styles */
-    .theme-japan-box {
-      background: #ffffff;
-      border: 2px solid #dc2626;
-      color: #dc2626;
-    }
-    .font-japan-semi {
-      font-family: 'Rampart One', 'Noto Serif JP', serif;
-    }
-    .theme-vietnam-box {
-      background: #dc2626;
-      border: 2px solid #facc15;
-      color: #facc15;
-    }
-    .font-vietnam-semi {
-      font-family: 'Archivo Black', sans-serif;
-      letter-spacing: 0.5px;
-    }
-
-    @media print {
-      header, footer, .no-print { display: none !important; }
-      body { background: #ffffff !important; color: #000000 !important; }
-      section { box-shadow: none !important; border-color: #cbd5e1 !important; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 text-navy-900">
+<body class="min-h-screen flex flex-col pb-20 lg:pb-0">
 
-  <!-- Top Navigation Header + Currency Switcher -->
-  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-2xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
-      <a href="#top" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-500 to-amber-500 flex items-center justify-center text-white font-extrabold text-base shadow-sm">
-          AT
-        </div>
-        <div>
-          <span class="block text-base sm:text-lg font-extrabold tracking-tight text-navy-900 leading-tight">
-            Alvir Travel and tours
-          </span>
-          <span class="block text-[11px] font-medium text-slate-500">Customize your travel</span>
+  <!-- HEADER -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <a href="#top" class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 shrink-0 rounded-2xl bg-gradient-to-br from-brand-500 to-amber-500 flex items-center justify-center text-white font-extrabold shadow-sm">AT</div>
+        <div class="min-w-0">
+          <span class="block text-base sm:text-lg font-extrabold tracking-tight leading-tight truncate">Alvir Travel and Tours</span>
+          <span class="block text-xs font-medium text-slate-500">Customize your travel</span>
         </div>
       </a>
 
-      <nav class="hidden lg:flex items-center gap-5 text-xs font-bold text-slate-700">
-        <a href="#destinations" onclick="setMainMode('LOCAL')" class="hover:text-brand-500 transition-colors">Local Tours</a>
-        <a href="#destinations" onclick="setMainMode('INTERNATIONAL')" class="hover:text-brand-500 transition-colors">International</a>
-        <a href="#packages" class="hover:text-brand-500 transition-colors">Available Packages</a>
-        <a href="#top" class="hover:text-brand-500 transition-colors">Meet the Owner</a>
-      </nav>
-
-      <!-- Yellow Route Box: Have a quote already? Send it to Alvir -->
-      <div class="flex flex-wrap items-center gap-2 bg-amber-50 border-2 border-amber-400 rounded-xl px-2.5 py-1.5 text-[11px] font-bold text-navy-900">
-        <span>Have a quote already? Send it to Alvir</span>
-        <div class="flex items-center gap-1">
-          <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded-md bg-white border border-amber-300 text-sky-700 hover:bg-sky-600 hover:text-white transition-colors">Messenger</a>
-          <a href="mailto:alvirestrella08@gmail.com?subject=Existing%20Quote%20for%20Alvir" class="px-2 py-0.5 rounded-md bg-white border border-amber-300 text-navy-900 hover:bg-navy-900 hover:text-white transition-colors">Email</a>
-          <a href="tel:+639163345946" class="px-2 py-0.5 rounded-md bg-white border border-amber-300 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-colors">Phone</a>
-        </div>
-      </div>
-
-      <!-- Currency Switcher at Top -->
       <div class="flex items-center gap-2">
         <label for="currencySelect" class="sr-only">Currency</label>
-        <select
-          id="currencySelect"
-          onchange="setCurrency(this.value)"
-          class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200/70 border border-slate-200 text-xs font-extrabold text-navy-900 focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"
-        >
-          <option value="PHP">₱ PHP</option>
-          <option value="USD">$ USD</option>
-          <option value="CHF">CHF Swiss Franc</option>
-          <option value="JPY">¥ JPY (Yen)</option>
-          <option value="EUR">€ EUR</option>
-          <option value="SGD">S$ SGD</option>
-          <option value="HKD">HK$ HKD</option>
-          <option value="THB">฿ THB</option>
-          <option value="VND">₫ VND</option>
-        </select>
+        <select id="currencySelect" class="px-2.5 py-2 rounded-xl bg-slate-100 border border-slate-200 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"></select>
 
-        <a
-          href="#quote-section"
-          class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-extrabold shadow-sm transition-all"
-        >
-          Get Quote
-        </a>
+        <button id="cartBtn" type="button" aria-label="Open cart" class="relative px-3.5 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold shadow-sm transition-colors flex items-center gap-2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+          <span class="hidden sm:inline">Cart</span>
+          <span id="cartCount" class="min-w-[1.4rem] h-6 px-1.5 rounded-full bg-white text-brand-600 text-xs font-extrabold flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN TABS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div role="tablist" aria-label="Browse" class="flex gap-6 overflow-x-auto no-scrollbar">
+        <button role="tab" id="tab-tours" data-tab="tours" aria-selected="true" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Tours</button>
+        <button role="tab" id="tab-packages" data-tab="packages" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Tour Packages</button>
+        <button role="tab" id="tab-hotels" data-tab="hotels" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Hotels</button>
+        <button role="tab" id="tab-services" data-tab="services" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Transfers &amp; Rentals</button>
+        <button role="tab" id="tab-info" data-tab="info" aria-selected="false" class="tab-btn py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Policies</button>
+        <a href="#about" class="py-3 text-sm font-extrabold border-b-4 border-transparent text-slate-600 hover:text-brand-500 whitespace-nowrap">Meet Alvir</a>
       </div>
     </div>
   </header>
 
-  <!-- FIRST WELCOME BANNER: MEET THE OWNER (FREEDIVING + TRAVEL THEME) -->
-  <section id="top" class="relative overflow-hidden bg-cyan-950 text-white min-h-[420px] flex items-center border-b-4 border-cyan-400">
-    <div class="absolute inset-0 opacity-45">
-      <img
-        src="dp.jpg"
-        alt="Meet the Owner — Freediving and Travel"
-        class="w-full h-full object-cover object-center"
-      />
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-r from-cyan-950/95 via-sky-950/80 to-navy-950/55"></div>
-
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
-      <div class="lg:col-span-8 space-y-5">
-        <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/25 border border-cyan-300/40 text-cyan-200 text-xs font-bold">
-          <span>Freediving &amp; Travel Theme</span>
-          <span>•</span>
-          <span>Customize your travel</span>
-        </div>
-
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-          Meet the Owner
-        </h1>
-
-        <p class="text-sm sm:text-base text-cyan-50/95 max-w-xl leading-relaxed">
-          Freediving and travel with Alvir — customized local and international journeys shaped by ocean exploration, smart pacing, and firsthand experience.
-        </p>
-
-        <div class="pt-1 flex flex-wrap items-center gap-3">
-          <a
-            href="#the-owner"
-            class="px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-brand-500/25 transition-all"
-          >
-            Explore
-          </a>
-        </div>
+  <!-- HERO -->
+  <section id="top" class="relative overflow-hidden bg-cyan-950 text-white">
+    <img src="dp.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-40" onerror="this.remove()" />
+    <div class="absolute inset-0 bg-gradient-to-r from-cyan-950/95 via-sky-950/80 to-navy-950/50"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-5">
+      <div class="space-y-3 max-w-2xl">
+        <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/25 border border-cyan-300/40 text-cyan-100 text-xs font-bold">Published rates • Lowest rate price match</span>
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Build your trip, one tour at a time</h1>
+        <p class="text-sm sm:text-base text-cyan-50/95 leading-relaxed">Mag-add ng mga tour sa cart, o pumili ng ready-made package. Ipapadala mo kay Alvir ang quote mo at siya na ang bahala.</p>
       </div>
 
-      <!-- Compact Currency Display Selector -->
-      <div class="lg:col-span-4">
-        <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 space-y-2.5 shadow-lg max-w-sm lg:ml-auto">
-          <div class="flex items-center justify-between">
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-300">Price Display Currency</span>
-            <span id="rateNoteLabel" class="text-[10px] text-slate-300">Base: PHP (₱)</span>
-          </div>
-
-          <select
-            id="heroCurrencySelect"
-            onchange="setCurrency(this.value)"
-            class="w-full px-3 py-2 rounded-xl bg-navy-950/80 border border-white/20 text-white text-xs font-extrabold focus:outline-none focus:ring-2 focus:ring-brand-400 cursor-pointer"
-          >
-            <option value="PHP">₱ Philippine Peso (PHP)</option>
-            <option value="USD">$ US Dollar (USD)</option>
-            <option value="CHF">CHF Swiss Franc (CHF)</option>
-            <option value="JPY">¥ Japanese Yen (JPY)</option>
-            <option value="EUR">€ Euro (EUR)</option>
-            <option value="SGD">S$ Singapore Dollar (SGD)</option>
-            <option value="HKD">HK$ HKD</option>
-            <option value="THB">฿ THB</option>
-            <option value="VND">₫ VND</option>
-          </select>
-
-          <p class="text-[10px] text-slate-300/90 leading-snug">
-            All package prices below automatically convert from PHP. Indicative conversion only; final rate confirmed upon quote review.
-          </p>
-        </div>
-      </div>
+      <form id="searchForm" class="flex flex-col sm:flex-row gap-2 max-w-2xl" role="search">
+        <label for="searchInput" class="sr-only">Search</label>
+        <input id="searchInput" type="search" placeholder="Search tours, packages, hotels (e.g. Coron, Underground)" class="flex-1 px-4 py-3.5 rounded-2xl text-navy-900 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-brand-400" />
+        <button type="submit" class="px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 font-extrabold text-sm shadow-lg transition-colors">Search</button>
+      </form>
     </div>
   </section>
 
-  <!-- BOOKING BANNER: ARE YOU READY TO BOOK? -->
-  <section id="booking-banner" class="relative overflow-hidden bg-navy-950 text-white border-b border-navy-800">
-    <div class="absolute inset-0 opacity-30">
-      <img
-        src="https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg"
-        alt="Palawan Lagoon"
-        class="w-full h-full object-cover"
-      />
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900/90 to-navy-900/65"></div>
-
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
-      <div class="space-y-2 max-w-2xl">
-        <span class="text-xs font-extrabold uppercase tracking-wider text-brand-400">Published Rates • Lowest Rate Price Match</span>
-        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Are you ready to book?</h2>
-        <p class="text-xs sm:text-sm text-slate-200">
-          Choose from curated local and international tours, hotels, and activities paced to your schedule, budget, and daily energy.
-        </p>
-      </div>
-      <div class="shrink-0">
-        <a
-          href="#destinations"
-          onclick="setMainMode('LOCAL')"
-          class="inline-block px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs sm:text-sm shadow-lg transition-all"
-        >
-          Click this button to explore tours and packages
-        </a>
+  <!-- QUOTE ALREADY STRIP -->
+  <div class="bg-amber-50 border-b border-amber-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+      <span class="font-bold text-navy-900">May quote ka na ba galing sa iba? Ipadala kay Alvir:</span>
+      <div class="flex flex-wrap gap-2">
+        <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-white border border-amber-300 text-sky-700 font-bold hover:bg-sky-600 hover:text-white transition-colors">Messenger</a>
+        <a href="mailto:alvirestrella08@gmail.com?subject=Existing%20Quote%20for%20Alvir" class="px-3 py-1.5 rounded-lg bg-white border border-amber-300 font-bold hover:bg-navy-900 hover:text-white transition-colors">Email</a>
+        <a href="tel:+639163345946" class="px-3 py-1.5 rounded-lg bg-white border border-amber-300 text-emerald-700 font-bold hover:bg-emerald-600 hover:text-white transition-colors">Call</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Main Content -->
-  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-12 space-y-16 flex-1">
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-10 space-y-16 flex-1">
 
-    <!-- SECTION 1: TABBED LOCAL & INTERNATIONAL DESTINATIONS + SUB-TABS -->
-    <section id="destinations" class="space-y-5">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+    <!-- TOURS PANEL -->
+    <section id="panel-tours" role="tabpanel" aria-labelledby="tab-tours" class="space-y-6">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold">Tours</h2>
+        <p class="text-sm text-slate-500 mt-1">Pumili ng isa-isang tour. <strong>Joiner</strong> = kasama ang ibang guests (per pax). <strong>Private</strong> = grupo mo lang.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <div id="modeToggle" class="inline-flex rounded-full bg-slate-200 p-1" role="group" aria-label="Tour type">
+          <button type="button" data-mode="joiner" aria-pressed="true" class="mode-btn px-5 py-2 rounded-full text-sm font-extrabold">Joiner</button>
+          <button type="button" data-mode="private" aria-pressed="false" class="mode-btn px-5 py-2 rounded-full text-sm font-extrabold">Private</button>
+        </div>
+        <div id="tourChips" class="flex flex-wrap gap-2" role="group" aria-label="Filter tours by place"></div>
+      </div>
+      <p id="tourCount" class="text-sm text-slate-500" aria-live="polite"></p>
+      <div id="toursGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 fade-in"></div>
+
+      <div class="pt-8 space-y-4">
         <div>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-brand-600">Browse By Tab</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mt-1">Destinations</h2>
+          <h3 class="text-xl font-extrabold">Iba pang destinations (custom quote)</h3>
+          <p class="text-sm text-slate-500 mt-1">Wala pang naka-publish na rate? I-add sa cart at i-quote ni Alvir.</p>
         </div>
-
-        <!-- Two Large Main Tabs: LOCAL vs INTERNATIONAL -->
-        <div class="grid grid-cols-2 gap-2.5 bg-slate-200/80 p-1.5 rounded-2xl border border-slate-200 w-full sm:w-auto sm:min-w-[360px]">
-          <button
-            type="button"
-            id="mainTabLocal"
-            onclick="setMainMode('LOCAL')"
-            class="px-6 py-3 rounded-xl text-sm font-extrabold transition-all bg-brand-500 text-white shadow-sm cursor-pointer"
-          >
-            Local
-          </button>
-          <button
-            type="button"
-            id="mainTabIntl"
-            onclick="setMainMode('INTERNATIONAL')"
-            class="px-6 py-3 rounded-xl text-sm font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer"
-          >
-            International
-          </button>
-        </div>
-      </div>
-
-      <!-- Sub-Tabs: Tours, Hotels, Activities -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-2xs">
-        <div id="subTabsContainer" class="grid grid-cols-3 gap-2">
-          <button
-            type="button"
-            data-subtab="TOURS"
-            onclick="setSubTab('TOURS')"
-            class="subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-navy-900 text-white cursor-pointer transition-all"
-          >
-            Tours
-          </button>
-          <button
-            type="button"
-            data-subtab="HOTELS"
-            onclick="setSubTab('HOTELS')"
-            class="subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:bg-slate-100 cursor-pointer transition-all"
-          >
-            Hotels
-          </button>
-          <button
-            type="button"
-            data-subtab="ACTIVITIES"
-            onclick="setSubTab('ACTIVITIES')"
-            class="subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:bg-slate-100 cursor-pointer transition-all"
-          >
-            Activities
-          </button>
-        </div>
-      </div>
-
-      <!-- Tab Content Cards Grid -->
-      <div id="destinationCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Rendered by JS -->
+        <div id="customGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 fade-in"></div>
       </div>
     </section>
 
-    <!-- SECTION 2: AVAILABLE PACKAGES (PUBLISHED RATES ONLY) -->
-    <section id="packages" class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-sky-700">Published Rates</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mt-1">Available Packages</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">
-            All rates shown are published per-pax rates. Coron tiers: <strong>Budget B</strong>, <strong>Budget A</strong>, and <strong>Midrange Hotel</strong>.
-          </p>
-        </div>
-
-        <div class="flex flex-wrap gap-2">
-          <button type="button" onclick="setPackageRegion('ALL')" id="pkgFilterAll" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-navy-900 text-white cursor-pointer">All</button>
-          <button type="button" onclick="setPackageRegion('CORON')" id="pkgFilterCoron" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer">Coron</button>
-          <button type="button" onclick="setPackageRegion('EL_NIDO')" id="pkgFilterElNido" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer">El Nido</button>
-          <button type="button" onclick="setPackageRegion('PUERTO')" id="pkgFilterPuerto" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer">Puerto</button>
-          <button type="button" onclick="setPackageRegion('COMBO')" id="pkgFilterCombo" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer">Combo</button>
-          <button type="button" onclick="setPackageRegion('BALABAC')" id="pkgFilterBalabac" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer">Balabac</button>
-        </div>
+    <!-- PACKAGES PANEL -->
+    <section id="panel-packages" role="tabpanel" aria-labelledby="tab-packages" class="space-y-6 hidden">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold">Tour Packages</h2>
+        <p class="text-sm text-slate-500 mt-1">Hotel + daily breakfast + tours + transfers. Published per-pax rates. Sa Coron, pumili ng hotel.</p>
       </div>
-
-      <div id="packagesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Rendered by JS -->
-      </div>
+      <div id="pkgChips" class="flex flex-wrap gap-2" role="group" aria-label="Filter packages by place"></div>
+      <div id="packagesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in"></div>
     </section>
 
-    <!-- SECTION 3: MEET THE OWNER, ALVIR -->
-    <section id="the-owner" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
+    <!-- HOTELS PANEL -->
+    <section id="panel-hotels" role="tabpanel" aria-labelledby="tab-hotels" class="space-y-6 hidden">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold">Hotels in Coron</h2>
+        <p class="text-sm text-slate-500 mt-1">Published rate kada gabi, may breakfast. Pumili ng room, bilang ng rooms at gabi.</p>
+      </div>
+      <div id="hotelsGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-6 fade-in"></div>
+      <p class="text-xs text-slate-500" id="hotelTimes"></p>
+    </section>
+
+    <!-- SERVICES PANEL -->
+    <section id="panel-services" role="tabpanel" aria-labelledby="tab-services" class="space-y-6 hidden">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold">Transfers &amp; Rentals</h2>
+        <p class="text-sm text-slate-500 mt-1">Airport transfers, van, kayak at iba pang gears.</p>
+      </div>
+      <div id="svcChips" class="flex flex-wrap gap-2" role="group" aria-label="Filter by place"></div>
+      <div id="servicesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 fade-in"></div>
+    </section>
+
+    <!-- INFO PANEL -->
+    <section id="panel-info" role="tabpanel" aria-labelledby="tab-info" class="space-y-6 hidden">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold">How to Book &amp; Policies</h2>
+      </div>
+      <div class="bg-white rounded-2xl border border-slate-200 p-5">
+        <h3 class="text-lg font-extrabold mb-3">Booking steps</h3>
+        <ol id="bookingSteps" class="list-decimal pl-5 space-y-1.5 text-sm text-slate-700"></ol>
+      </div>
+      <div id="policyGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-5">
-          <div class="relative rounded-3xl overflow-hidden bg-navy-950 border border-slate-200 aspect-[3/4] max-h-[440px] w-full mx-auto shadow-md">
-            <img
-              src="dp.jpg"
-              alt="Meet the owner, Alvir freediving underwater"
-              class="w-full h-full object-cover object-center"
-            />
+          <div class="relative rounded-3xl overflow-hidden bg-navy-950 aspect-[3/4] max-h-[440px] w-full mx-auto shadow-md">
+            <img src="dp.jpg" alt="Alvir freediving underwater" loading="lazy" class="w-full h-full object-cover" />
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950/95 via-navy-950/55 to-transparent p-5 text-white">
-              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-brand-500/30 border border-brand-300/50 text-brand-100 mb-1">
-                Meet the Owner, Alvir
-              </span>
               <div class="text-lg font-extrabold">Alvir</div>
-              <div class="text-[11px] text-slate-200">Freediver • Traveler • Explorer</div>
+              <div class="text-sm text-slate-200">Freediver • Traveler • Explorer</div>
             </div>
           </div>
         </div>
-
         <div class="lg:col-span-7 space-y-4">
           <div>
-            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-600">Meet the Owner, Alvir</span>
-            <h2 class="text-2xl font-extrabold text-navy-900 mt-1">
-              Why Clients Keep Coming Back
-            </h2>
+            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-600">Meet the Owner</span>
+            <h2 class="text-2xl font-extrabold mt-1">Why clients keep coming back</h2>
           </div>
-
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Super friendly and approachable—especially when it comes to prices—while passionate about traveling, exploring, freediving, and meeting new friends, whether solo travelers, barkada, families, or guests. Many clients keep coming back for repeat trips because of practical flight guidance, easy price discussions, and smart itineraries tailored to each group's schedule and energy levels.
-          </p>
-
-          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700">
-            <li class="flex items-start gap-2.5">
-              <span class="text-brand-500 font-extrabold">✓</span>
-              <span><strong>Smart Itinerary &amp; Daily Energy Guide:</strong> Transparent feedback and clear daily fatigue/energy guidance so your trip matches your group's pace.</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <span class="text-brand-500 font-extrabold">✓</span>
-              <span><strong>First-Hand Experience by the Owner:</strong> Every tour and route has been personally explored and experienced, partnered with trusted local operators.</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <span class="text-brand-500 font-extrabold">✓</span>
-              <span><strong>On-Tour Photo &amp; Guide Option:</strong> Available to join and guide throughout the tour—and take pictures—when requested.</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <span class="text-brand-500 font-extrabold">✓</span>
-              <span><strong>Budget to Midrange Options:</strong> Clear accommodation choices from Budget B and Budget A up to Midrange Hotel.</span>
-            </li>
+          <p class="text-sm text-slate-600 leading-relaxed">Friendly at approachable, lalo na pagdating sa presyo. Passionate sa travel, freediving at pakikipagkaibigan, kaya maraming repeat clients dahil sa practical na flight guidance, madaling usapan sa presyo, at itineraries na swak sa schedule at energy ng grupo.</p>
+          <ul class="space-y-2.5 text-sm text-slate-700">
+            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>Smart itinerary &amp; daily energy guide:</strong> Malinaw na gabay para swak ang pace ng trip sa grupo mo.</span></li>
+            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>First-hand experience:</strong> Personal na na-explore ni Alvir ang bawat tour at route, kasama ang trusted local operators.</span></li>
+            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>On-tour photo &amp; guide option:</strong> Pwedeng sumama at kumuha ng pictures kapag hiniling.</span></li>
+            <li class="flex gap-2.5"><span class="text-brand-500 font-extrabold">✓</span><span><strong>Budget to midrange:</strong> Malinaw na choices mula budget inn hanggang hotel na may pool.</span></li>
           </ul>
-
-          <div class="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 border border-slate-200 rounded-2xl p-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 border border-slate-200 rounded-2xl p-4">
             <div class="space-y-2">
-              <div class="text-xs font-extrabold text-navy-900">15-Minute Trip Call on Messenger</div>
-              <p class="text-[11px] text-slate-600 leading-relaxed">
-                Discuss flight timing, pace, budget, and custom preferences directly with Alvir.
-              </p>
-              <a
-                href="https://m.me/alvirski"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-extrabold shadow-2xs transition-colors"
-              >
-                Book a 15-Minute Call on Messenger
-              </a>
+              <div class="text-sm font-extrabold">15-Minute Trip Call on Messenger</div>
+              <p class="text-sm text-slate-600">Pag-usapan ang flight timing, pace, budget at preferences kay Alvir.</p>
+              <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-extrabold transition-colors">Book a 15-Minute Call</a>
             </div>
-
             <div class="flex sm:flex-col items-center gap-2.5 shrink-0 bg-white p-2.5 rounded-xl border border-slate-200">
-              <img
-                src="Screenshot 2026-11-25 134206.png"
-                alt="Alvir Messenger QR Code (@alvirski)"
-                class="w-24 h-24 object-cover object-top rounded-lg"
-              />
-              <div class="text-center">
-                <div class="text-[10px] font-extrabold text-navy-900">@alvirski</div>
-                <div class="text-[9px] text-slate-500">Scan on Messenger</div>
-              </div>
+              <img src="Screenshot%202026-11-25%20134206.png" alt="Alvir Messenger QR Code (@alvirski)" loading="lazy" class="w-24 h-24 object-cover object-top rounded-lg" onerror="this.remove()" />
+              <div class="text-center"><div class="text-xs font-extrabold">@alvirski</div><div class="text-[11px] text-slate-500">Scan on Messenger</div></div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- SECTION 4: SEND QUOTE TO ALVIR -->
-    <section id="quote-section" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xs space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
-        <div>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-brand-600">Quote Preparation</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-navy-900 mt-0.5">SEND QUOTE TO ALVIR</h2>
-        </div>
-        <div class="text-xs text-slate-600 font-semibold">
-          Alvir • <span class="font-bold text-navy-900">09163345946</span> • <span class="font-bold text-navy-900">alvirestrella08@gmail.com</span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label for="quoteRecipient" class="block text-xs font-extrabold text-navy-900 mb-1.5">Recipient</label>
-          <input
-            type="text"
-            id="quoteRecipient"
-            value="Alvir — 09163345946 | alvirestrella08@gmail.com"
-            readonly
-            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs sm:text-sm font-semibold text-slate-700"
-          />
-        </div>
-
-        <div>
-          <label for="travelDatesInput" class="block text-xs font-extrabold text-navy-900 mb-1.5">Travel Dates *</label>
-          <input
-            type="text"
-            id="travelDatesInput"
-            oninput="updateQuotePreview()"
-            placeholder="e.g., Dec 10–13, 2026"
-            class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs sm:text-sm text-navy-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
-          />
-        </div>
-      </div>
-
-      <div class="bg-brand-50 border border-brand-200 rounded-2xl p-4 space-y-2">
-        <label for="priceMatchInput" class="block text-xs sm:text-sm font-extrabold text-navy-900">
-          Found a lower quote from another travel agency? We offer a price match guarantee on comparable inclusions.
-        </label>
-        <textarea
-          id="priceMatchInput"
-          rows="2"
-          oninput="updateQuotePreview()"
-          placeholder='Enter "None" or share the quote details and inclusions so Alvir can review for a price match...'
-          class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-brand-200 text-xs sm:text-sm text-navy-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
-        ></textarea>
-      </div>
-
-      <div>
-        <label for="otherNotesInput" class="block text-xs sm:text-sm font-extrabold text-navy-900 mb-1.5">
-          Other Requests / Notes
-        </label>
-        <textarea
-          id="otherNotesInput"
-          rows="3"
-          oninput="updateQuotePreview()"
-          placeholder='Package choice (e.g., Coron 4D3N Budget A), pax count, flight details, dietary notes, or "None"...'
-          class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs sm:text-sm text-navy-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
-        ></textarea>
-      </div>
-
-      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2 text-xs">
-        <div class="font-extrabold uppercase tracking-wider text-slate-500 text-[10px]">Quote Summary for Review</div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-navy-900">
-          <div><span class="font-bold">To:</span> Alvir (09163345946 / alvirestrella08@gmail.com)</div>
-          <div><span class="font-bold">Travel Dates:</span> <span id="previewDates">Not specified</span></div>
-          <div><span class="font-bold">Display Currency:</span> <span id="previewCurrency">PHP (₱)</span></div>
-          <div><span class="font-bold">Price Match:</span> <span id="previewPriceMatch">None</span></div>
-        </div>
-        <div class="text-navy-900 pt-1">
-          <span class="font-bold">Notes / Requests:</span> <span id="previewNotes">None</span>
-        </div>
-      </div>
-
-      <div class="pt-3 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div class="space-y-1">
-          <p class="text-xs text-slate-700 leading-relaxed">
-            After printing this page, send this to Alvir and <strong>galingan mo tumawad</strong> 😄✨
-          </p>
-          <p class="text-[11px] text-slate-500">
-            Print or take a screenshot of this quote sheet and send it to Alvir via Messenger (@alvirski), SMS/call (09163345946), or email (alvirestrella08@gmail.com) for review.
-          </p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-2.5 shrink-0 no-print">
-          <button
-            type="button"
-            onclick="copyQuoteSummary()"
-            id="copyQuoteBtn"
-            class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-navy-900 text-xs font-extrabold transition-colors cursor-pointer"
-          >
-            Copy Quote Summary
-          </button>
-          <button
-            type="button"
-            onclick="window.print()"
-            class="px-4 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-extrabold shadow-xs transition-colors cursor-pointer"
-          >
-            Print Quote
-          </button>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-navy-950 text-slate-400 border-t border-navy-800 py-8 px-4 sm:px-6 text-xs">
+  <footer class="bg-navy-950 text-slate-400 border-t border-navy-800 py-8 px-4 sm:px-6 text-sm">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>
-        <span class="font-extrabold text-white">Alvir Travel and tours</span> • Alvir • 09163345946 • alvirestrella08@gmail.com
-      </div>
-      <div class="flex flex-wrap items-center gap-4">
-        <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Messenger (@alvirski)</a>
-        <span>•</span>
-        <a href="#packages" class="text-brand-400 font-bold hover:underline">Published Packages</a>
-      </div>
+      <div><span class="font-extrabold text-white">Alvir Travel and Tours</span> • 09163345946 • alvirestrella08@gmail.com</div>
+      <a href="https://m.me/alvirski" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Messenger (@alvirski)</a>
     </div>
   </footer>
 
-  <script>
-    const CURRENCY_CONFIG = {
-      PHP: { symbol: '₱', rateFromPhp: 1, decimals: 0, label: 'PHP (₱)' },
-      USD: { symbol: '$', rateFromPhp: 0.01571, decimals: 2, label: 'USD ($)' },
-      CHF: { symbol: 'CHF ', rateFromPhp: 0.0131, decimals: 2, label: 'CHF (Swiss Franc)' },
-      JPY: { symbol: '¥', rateFromPhp: 2.50, decimals: 0, label: 'JPY (¥)' },
-      EUR: { symbol: '€', rateFromPhp: 0.0143, decimals: 2, label: 'EUR (€)' },
-      SGD: { symbol: 'S$', rateFromPhp: 0.0203, decimals: 2, label: 'SGD (S$)' },
-      HKD: { symbol: 'HK$', rateFromPhp: 0.123, decimals: 2, label: 'HKD (HK$)' },
-      THB: { symbol: '฿', rateFromPhp: 0.55, decimals: 0, label: 'THB (฿)' },
-      VND: { symbol: '₫', rateFromPhp: 400, decimals: 0, label: 'VND (₫)' }
-    };
+  <!-- MOBILE CART BAR -->
+  <div id="mobileBar" class="lg:hidden fixed bottom-0 inset-x-0 z-20 p-3 bg-white/95 backdrop-blur border-t border-slate-200 hidden">
+    <button id="mobileCartBtn" type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-brand-500 text-white font-extrabold shadow-lg">
+      <span><span id="mobileCartCount">0</span> item(s) sa cart</span>
+      <span id="mobileCartTotal">View</span>
+    </button>
+  </div>
 
-    let activeCurrency = 'PHP';
-    let activeMainMode = 'LOCAL';
-    let activeSubTab = 'TOURS';
-    let activePackageRegion = 'ALL';
+  <!-- CART DRAWER -->
+  <div id="cartOverlay" class="fixed inset-0 z-40 bg-navy-950/60 no-print" aria-hidden="true"></div>
+  <aside id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200 no-print">
+      <h2 id="cartTitle" class="text-lg font-extrabold">Your Cart</h2>
+      <button id="cartClose" type="button" aria-label="Close cart" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 font-bold">✕</button>
+    </div>
 
-    function formatFromPhp(phpAmount) {
-      if (phpAmount === null || phpAmount === undefined) return 'Custom Quote';
-      const cfg = CURRENCY_CONFIG[activeCurrency] || CURRENCY_CONFIG.PHP;
-      const converted = phpAmount * cfg.rateFromPhp;
-      const formatted = converted.toLocaleString('en-US', {
-        minimumFractionDigits: cfg.decimals,
-        maximumFractionDigits: cfg.decimals
-      });
-      return `${cfg.symbol}${formatted}`;
-    }
+    <div class="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+      <div id="cartEmpty" class="text-center py-10 text-slate-500 text-sm">
+        <p class="font-bold text-navy-900 mb-1">Wala pang laman ang cart</p>
+        <p>Mag-add ng tour o package para makabuo ng quote.</p>
+      </div>
+      <ul id="cartItems" class="space-y-3"></ul>
 
-    function setCurrency(code) {
-      activeCurrency = CURRENCY_CONFIG[code] ? code : 'PHP';
-      const topSelect = document.getElementById('currencySelect');
-      const heroSelect = document.getElementById('heroCurrencySelect');
-      if (topSelect) topSelect.value = activeCurrency;
-      if (heroSelect) heroSelect.value = activeCurrency;
+      <div id="cartForm" class="space-y-3 hidden">
+        <div>
+          <label for="travelDates" class="block text-sm font-extrabold mb-1">Travel dates *</label>
+          <input id="travelDates" type="text" placeholder="e.g., Dec 10–13, 2026" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div>
+          <label for="priceMatch" class="block text-sm font-extrabold mb-1">May mas mababang quote sa iba?</label>
+          <textarea id="priceMatch" rows="2" placeholder='Ilagay ang quote at inclusions para ma-price match, o "None"' class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+        </div>
+        <div>
+          <label for="notes" class="block text-sm font-extrabold mb-1">Other requests / notes</label>
+          <textarea id="notes" rows="2" placeholder='Flight details, dietary notes, o "None"' class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+        </div>
+      </div>
+      <div id="cartSummary" class="hidden"></div>
+    </div>
 
-      document.getElementById('rateNoteLabel').textContent = `Base: PHP (₱) → ${activeCurrency}`;
-      renderPackages();
-      updateQuotePreview();
-    }
+    <div id="cartFooter" class="border-t border-slate-200 px-5 py-4 space-y-3 hidden">
+      <div class="flex items-end justify-between">
+        <span class="text-sm font-bold text-slate-600">Estimated total</span>
+        <span id="cartTotal" class="text-xl font-extrabold text-brand-600">—</span>
+      </div>
+      <p id="cartTotalNote" class="text-xs text-slate-500 leading-snug"></p>
+      <div class="grid grid-cols-2 gap-2 no-print">
+        <button id="shotBtn" type="button" class="col-span-2 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold transition-colors">Save summary as image &amp; send to Alvir</button>
+        <button id="sendMessenger" type="button" class="col-span-2 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-extrabold transition-colors">Send text quote via Messenger</button>
+        <button id="sendEmail" type="button" class="py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-sm font-extrabold transition-colors">Email</button>
+        <button id="copyQuote" type="button" class="py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-sm font-extrabold transition-colors">Copy</button>
+        <button id="printQuote" type="button" class="py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-sm font-extrabold transition-colors">Print</button>
+        <button id="clearCart" type="button" class="py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors">Clear cart</button>
+      </div>
+      <p class="text-xs text-slate-500 leading-snug no-print">Sa phone, piliin ang Messenger sa share menu. Sa computer, ma-download ang larawan at i-attach ito sa chat kay Alvir. Indicative conversion lang ang ibang currency; ang final rate ay kukumpirmahin ni Alvir. 😄 Galingan mong tumawad!</p>
+    </div>
+  </aside>
 
-    const LOCAL_BY_SUBTAB = {
-      TOURS: [
-        { sign: 'CORON', subtitle: 'Lagoons, Wrecks & Islands • JY Travel and Tours', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg', highlights: ['Town, Tour A/B, Ultimate & Escapade', 'Budget B, Budget A & Midrange Hotel', '3D2N–6D5N Packages'], regionFilter: 'CORON' },
-        { sign: 'EL NIDO', subtitle: 'Big & Small Lagoons • JY Travel and Tours', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Big_Lagoon_El_Nido.jpg', highlights: ['Tours A, B, C & D', 'PPS / Lio Van Transfers', '3D2N–5D4N Packages'], regionFilter: 'EL_NIDO' },
-        { sign: 'PUERTO', subtitle: 'Underground River & Honda Bay • JY Travel and Tours', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Puerto_Princesa_Subterranean_River_National_Park.jpg', highlights: ['City Tour & Underground River', 'Honda Bay & Firefly w/ Dinner', '3D2N–5D4N Packages'], regionFilter: 'PUERTO' },
-        { sign: 'BALABAC', subtitle: 'Onuk Island & Sandbars • JY Travel and Tours', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Onuk_Island,_Balabac,_Palawan.jpg', highlights: ['Onuk, Candaraman & Sandbars', 'Camp Sebaring & Town Stay', 'Selected Dates Package'], regionFilter: 'BALABAC' },
-        { sign: 'SIARGAO', subtitle: 'Partner: Siargana Travel and Tours', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80', highlights: ['Tri-Island Hopping', 'Maasin River & Coconut View', 'Lagoon & Surfing Spots'], regionFilter: 'ALL' },
-        { sign: 'BOHOL', subtitle: 'Partner: Kuya Cyril Pasicaran', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80', highlights: ['Chocolate Hills & Loboc River', 'Balicasag & Virgin Island', 'Private Car/Van & Transfers'], regionFilter: 'ALL' },
-        { sign: 'CEBU', subtitle: 'Partner: Highland Canyoneering', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80', highlights: ['Highland Canyoneering', 'South Cebu & City Stops', 'Customizable Group Pace'], regionFilter: 'ALL' },
-        { sign: 'BATANES', subtitle: 'Rolling Hills, Lighthouses & Stone Houses', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80', highlights: ['North & South Batan Tours', 'Sabtang Island Day Tour', 'Airport & Local Transfers'], regionFilter: 'ALL' }
-      ],
-      HOTELS: [
-        { sign: 'CORON STAY', subtitle: 'Budget B, Budget A & Midrange Hotel Options', badge: 'Published Tiers', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kayangan_Lake,_Coron_-_Palawan.jpg', highlights: ['Town & Coastal Stays', 'Paired w/ 3D2N–6D5N Packages', 'Flexible Group Pacing'], regionFilter: 'CORON' },
-        { sign: 'EL NIDO STAY', subtitle: 'Hotel w/ Breakfast Options', badge: 'Rates Updated', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Big_Lagoon_El_Nido.jpg', highlights: ['Town & Beachfront Choices', 'Paired w/ Tour A, B & C', 'Van Transfers Included'], regionFilter: 'EL_NIDO' },
-        { sign: 'BORACAY STAY', subtitle: 'Klook • Bamboo Beach • La Carmela', badge: 'Partner Rates', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80', highlights: ['Station & Beachfront Options', 'Custom Stay Duration', 'Caticlan / Kalibo Transfers'], regionFilter: 'ALL' }
-      ],
-      ACTIVITIES: [
-        { sign: 'FREEDIVE', subtitle: 'Ocean Exploration & Freediving w/ Alvir', badge: 'Owner Specialty', image: 'dp.jpg', highlights: ['Freedive-Friendly Pacing', 'Photo & Guide Option', 'Tailored Sea Conditions'], regionFilter: 'ALL' },
-        { sign: 'ISLAND HOP', subtitle: 'Lagoons, Sandbars & Marine Sanctuaries', badge: 'Published Rates', image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Onuk_Island,_Balabac,_Palawan.jpg', highlights: ['Coron, El Nido, Honda Bay & Balabac', 'Siargao Tri-Island & Bohol', 'Boat & Env. Fees Guided'], regionFilter: 'ALL' },
-        { sign: 'CANYONEER', subtitle: 'Partner: Highland Canyoneering • Cebu', badge: 'Custom Quote', image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80', highlights: ['Waterfalls & River Treks', 'South Cebu Add-Ons', 'Custom Group Pace'], regionFilter: 'ALL' }
-      ]
-    };
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-24 lg:bottom-8 left-1/2 z-[60] px-4 py-2.5 rounded-xl bg-navy-900 text-white text-sm font-bold shadow-xl"></div>
 
-    const INTERNATIONAL_BY_SUBTAB = {
-      TOURS: [
-        {
-          country: 'JAPAN',
-          themeClass: 'theme-japan-box',
-          fontClass: 'font-japan-semi',
-          title: 'JAPAN — TOURS',
-          subtitle: 'Tokyo, Kyoto, Osaka & Custom Routes',
-          badge: 'Japan Theme',
-          image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80',
-          highlights: ['Tokyo, Kyoto & Osaka', 'Rail & City Pacing', 'Custom Group Itinerary']
-        },
-        {
-          country: 'VIETNAM',
-          themeClass: 'theme-vietnam-box',
-          fontClass: 'font-vietnam-semi',
-          title: 'VIETNAM — TOURS',
-          subtitle: 'Da Nang Golden Hands, Ba Na Hills & Hanoi/Sapa',
-          badge: 'Vietnam Theme • Golden Hands',
-          image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Bridge_Ba_Na_Hills.jpg',
-          highlights: ['Da Nang & Golden Bridge', 'Hoi An, Hanoi & Sapa', 'Private Van & Custom Pace']
-        },
-        {
-          country: 'HONG KONG & MACAU',
-          themeClass: 'bg-white border-2 border-navy-900 text-navy-900',
-          fontClass: 'font-extrabold',
-          title: 'HONG KONG & MACAU — TOURS',
-          subtitle: 'City Skyline, Theme Parks & Cross-Bridge Trip',
-          badge: 'International',
-          image: 'https://images.unsplash.com/photo-1506970810-dc53884c9039?auto=format&fit=crop&w=800&q=80',
-          highlights: ['HK City & Theme Parks', 'Macau Day Trip', 'Tailored Pace']
-        }
-      ],
-      HOTELS: [
-        {
-          country: 'JAPAN',
-          themeClass: 'theme-japan-box',
-          fontClass: 'font-japan-semi',
-          title: 'JAPAN — HOTELS',
-          subtitle: 'City Business Hotels, Ryokans & Station Stays',
-          badge: 'Japan Theme',
-          image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80',
-          highlights: ['Accessible Transit Stays', 'Ryokan & Modern Options', 'Custom Room Mix']
-        },
-        {
-          country: 'VIETNAM',
-          themeClass: 'theme-vietnam-box',
-          fontClass: 'font-vietnam-semi',
-          title: 'VIETNAM — HOTELS',
-          subtitle: 'Da Nang Beach, Ba Na Hills & Hanoi/Sapa Stays',
-          badge: 'Vietnam Theme • Golden Hands',
-          image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sapa_rice_terraces.jpg',
-          highlights: ['Coastal & Highland Stays', 'Couples, Barkada & Family', 'Airport Transfer Options']
-        },
-        {
-          country: 'THAILAND',
-          themeClass: 'bg-white border-2 border-navy-900 text-navy-900',
-          fontClass: 'font-extrabold',
-          title: 'THAILAND — HOTELS',
-          subtitle: 'Bangkok City & Coastal Resort Options',
-          badge: 'International',
-          image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',
-          highlights: ['Central & Night-Market Access', 'Resort Add-Ons', 'Custom Dates']
-        }
-      ],
-      ACTIVITIES: [
-        {
-          country: 'JAPAN',
-          themeClass: 'theme-japan-box',
-          fontClass: 'font-japan-semi',
-          title: 'JAPAN — ACTIVITIES',
-          subtitle: 'Cultural Experiences, Sightseeing & Passes',
-          badge: 'Japan Theme',
-          image: 'https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=800&q=80',
-          highlights: ['Shrines, Districts & Views', 'Energy-Fit Daily Plans', 'Custom Add-Ons']
-        },
-        {
-          country: 'VIETNAM',
-          themeClass: 'theme-vietnam-box',
-          fontClass: 'font-vietnam-semi',
-          title: 'VIETNAM — ACTIVITIES',
-          subtitle: 'Golden Hands Bridge, Lantern Boats & Mountain Treks',
-          badge: 'Vietnam Theme • Golden Hands',
-          image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Bridge_Ba_Na_Hills.jpg',
-          highlights: ['Ba Na Hills & Golden Bridge', 'Hoi An & Sapa Highlights', 'Tailored Group Pace']
-        },
-        {
-          country: 'THAILAND',
-          themeClass: 'bg-white border-2 border-navy-900 text-navy-900',
-          fontClass: 'font-extrabold',
-          title: 'THAILAND — ACTIVITIES',
-          subtitle: 'Temples, Food Walks & Island Day Trips',
-          badge: 'International',
-          image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',
-          highlights: ['Day Tours & Experiences', 'Custom Group Pace', 'Flexible Quote']
-        }
-      ]
-    };
-
-    const PACKAGES_DATA = [
-      { region: 'CORON', tag: 'Coron • Published Rate', title: '3D2N Explore Package', itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Departure', tiers: [{ label: 'Budget B', php: 3400 }, { label: 'Budget A', php: 3450 }, { label: 'Midrange Hotel', php: 4700 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
-      { region: 'CORON', tag: 'Coron • Published Rate', title: '3D2N Highlights Package', itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Departure', tiers: [{ label: 'Budget B', php: 4000 }, { label: 'Budget A', php: 4050 }, { label: 'Midrange Hotel', php: 5300 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
-      { region: 'CORON', tag: 'Coron • Published Rate', title: '4D3N Explore Package', itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Tour B • Day 4: Departure', tiers: [{ label: 'Budget B', php: 5200 }, { label: 'Budget A', php: 5250 }, { label: 'Midrange Hotel', php: 7150 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
-      { region: 'CORON', tag: 'Coron Best-Seller • Published Rate', title: '4D3N Highlights Package', itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Island Escapade • Day 4: Departure', tiers: [{ label: 'Budget B', php: 6100 }, { label: 'Budget A', php: 6150 }, { label: 'Midrange Hotel', php: 8050 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
-      { region: 'CORON', tag: 'Coron • Published Rate', title: '5D4N Explore Package', itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Tour B • Day 4: Escapade Tour • Day 5: Departure', tiers: [{ label: 'Budget B', php: 7300 }, { label: 'Budget A', php: 7350 }, { label: 'Midrange Hotel', php: 9900 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
-      { region: 'CORON', tag: 'Coron Best-Seller • Published Rate', title: '5D4N Highlights Package', itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Escapade Tour • Day 4: Reef & Wrecks • Day 5: Departure', tiers: [{ label: 'Budget B', php: 8200 }, { label: 'Budget A', php: 8250 }, { label: 'Midrange Hotel', php: 10800 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
-      { region: 'CORON', tag: 'Coron w/ Optional Safari • Published Rate', title: '5D4N Explore Package (Optional Day 5 Calauit Safari)', itinerary: 'Day 1: Town Tour • Day 2: Tour A • Day 3: Tour B • Day 4: Escapade • Day 5: Opt. Calauit Safari • Day 6: Departure', tiers: [{ label: 'Budget B', php: 7900 }, { label: 'Budget A', php: 7950 }, { label: 'Midrange Hotel', php: 11150 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
-      { region: 'CORON', tag: 'Coron • Published Rate', title: '6D5N Highlights Package', itinerary: 'Day 1: Town Tour • Day 2: Ultimate Tour • Day 3: Escapade • Day 4: Reef & Wrecks • Day 5: Opt. Calauit Safari • Day 6: Departure', tiers: [{ label: 'Budget B', php: 8800 }, { label: 'Budget A', php: 8850 }, { label: 'Midrange Hotel', php: 12050 }], note: 'Excl. airfare, kayak, snorkel/swimming gears & ₱200/pax env. fee.' },
-      { region: 'EL_NIDO', tag: 'El Nido • Published Rate', title: '3D2N El Nido Package', itinerary: 'Day 1: Arrival at PPS Airport • Day 2: El Nido Tour A • Day 3: Departure', tiers: [{ label: 'Published Rate / pax', php: 5300 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, Tour A w/ lunch, El Nido ₱400 env. fee & ₱200 lagoon fee. Excl. airfare & gears.' },
-      { region: 'EL_NIDO', tag: 'El Nido • Published Rate', title: '4D3N El Nido Package', itinerary: 'Day 1: Arrival at PPS Airport • Day 2: El Nido Tour A • Day 3: Tour C • Day 4: Departure', tiers: [{ label: 'Published Rate / pax', php: 7700 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, Tours A & C w/ lunch, env. & lagoon fees. Excl. airfare & gears.' },
-      { region: 'EL_NIDO', tag: 'El Nido Best-Seller • Published Rate', title: '5D4N El Nido Package', itinerary: 'Day 1: Arrival at PPS Airport • Day 2: El Nido Tour A • Day 3: Tour B • Day 4: Tour C • Day 5: Departure', tiers: [{ label: 'Published Rate / pax', php: 10100 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, Tours A, B & C w/ lunch, env. & lagoon fees. Excl. airfare & gears.' },
-      { region: 'PUERTO', tag: 'Puerto Princesa • Published Rate', title: '3D2N Puerto Package', itinerary: 'Day 1: City Tour • Day 2: Underground River • Day 3: Departure', tiers: [{ label: 'Published Rate / pax', php: 5000 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, tours w/ lunch & ₱150/pax env. fee. Excl. airfare & gears.' },
-      { region: 'PUERTO', tag: 'Puerto Best-Seller • Published Rate', title: '4D3N Puerto Package', itinerary: 'Day 1: City Tour • Day 2: Underground River • Day 3: Honda Bay Island Hopping • Day 4: Departure', tiers: [{ label: 'Published Rate / pax', php: 8000 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, tours w/ lunch & ₱150/pax env. fee. Excl. airfare & gears.' },
-      { region: 'PUERTO', tag: 'Puerto Princesa • Published Rate', title: '5D4N Puerto Package', itinerary: 'Day 1: City Tour • Day 2: Underground River • Day 3: Honda Bay • Day 4: Firefly Watching w/ Dinner • Day 5: Departure', tiers: [{ label: 'Published Rate / pax', php: 10600 }], note: 'Incl. hotel w/ breakfast, RT airport transfer, tours w/ lunch/dinner & ₱150/pax env. fee. Excl. airfare & gears.' },
-      { region: 'COMBO', tag: 'El Nido + Puerto • Published Rate', title: '4D3N El Nido + Puerto (Best-Seller)', itinerary: 'Day 1: Arrival • Day 2: El Nido Tour A • Day 3: Underground River • Day 4: Departure', tiers: [{ label: 'Published Rate / pax', php: 8100 }], note: 'Incl. hotel w/ breakfast, RT airport & PPS–El Nido van transfer, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
-      { region: 'COMBO', tag: 'El Nido + Puerto • Published Rate', title: '5D4N El Nido + Puerto (Best-Seller)', itinerary: 'Day 1: Arrival • Day 2: El Nido Tour A • Day 3: El Nido Tour C • Day 4: Underground River • Day 5: Departure', tiers: [{ label: 'Published Rate / pax', php: 10300 }], note: 'Incl. hotel w/ breakfast, transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
-      { region: 'COMBO', tag: 'El Nido + Puerto • Published Rate', title: '6D5N El Nido + Puerto', itinerary: 'Day 1: Arrival • Day 2: El Nido Tour A • Day 3: El Nido Tour C • Day 4: Underground River • Day 5: City Tour • Day 6: Departure', tiers: [{ label: 'Published Rate / pax', php: 12100 }], note: 'Incl. hotel w/ breakfast, transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
-      { region: 'COMBO', tag: 'Coron + El Nido • Published Rate', title: '5D4N Coron + El Nido (Best-Seller)', itinerary: 'Day 1: Arrival @ PPS, van to El Nido • Day 2: El Nido Tour A • Day 3: Ferry to Coron • Day 4: Coron Tour A • Day 5: Depart Busuanga', tiers: [{ label: 'Published Rate / pax', php: 10700 }], note: 'Incl. hotel w/ breakfast, PPS–El Nido van, El Nido–Coron ferry, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
-      { region: 'COMBO', tag: 'Coron + El Nido • Published Rate', title: '6D5N Coron + El Nido (Best-Seller)', itinerary: 'Day 1: Arrival @ PPS, van to El Nido • Day 2: El Nido Tour A • Day 3: Ferry to Coron • Day 4: Coron Tour A • Day 5: Tour B • Day 6: Depart Busuanga', tiers: [{ label: 'Published Rate / pax', php: 12850 }], note: 'Incl. hotel w/ breakfast, van & ferry transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
-      { region: 'COMBO', tag: 'Tri-City • Published Rate', title: '6D5N Tri-City (Coron + El Nido + PPS)', itinerary: 'Day 1: Arrival @ PPS, City Tour • Day 2: Underground then van to El Nido • Day 3: Tour A • Day 4: Ferry to Coron • Day 5: Coron Tour A • Day 6: Depart Busuanga', tiers: [{ label: 'Published Rate / pax', php: 14999 }], note: 'Incl. hotel w/ breakfast, van & ferry transfers, tours w/ lunch & env./lagoon fees. Excl. airfare & gears.' },
-      { region: 'BALABAC', tag: 'Balabac Selected Dates • Published Rate', title: 'Balabac Island Hopping & Camp Package', itinerary: 'Day 1: PPS Arrival • Day 2: Buliluyan van + islands & Sebaring camp • Day 3–4: Sandbars & Onok Island • Day 5: Return to PPS', tiers: [{ label: 'Published Rate / pax', php: 14500 }], note: 'Incl. min camping at Camp Sebaring, 2N town stay, B/L/D, van & boat transfers, guide, env. fees & travel insurance.' }
-    ];
-
-    function setMainMode(mode) {
-      activeMainMode = mode;
-      const localBtn = document.getElementById('mainTabLocal');
-      const intlBtn = document.getElementById('mainTabIntl');
-
-      if (mode === 'LOCAL') {
-        localBtn.className = 'px-6 py-3 rounded-xl text-sm font-extrabold transition-all bg-brand-500 text-white shadow-sm cursor-pointer';
-        intlBtn.className = 'px-6 py-3 rounded-xl text-sm font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer';
-      } else {
-        intlBtn.className = 'px-6 py-3 rounded-xl text-sm font-extrabold transition-all bg-brand-500 text-white shadow-sm cursor-pointer';
-        localBtn.className = 'px-6 py-3 rounded-xl text-sm font-extrabold transition-all text-slate-700 hover:bg-white cursor-pointer';
-      }
-      renderDestinationCards();
-    }
-
-    function setSubTab(subtab) {
-      activeSubTab = subtab;
-      document.querySelectorAll('.subtab-btn').forEach(btn => {
-        const isActive = btn.dataset.subtab === subtab;
-        btn.className = isActive
-          ? 'subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-navy-900 text-white cursor-pointer transition-all'
-          : 'subtab-btn py-2.5 px-4 rounded-xl text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:bg-slate-100 cursor-pointer transition-all';
-      });
-      renderDestinationCards();
-    }
-
-    function renderDestinationCards() {
-      const grid = document.getElementById('destinationCardsGrid');
-
-      if (activeMainMode === 'LOCAL') {
-        const items = LOCAL_BY_SUBTAB[activeSubTab] || LOCAL_BY_SUBTAB.TOURS;
-        grid.innerHTML = items.map(item => {
-          const actionBtn = item.regionFilter && item.regionFilter !== 'ALL'
-            ? `<a href="#packages" onclick="setPackageRegion('${item.regionFilter}')" class="inline-flex items-center gap-1 text-xs font-extrabold text-brand-600 hover:text-brand-700">View Published Rates →</a>`
-            : `<a href="#quote-section" class="inline-flex items-center gap-1 text-xs font-extrabold text-brand-600 hover:text-brand-700">Request Custom Quote →</a>`;
-
-          return `
-            <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs flex flex-col justify-between hover:border-brand-300 transition-all">
-              <div>
-                <div class="relative h-44 bg-slate-200 overflow-hidden">
-                  <img src="${item.image}" alt="${item.sign}" class="w-full h-full object-cover" />
-                  <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-navy-950/85 text-white text-[10px] font-extrabold tracking-wide">
-                    ${item.badge}
-                  </span>
-                </div>
-                <div class="p-4 space-y-2.5">
-                  <div>
-                    <div class="jeepney-sign text-sm">${item.sign}</div>
-                    <p class="text-xs text-slate-500 mt-2">${item.subtitle}</p>
-                  </div>
-                  <ul class="space-y-1 text-xs text-slate-700 pt-1">
-                    ${item.highlights.map(h => `<li class="flex items-center gap-1.5"><span class="text-brand-500 font-bold">•</span><span>${h}</span></li>`).join('')}
-                  </ul>
-                </div>
-              </div>
-              <div class="px-4 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-                ${actionBtn}
-              </div>
-            </article>
-          `;
-        }).join('');
-      } else {
-        const items = INTERNATIONAL_BY_SUBTAB[activeSubTab] || INTERNATIONAL_BY_SUBTAB.TOURS;
-        grid.innerHTML = items.map(item => `
-          <article class="rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between ${item.themeClass}">
-            <div>
-              <div class="relative h-44 bg-slate-200 overflow-hidden">
-                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" />
-                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-black/75 text-white text-[10px] font-extrabold tracking-wide">
-                  ${item.badge}
-                </span>
-              </div>
-              <div class="p-4 space-y-2.5">
-                <div>
-                  <h3 class="text-lg ${item.fontClass} leading-snug">${item.title}</h3>
-                  <p class="text-xs opacity-90 mt-1">${item.subtitle}</p>
-                </div>
-                <ul class="space-y-1 text-xs opacity-95 pt-1">
-                  ${item.highlights.map(h => `<li class="flex items-center gap-1.5"><span>•</span><span>${h}</span></li>`).join('')}
-                </ul>
-              </div>
-            </div>
-            <div class="px-4 py-3 border-t border-current/15 flex items-center justify-between">
-              <a href="#quote-section" class="inline-flex items-center gap-1 text-xs font-extrabold underline">
-                Request Custom Quote →
-              </a>
-            </div>
-          </article>
-        `).join('');
-      }
-    }
-
-    function setPackageRegion(region) {
-      activePackageRegion = region;
-      const map = {
-        ALL: 'pkgFilterAll',
-        CORON: 'pkgFilterCoron',
-        EL_NIDO: 'pkgFilterElNido',
-        PUERTO: 'pkgFilterPuerto',
-        COMBO: 'pkgFilterCombo',
-        BALABAC: 'pkgFilterBalabac'
-      };
-      Object.entries(map).forEach(([key, id]) => {
-        const btn = document.getElementById(id);
-        if (!btn) return;
-        btn.className = key === region
-          ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-navy-900 text-white cursor-pointer'
-          : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer';
-      });
-      renderPackages();
-    }
-
-    function renderPackages() {
-      const grid = document.getElementById('packagesGrid');
-      const filtered = activePackageRegion === 'ALL'
-        ? PACKAGES_DATA
-        : PACKAGES_DATA.filter(p => p.region === activePackageRegion);
-
-      grid.innerHTML = filtered.map(pkg => {
-        const tiersHtml = pkg.tiers.map(t => `
-          <div class="flex items-center justify-between py-1.5 px-2.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs">
-            <span class="font-bold text-slate-700">${t.label}</span>
-            <span class="font-extrabold text-brand-600">${formatFromPhp(t.php)}<span class="text-[10px] font-semibold text-slate-400">/pax</span></span>
-          </div>
-        `).join('');
-
-        return `
-          <article class="bg-white rounded-2xl border border-slate-200 p-5 shadow-2xs flex flex-col justify-between space-y-4">
-            <div class="space-y-3">
-              <div class="inline-block px-2.5 py-0.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-[10px] font-extrabold">
-                ${pkg.tag}
-              </div>
-              <h3 class="text-base font-extrabold text-navy-900 leading-snug">${pkg.title}</h3>
-              <p class="text-[11px] text-slate-600 leading-relaxed">${pkg.itinerary}</p>
-              <div class="space-y-1.5 pt-1">
-                ${tiersHtml}
-              </div>
-            </div>
-            <div class="pt-2 border-t border-slate-100 space-y-2">
-              <p class="text-[10px] text-slate-500 leading-snug">${pkg.note}</p>
-              <a
-                href="#quote-section"
-                onclick="prefillQuotePackage('${pkg.title.replace(/'/g, "\\'")}')"
-                class="block w-full text-center py-2 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-extrabold transition-colors"
-              >
-                Inquire / Quote This Package
-              </a>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    function prefillQuotePackage(pkgTitle) {
-      const notesEl = document.getElementById('otherNotesInput');
-      if (notesEl && !notesEl.value.includes(pkgTitle)) {
-        notesEl.value = notesEl.value ? `${notesEl.value}\nPackage: ${pkgTitle}` : `Package: ${pkgTitle}`;
-        updateQuotePreview();
-      }
-    }
-
-    function updateQuotePreview() {
-      const dates = document.getElementById('travelDatesInput').value.trim();
-      const priceMatch = document.getElementById('priceMatchInput').value.trim();
-      const notes = document.getElementById('otherNotesInput').value.trim();
-
-      document.getElementById('previewDates').textContent = dates || 'Not specified';
-      document.getElementById('previewCurrency').textContent = CURRENCY_CONFIG[activeCurrency].label;
-      document.getElementById('previewPriceMatch').textContent = priceMatch || 'None';
-      document.getElementById('previewNotes').textContent = notes || 'None';
-    }
-
-    function copyQuoteSummary() {
-      const dates = document.getElementById('travelDatesInput').value.trim() || 'Not specified';
-      const priceMatch = document.getElementById('priceMatchInput').value.trim() || 'None';
-      const notes = document.getElementById('otherNotesInput').value.trim() || 'None';
-      const currencyLabel = CURRENCY_CONFIG[activeCurrency].label;
-
-      const text = [
-        'QUOTE FOR ALVIR (09163345946 / alvirestrella08@gmail.com)',
-        `Travel Dates: ${dates}`,
-        `Display Currency: ${currencyLabel}`,
-        `Price Match: ${priceMatch}`,
-        `Notes / Requests: ${notes}`
-      ].join('\n');
-
-      navigator.clipboard?.writeText(text).then(() => {
-        const btn = document.getElementById('copyQuoteBtn');
-        const oldText = btn.textContent;
-        btn.textContent = 'Copied!';
-        setTimeout(() => { btn.textContent = oldText; }, 1500);
-      });
-    }
-
-    setMainMode('LOCAL');
-    setCurrency('PHP');
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
